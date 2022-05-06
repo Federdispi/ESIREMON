@@ -1,0 +1,14 @@
+package sprite;
+
+import application.GamePanel;
+import application.KeyHandler;
+
+public class Player extends Sprite {
+	GamePanel gamePanel;
+	KeyHandler keyHandler;
+	
+	public Player(GamePanel gamePanel, KeyHandler keyHandler) {
+		this.gamePanel = gamePanel;
+		this.keyHandler = keyHandler;
+	}
+}

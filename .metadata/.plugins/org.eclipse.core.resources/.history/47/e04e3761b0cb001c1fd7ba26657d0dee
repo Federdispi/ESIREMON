@@ -1,0 +1,9 @@
+package application;
+
+import java.awt.Panel;
+
+public class GamePanel extends Panel {
+	final int originalTileSize = 16;
+	final int scale = 3;
+	final int tileSize
+}
