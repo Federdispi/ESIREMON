@@ -1,0 +1,45 @@
+package map;
+
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import application.GamePanel;
+
+public class TileManager {
+	GamePanel gamePanel;
+	Tile[] tileTypes;
+	
+	public TileManager(GamePanel gamePanel) {
+		this.gamePanel = gamePanel;
+		tileTypes = new Tile[11];
+	}
+	
+	public void getTileImage() {
+		tileTypes[0] = new Tile("/tiles/Parquet.png");
+		//tileTypes[1] = new Tile("");
+		tileTypes[2] = new Tile("/tiles/Terra.png");
+		tileTypes[3] = new Tile("/tiles/Asfalto.png");
+		tileTypes[4] = new Tile("/tiles/Strisce.png");
+		tileTypes[5] = new Tile("/tiles/Mattonelle.png");
+		tileTypes[6] = new Tile("/tiles/scale_dx_su.png");
+		tileTypes[7] = new Tile("/tiles/scale_dx_giu.png");
+		tileTypes[8] = new Tile("/tiles/Entrata_sx_giu.png");
+		tileTypes[9] = new Tile("/tiles/Entrata_dx_giu.png");
+		tileTypes[10] = new Tile("/tiles/Entrata_sx_su.png");
+		tileTypes[11] = new Tile("/tiles/Entrata_dx_su.png");
+	}
+	
+	public void draw(Graphics2D g2) {
+		BufferedImage img = null;
+		try {
+			BufferedImage img = ImageIO.read(getClass().getResourceAsStream("/tiles/Terra.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		g2.drawImage(img, 0, 0, gamePanel.getTileSize(), gamePanel.getTileSize(), null);
+	}
+}

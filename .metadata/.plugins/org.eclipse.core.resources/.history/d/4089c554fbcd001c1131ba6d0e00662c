@@ -1,0 +1,13 @@
+package map;
+
+import application.GamePanel;
+
+public class TileManager {
+	GamePanel gamePanel;
+	Tile[] tile;
+	
+	public TileManager(GamePanel gamePanel) {
+		this.gamePanel = gamePanel;
+		tile = new Tile[11];
+	}
+}

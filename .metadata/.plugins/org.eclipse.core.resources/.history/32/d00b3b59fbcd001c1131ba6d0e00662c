@@ -1,0 +1,17 @@
+package map;
+
+import application.GamePanel;
+
+public class TileManager {
+	GamePanel gamePanel;
+	Tile[] tileType;
+	
+	public TileManager(GamePanel gamePanel) {
+		this.gamePanel = gamePanel;
+		tileType = new Tile[11];
+	}
+	
+	public void getTileImage() {
+		
+	}
+}

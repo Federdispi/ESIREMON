@@ -13,12 +13,16 @@ public class Player extends Sprite {
 	private GamePanel gamePanel;
 	private KeyHandler keyHandler;
 	
+	public final int screenX, screenY;
+	
 	public Player(GamePanel gamePanel, KeyHandler keyHandler) {
 		this.gamePanel = gamePanel;
 		this.keyHandler = keyHandler;
-		x = 100;
-		y = 100;
-		speed = 4;
+		screenX = gamePanel.getScreenWidth() / 2 - gamePanel.getTileSize() / 2;
+		screenY = gamePanel.getScreenHeight() / 2 - gamePanel.getTileSize() / 2;
+		mapX = gamePanel.getTileSize() * 2;
+		mapY = gamePanel.getTileSize() * 0;
+		speed = 2;
 		direction = "down";
 		previous_direction = "down";
 		try {
@@ -44,20 +48,20 @@ public class Player extends Sprite {
 		{
 			if(keyHandler.upPressed) {
 				direction = "up";
-				y -= speed;
+				mapY -= speed;
 			} else if(keyHandler.downPressed) {
 				direction = "down";
-				y += speed;
+				mapY += speed;
 			} else if(keyHandler.leftPressed) {
 				direction = "left";
-				x -= speed;
+				mapX -= speed;
 			} else if(keyHandler.rightPressed) {
 				direction = "right";
-				x += speed;
+				mapX += speed;
 			}
 			previous_direction = direction;
 			spriteCounter++;
-			if(spriteCounter > 7) {
+			if(spriteCounter > 14) {
 				firstSprite = !firstSprite;
 				spriteCounter = 0;
 			}
@@ -107,6 +111,6 @@ public class Player extends Sprite {
 			image = right3;
 			break;
 		}
-		g2.drawImage(image, x, y, this.gamePanel.getTileSize(), this.gamePanel.getTileSize(), null);
+		g2.drawImage(image, screenX, screenY, this.gamePanel.getTileSize(), this.gamePanel.getTileSize(), null);
 	}
 }

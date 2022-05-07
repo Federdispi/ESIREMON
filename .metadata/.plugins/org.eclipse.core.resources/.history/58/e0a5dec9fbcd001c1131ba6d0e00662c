@@ -1,0 +1,14 @@
+package map;
+
+import java.awt.image.BufferedImage;
+
+import javax.imageio.ImageIO;
+
+public class Tile {
+	BufferedImage image;
+	public boolean collision = false;
+	
+	public void Tile(String pathName) {
+		image = ImageIO.read(getClass().getResourceAsStream(pathName));
+	}
+}

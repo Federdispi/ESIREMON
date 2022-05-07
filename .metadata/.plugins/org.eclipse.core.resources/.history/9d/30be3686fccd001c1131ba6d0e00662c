@@ -1,0 +1,19 @@
+package map;
+
+import java.io.IOException;
+
+import application.GamePanel;
+
+public class TileManager {
+	GamePanel gamePanel;
+	Tile[] tileTypes;
+	
+	public TileManager(GamePanel gamePanel) {
+		this.gamePanel = gamePanel;
+		tileTypes = new Tile[11];
+	}
+	
+	public void getTileImage() {
+		tileTypes[0] = new Tile("");
+	}
+}

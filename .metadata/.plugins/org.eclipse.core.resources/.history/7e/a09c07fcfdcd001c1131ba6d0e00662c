@@ -1,0 +1,39 @@
+package map;
+
+import java.awt.Graphics2D;
+import java.io.IOException;
+
+import application.GamePanel;
+
+public class TileManager {
+	GamePanel gamePanel;
+	Tile[] tileTypes;
+	
+	public TileManager(GamePanel gamePanel) {
+		this.gamePanel = gamePanel;
+		tileTypes = new Tile[11];
+		for(int i = 0; i < tileTypes.length; i++) {
+			tileTypes[i] = new Tile();
+		}
+	}
+	
+	public void getTileImage() {
+		tileTypes[0] = new Tile();
+		tileTypes[0].se
+		//tileTypes[1] = new Tile("");
+		tileTypes[2] = new Tile("/tiles/Terra.png");
+		tileTypes[3] = new Tile("/tiles/Asfalto.png");
+		tileTypes[4] = new Tile("/tiles/Strisce.png");
+		tileTypes[5] = new Tile("/tiles/Mattonelle.png");
+		tileTypes[6] = new Tile("/tiles/scale_dx_su.png");
+		tileTypes[7] = new Tile("/tiles/scale_dx_giu.png");
+		tileTypes[8] = new Tile("/tiles/Entrata_sx_giu.png");
+		tileTypes[9] = new Tile("/tiles/Entrata_dx_giu.png");
+		tileTypes[10] = new Tile("/tiles/Entrata_sx_su.png");
+		tileTypes[11] = new Tile("/tiles/Entrata_dx_su.png");
+	}
+	
+	public void draw(Graphics2D g2) {
+		g2.drawImage(tileTypes[0].getImage(), 0, 0, gamePanel.getTileSize(), gamePanel.getTileSize(), null);
+	}
+}
