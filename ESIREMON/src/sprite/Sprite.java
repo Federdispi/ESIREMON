@@ -1,5 +1,6 @@
 package sprite;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 public class Sprite {
@@ -10,6 +11,10 @@ public class Sprite {
 	
 	protected int spriteCounter = 0;
 	protected boolean firstSprite;
+	
+	protected Rectangle hitBox;
+	protected boolean collision = false;
+	protected boolean objectCollision = false;
 	
 	public void setX(int x) {
 		this.mapX = x;
@@ -23,6 +28,14 @@ public class Sprite {
 		this.speed = speed;
 	}
 	
+	public void setCollision(boolean collision) {
+		this.collision = collision;
+	}
+	
+	public void setObjectCollision(boolean objectCollision) {
+		this.objectCollision = objectCollision;
+	}
+	
 	public int getX() {
 		return this.mapX;
 	}
@@ -33,5 +46,21 @@ public class Sprite {
 	
 	public int getSpeed() {
 		return this.speed;
+	}
+	
+	public boolean getCollision() {
+		return this.collision;
+	}
+	
+	public boolean getObjectCollision() {
+		return this.objectCollision;
+	}
+	
+	public String getDirection() {
+		return this.direction;
+	}
+	
+	public Rectangle getHitBox() {
+		return this.hitBox;
 	}
 }

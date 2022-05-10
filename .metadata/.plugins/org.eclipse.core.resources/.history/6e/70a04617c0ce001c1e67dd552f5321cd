@@ -1,0 +1,94 @@
+package map;
+
+import java.awt.Graphics2D;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import javax.imageio.ImageIO;
+
+import application.GamePanel;
+
+public class TileManager {
+	GamePanel gamePanel;
+	Tile[] tileTypes;
+	int map[][];
+	
+	public TileManager(GamePanel gamePanel) {
+		this.gamePanel = gamePanel;
+		tileTypes = new Tile[12];
+		map = new int[gamePanel.getMapCol()][gamePanel.getMapCol()];
+		for(int i = 0; i < tileTypes.length; i++) {
+			tileTypes[i] = new Tile();
+		}
+		getTileImage();
+		loadMap("/maps/Appart.txt");
+	}
+	
+	public void getTileImage() {
+		try {
+			tileTypes[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Parquet.png"));
+			
+			//tileTypes[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/.png"));
+			
+			tileTypes[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Terra.png"));
+			
+			tileTypes[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Asfalto.png"));
+			
+			tileTypes[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Strisce.png"));
+			
+			tileTypes[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Mattonelle.png"));
+			
+			tileTypes[6].image = ImageIO.read(getClass().getResourceAsStream("/tiles/scale_dx_su.png"));
+			
+			tileTypes[7].image = ImageIO.read(getClass().getResourceAsStream("/tiles/scale_dx_giu.png"));
+			
+			tileTypes[8].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Entrata_sx_giu.png"));
+			
+			tileTypes[9].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Entrata_dx_giu.png"));
+			
+			tileTypes[10].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Entrata_sx_su.png"));
+			
+			tileTypes[11].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Entrata_dx_su.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void draw(Graphics2D g2) {
+		for(int iRow = 0; iRow < gamePanel.getMapRow(); iRow++) {
+			for(int iCol = 0; iCol < gamePanel.getMapCol(); iCol++) {
+				int mapX = iCol * gamePanel.getTileSize();
+				int mapY = iRow * gamePanel.getTileSize();
+				int screenX = mapX - gamePanel.player.getX() + gamePanel.player.screenX;
+				int screenY = mapY - gamePanel.player.getY() + gamePanel.player.screenY;
+				if(map[iCol][iRow] != -1 && mapX + gamePanel.getTileSize() > gamePanel.player.getX() - gamePanel.player.screenX && mapX - gamePanel.getTileSize() < gamePanel.player.getX() + gamePanel.player.screenX && mapY + gamePanel.getTileSize() > gamePanel.player.getY() - gamePanel.player.screenY && mapY - gamePanel.getTileSize() < gamePanel.player.getY() + gamePanel.player.screenY)
+					g2.drawImage(tileTypes[map[iCol][iRow]].image, screenX, screenY, gamePanel.getTileSize(), gamePanel.getTileSize(), null);
+			}
+		}
+	}
+	
+	public void loadMap(String pathName) {
+		try {
+			InputStream inputStream = getClass().getResourceAsStream(pathName);
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+			
+			for(int iRow = 0; iRow < gamePanel.getMapRow(); iRow++) {
+				String line = bufferedReader.readLine();
+				for(int iCol = 0; iCol < gamePanel.getMapCol(); iCol++) {
+					String numbers[] = line.split(" ");
+					int num = Integer.parseInt(numbers[iCol]);
+					map[iCol][iRow] = num - 1;
+				}
+			}
+			bufferedReader.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int[][] getMap() {
+		return this.map;
+	}
+}

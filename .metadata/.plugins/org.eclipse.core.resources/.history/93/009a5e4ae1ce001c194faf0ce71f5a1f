@@ -1,0 +1,34 @@
+package object;
+
+import java.awt.image.BufferedImage;
+
+public class Object {
+	protected BufferedImage image;
+	protected String name;
+	protected boolean collision = false;
+	protected int mapX, mapY;
+	
+	public void setCollision(boolean collision) {
+		this.collision = collision;
+	}
+	
+	public void setX(int x) {
+		this.mapX = x;
+	}
+	
+	public void setY(int y) {
+		this.mapY = y;
+	}
+	
+	public boolean getCollision() {
+		return this.collision;
+	}
+	
+	public int getX() {
+		return this.mapX;
+	}
+	
+	public int getY() {
+		return this.mapY;
+	}
+} 

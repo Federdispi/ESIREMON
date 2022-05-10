@@ -1,0 +1,16 @@
+package application;
+
+import object.Bed;
+
+public class AssetManager {
+	GamePanel gamePanel;
+	public AssetManager(GamePanel gamePanel) {
+		this.gamePanel = gamePanel;
+	}
+	
+	public void setObject() {
+		gamePanel.object[0] = new Bed();
+		gamePanel.object[0].setX(0 * gamePanel.getTileSize());
+		gamePanel.object[0].setY(1 / 2 * gamePanel.getTileSize());
+	}
+}

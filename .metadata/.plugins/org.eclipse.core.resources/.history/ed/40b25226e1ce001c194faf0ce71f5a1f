@@ -1,0 +1,10 @@
+package object;
+
+import java.awt.image.BufferedImage;
+
+public class Object {
+	protected BufferedImage image;
+	protected String name;
+	protected boolean collision = false;
+	protected int mapX, mapY;
+} 
