@@ -45,7 +45,7 @@ public class CollisionDetector {
 					tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteBottomRow];
 					if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision())
 						sprite.setCollision(true);
-					if(spriteBottom + sprite.getSpeed() > objectTop && spriteBottom + sprite.getSpeed() < objectBottom && spriteRight > objectLeft && spriteLeft < objectRight)
+					if(spriteBottom + sprite.getSpeed() > objectTop && spriteLeft + sprite.getSpeed() < objectBottom && spriteRight > objectLeft && spriteLeft < objectRight)
 						sprite.setCollision(true);
 					break;
 				case "left":
@@ -54,7 +54,7 @@ public class CollisionDetector {
 					tile2 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteBottomRow];
 					if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision())
 						sprite.setCollision(true);
-					if(spriteLeft - sprite.getSpeed() < objectRight && spriteLeft - sprite.getSpeed() > objectLeft && spriteBottom > objectTop && spriteTop < objectBottom)
+					if(spriteLeft - sprite.getSpeed() < objectRight && spriteLeft - sprite.getSpeed() > objectLeft && spriteTop > objectTop && spriteBottom < objectBottom)
 							sprite.setCollision(true);
 					break;
 				case "right":
@@ -63,7 +63,7 @@ public class CollisionDetector {
 					tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteBottomRow];
 					if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision())
 						sprite.setCollision(true);
-					if(spriteRight + sprite.getSpeed() > objectLeft && spriteRight + sprite.getSpeed() < objectRight && spriteBottom > objectTop && spriteTop < objectBottom)
+					if(spriteRight + sprite.getSpeed() > objectLeft && spriteRight + sprite.getSpeed() < objectRight && spriteTop > objectTop && spriteBottom < objectBottom)
 						sprite.setCollision(true);
 					break;
 				}

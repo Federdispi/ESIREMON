@@ -45,7 +45,7 @@ public class CollisionDetector {
 					tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteBottomRow];
 					if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision())
 						sprite.setCollision(true);
-					if(spriteBottom + sprite.getSpeed() > objectTop && spriteBottom + sprite.getSpeed() < objectBottom && spriteRight > objectLeft && spriteLeft < objectRight)
+					if(spriteBottom + sprite.getSpeed() > objectTop && spriteLeft + sprite.getSpeed() < objectBottom && spriteRight > objectLeft && spriteLeft < objectRight)
 						sprite.setCollision(true);
 					break;
 				case "left":
