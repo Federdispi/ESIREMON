@@ -64,10 +64,10 @@ public class TileManager {
 				int screenX = mapX - gamePanel.player.getX() + gamePanel.player.screenX;
 				int screenY = mapY - gamePanel.player.getY() + gamePanel.player.screenY;
 				if(map[iCol][iRow] != -1 
-						&& mapX + gamePanel.getTileSize() > gamePanel.player.getX() - gamePanel.player.screenX 
-						&& mapX - gamePanel.getTileSize() < gamePanel.player.getX() + gamePanel.player.screenX 
-						&& mapY + gamePanel.getTileSize() > gamePanel.player.getY() - gamePanel.player.screenY 
-						&& mapY - gamePanel.getTileSize() < gamePanel.player.getY() + gamePanel.player.screenY)
+						&& mapX + 100*gamePanel.getTileSize() > gamePanel.player.getX() - gamePanel.player.screenX 
+						&& mapX - 100*gamePanel.getTileSize() < gamePanel.player.getX() + gamePanel.player.screenX 
+						&& mapY + 100*gamePanel.getTileSize() > gamePanel.player.getY() - gamePanel.player.screenY 
+						&& mapY - 100*gamePanel.getTileSize() < gamePanel.player.getY() + gamePanel.player.screenY)
 					g2.drawImage(tileTypes[map[iCol][iRow]].image, screenX, screenY, gamePanel.getTileSize(), gamePanel.getTileSize(), null);
 			}
 		}

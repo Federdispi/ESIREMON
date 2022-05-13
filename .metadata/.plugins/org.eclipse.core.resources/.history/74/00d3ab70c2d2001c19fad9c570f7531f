@@ -57,7 +57,7 @@ public class TileManager {
 	}
 	
 	public void draw(Graphics2D g2) {
-		for(int iRow = 0; iRow < gamePanel.getMapRow() ; iRow++) {
+		for(int iRow = 0; iRow < gamePanel.getMapRow(); iRow++) {
 			for(int iCol = 0; iCol < gamePanel.getMapCol(); iCol++) {
 				int mapX = iCol * gamePanel.getTileSize();
 				int mapY = iRow * gamePanel.getTileSize();
