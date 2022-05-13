@@ -1,0 +1,18 @@
+package application;
+
+import object.Bed;
+import object.Bookshelf;
+import object.Desk;
+
+public class AssetManager {
+	GamePanel gamePanel;
+	public AssetManager(GamePanel gamePanel) {
+		this.gamePanel = gamePanel;
+	}
+	
+	public void setObject() {		
+		gamePanel.object[2] = new Bookshelf();
+		gamePanel.object[2].setX(18 * gamePanel.getTileSize());
+		gamePanel.object[2].setY(4 * gamePanel.getTileSize());
+	}
+}

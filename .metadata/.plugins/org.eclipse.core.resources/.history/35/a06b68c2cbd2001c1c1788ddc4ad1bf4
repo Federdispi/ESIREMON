@@ -7,7 +7,9 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import map.TileManager;
 import sprite.Player;
+import object.Object;
 
 public class GamePanel extends JPanel implements Runnable {
 	final private int originalTileSize = 16;
@@ -19,10 +21,20 @@ public class GamePanel extends JPanel implements Runnable {
 	final private int screenWidth = tileSize * maxScreenCol;
 	final private int screenHeight = tileSize * maxScreenRow;
 	
+	final private int maxMapCol = 28;
+	final private int maxMapRow = 18;
+	final private int mapWidth = tileSize * maxMapCol;
+	final private int mapHeight = tileSize * maxMapRow;
+	
 	KeyHandler keyHandler = new KeyHandler();
 	Thread gameThread;
+	TileManager tileManager = new TileManager(this);
+	public CollisionDetector collisionDetector = new CollisionDetector(this);
+	AssetManager assetManager = new AssetManager(this);
 	
-	Player player = new Player(this, keyHandler);
+	public Player player = new Player(this, keyHandler);
+	
+	public Object object[] = new Object[10];
 	
 	int FPS = 60;
 	
@@ -33,25 +45,9 @@ public class GamePanel extends JPanel implements Runnable {
 		this.addKeyListener(keyHandler);
 		this.setFocusable(true);
 	}
-	
-	public int getTileSize() {
-		return this.tileSize;
-	}
-	
-	public int getMaxScreenCol() {
-		return this.maxScreenCol;
-	}
-	
-	public int getMaxScreenRow() {
-		return this.maxScreenRow;
-	}
-	
-	public int getScreenWidth() {
-		return this.screenWidth;
-	}
-	
-	public int getScreenHeight() {
-		return this.screenHeight;
+
+	public void gameSetup() {
+		assetManager.setObject();
 	}
 
 	public void startGameThread() {
@@ -97,7 +93,48 @@ public class GamePanel extends JPanel implements Runnable {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
+		tileManager.draw(g2);
+		for(int i = 0; i < object.length; i++) {
+			if(object[i] != null)
+				object[i].draw(g2, this);
+		}
 		player.draw(g2);
 		g2.dispose();
+	}
+	
+	public int getTileSize() {
+		return this.tileSize;
+	}
+	
+	public int getMaxScreenCol() {
+		return this.maxScreenCol;
+	}
+	
+	public int getMaxScreenRow() {
+		return this.maxScreenRow;
+	}
+	
+	public int getScreenWidth() {
+		return this.screenWidth;
+	}
+	
+	public int getScreenHeight() {
+		return this.screenHeight;
+	}
+	
+	public int getMapCol() {
+		return this.maxMapCol;
+	}
+	
+	public int getMapRow() {
+		return this.maxMapRow;
+	}
+	
+	public int getMapWidth() {
+		return this.mapWidth;
+	}
+	
+	public int getMapHeight() {
+		return this.mapHeight;
 	}
 }

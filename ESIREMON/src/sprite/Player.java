@@ -22,11 +22,11 @@ public class Player extends Sprite {
 		hitBox = new Rectangle(8, 16, gamePanel.getTileSize() - gamePanel.getTileSize() / 3, gamePanel.getTileSize() - gamePanel.getTileSize() / 3);
 		screenX = gamePanel.getScreenWidth() / 2 - gamePanel.getTileSize() / 2;
 		screenY = gamePanel.getScreenHeight() / 2 - gamePanel.getTileSize() / 2;
-		mapX = gamePanel.getTileSize() * 3;
-		mapY = gamePanel.getTileSize() * 0;
+		mapX = gamePanel.getTileSize() * 14;
+		mapY = gamePanel.getTileSize() * 20;
 		speed = 2;
-		direction = "down";
-		previous_direction = "down";
+		direction = "up";
+		previous_direction = "up";
 		try {
 			up1 = ImageIO.read(getClass().getResourceAsStream("/player/up1.png"));
 			up2 = ImageIO.read(getClass().getResourceAsStream("/player/up3.png"));
@@ -86,7 +86,7 @@ public class Player extends Sprite {
 			
 			previous_direction = direction;
 			spriteCounter++;
-			if(spriteCounter > 14) {
+			if(spriteCounter > 12) {
 				firstSprite = !firstSprite;
 				spriteCounter = 0;
 			}

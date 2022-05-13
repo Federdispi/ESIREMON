@@ -31,7 +31,6 @@ public class TileManager {
 			tileTypes[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Parquet.png"));
 			
 			tileTypes[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/muro.png"));
-			tileTypes[1].setCollision(true);
 			
 			tileTypes[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Terra.png"));
 			
