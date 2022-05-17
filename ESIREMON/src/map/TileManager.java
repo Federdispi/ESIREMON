@@ -42,16 +42,10 @@ public class TileManager {
 			tileTypes[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Mattonelle.png"));
 			
 			tileTypes[6].image = ImageIO.read(getClass().getResourceAsStream("/tiles/scale_dx_su.png"));
+			tileTypes[6].setCollision(true);
 			
 			tileTypes[7].image = ImageIO.read(getClass().getResourceAsStream("/tiles/scale_dx_giu.png"));
-			
-			tileTypes[8].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Entrata_sx_giu.png"));
-			
-			tileTypes[9].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Entrata_dx_giu.png"));
-			
-			tileTypes[10].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Entrata_sx_su.png"));
-			
-			tileTypes[11].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Entrata_dx_su.png"));
+			tileTypes[7].setCollision(true);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

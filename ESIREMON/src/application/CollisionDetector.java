@@ -31,38 +31,54 @@ public class CollisionDetector {
 				int objectBottom = gamePanel.object[i].getY() + gamePanel.object[i].getHeight();
 				switch(sprite.getDirection()) {
 				case "up":
-					spriteTopRow = (spriteTop - sprite.getSpeed()) / gamePanel.getTileSize();
-					tile1 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteTopRow];
-					tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteTopRow];
-					if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision())
+					try {
+						spriteTopRow = (spriteTop - sprite.getSpeed()) / gamePanel.getTileSize();
+						tile1 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteTopRow];
+						tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteTopRow];
+						if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision() || spriteTop < 0)
+							sprite.setCollision(true);
+					} catch(Exception e) {
 						sprite.setCollision(true);
+					}
 					if(spriteTop - sprite.getSpeed() < objectBottom && spriteTop - sprite.getSpeed() > objectTop && spriteRight > objectLeft && spriteLeft < objectRight)
 						sprite.setCollision(true);
 					break;
-				case "down":
-					spriteBottomRow = (spriteBottom + sprite.getSpeed()) / gamePanel.getTileSize();
-					tile1 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteBottomRow];
-					tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteBottomRow];
-					if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision())
+				case "down":				
+					try {
+						spriteBottomRow = (spriteBottom + sprite.getSpeed()) / gamePanel.getTileSize();
+						tile1 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteBottomRow];
+						tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteBottomRow];
+						if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision() || spriteBottom > gamePanel.getMapHeight())
+							sprite.setCollision(true);
+					} catch(Exception e) {
 						sprite.setCollision(true);
+					}
 					if(spriteBottom + sprite.getSpeed() > objectTop && spriteBottom + sprite.getSpeed() < objectBottom && spriteRight > objectLeft && spriteLeft < objectRight)
 						sprite.setCollision(true);
 					break;
 				case "left":
-					spriteLeftCol = (spriteLeft - sprite.getSpeed()) / gamePanel.getTileSize();
-					tile1 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteTopRow];
-					tile2 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteBottomRow];
-					if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision())
+					try {
+						spriteLeftCol = (spriteLeft - sprite.getSpeed()) / gamePanel.getTileSize();
+						tile1 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteTopRow];
+						tile2 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteBottomRow];
+						if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision() || spriteLeft < 0)
+							sprite.setCollision(true);
+					} catch(Exception e) {
 						sprite.setCollision(true);
+					}
 					if(spriteLeft - sprite.getSpeed() < objectRight && spriteLeft - sprite.getSpeed() > objectLeft && spriteBottom > objectTop && spriteTop < objectBottom)
 							sprite.setCollision(true);
 					break;
 				case "right":
-					spriteRightCol = (spriteRight + sprite.getSpeed()) / gamePanel.getTileSize();
-					tile1 = gamePanel.tileManager.getMap()[spriteRightCol][spriteTopRow];
-					tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteBottomRow];
-					if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision())
+					try {
+						spriteRightCol = (spriteRight + sprite.getSpeed()) / gamePanel.getTileSize();
+						tile1 = gamePanel.tileManager.getMap()[spriteRightCol][spriteTopRow];
+						tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteBottomRow];
+						if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision() || spriteRight > gamePanel.getMapWidth())
+							sprite.setCollision(true);
+					} catch(Exception e) {
 						sprite.setCollision(true);
+					}
 					if(spriteRight + sprite.getSpeed() > objectLeft && spriteRight + sprite.getSpeed() < objectRight && spriteBottom > objectTop && spriteTop < objectBottom)
 						sprite.setCollision(true);
 					break;
