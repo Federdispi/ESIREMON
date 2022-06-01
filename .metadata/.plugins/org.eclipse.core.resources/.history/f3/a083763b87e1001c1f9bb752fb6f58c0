@@ -1,0 +1,9 @@
+package object;
+
+public class HorizontalDesk extends Object{
+	
+	public HorizontalDesk() {
+		name = "HorizontalDesk";
+	}
+
+}

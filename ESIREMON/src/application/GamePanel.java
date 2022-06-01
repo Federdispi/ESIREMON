@@ -34,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public Player player = new Player(this, keyHandler);
 	
-	public Object object[] = new Object[10];
+	public Object object[] = new Object[20];
 	
 	int FPS = 60;
 	
