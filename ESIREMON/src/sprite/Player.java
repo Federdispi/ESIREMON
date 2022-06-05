@@ -11,20 +11,20 @@ import application.GamePanel;
 import application.KeyHandler;
 
 public class Player extends Sprite {
-	private GamePanel gamePanel;
 	private KeyHandler keyHandler;
 	
 	public final int screenX, screenY;
 	
 	public Player(GamePanel gamePanel, KeyHandler keyHandler) {
-		this.gamePanel = gamePanel;
+		super(gamePanel);
+		hitBoxX = 8;
+		hitBoxY = 16;
 		this.keyHandler = keyHandler;
-		hitBox = new Rectangle(8, 16, gamePanel.getTileSize() - gamePanel.getTileSize() / 3, gamePanel.getTileSize() - gamePanel.getTileSize() / 3);
+		hitBox = new Rectangle(hitBoxX, hitBoxY, gamePanel.getTileSize() - gamePanel.getTileSize() / 3, gamePanel.getTileSize() - gamePanel.getTileSize() / 3);
 		screenX = gamePanel.getScreenWidth() / 2 - gamePanel.getTileSize() / 2;
 		screenY = gamePanel.getScreenHeight() / 2 - gamePanel.getTileSize() / 2;
 		mapX = gamePanel.getTileSize() * 14;
 		mapY = gamePanel.getTileSize() * 20;
-		speed = 2;
 		direction = "up";
 		previous_direction = "up";
 		try {
@@ -59,13 +59,17 @@ public class Player extends Sprite {
 			}
 			
 			collision = false;
-			int objectIndex = gamePanel.collisionDetector.detectCollision(this);
 			
+			int objectIndex = gamePanel.collisionDetector.detectCollision(this);
 			if(objectIndex != -1)
 			{
 				if(gamePanel.object[objectIndex].getInteractable())
 					gamePanel.object[objectIndex].Interact();
 			}
+			
+			int npcIndex = gamePanel.collisionDetector.detectSpritesCollision(this, gamePanel.npc);
+			if(npcIndex != -1)
+				npcInteract();
 			
 			if(!collision) {
 				switch(direction) {
@@ -93,6 +97,10 @@ public class Player extends Sprite {
 		} else {
 			direction = previous_direction.concat("_stop");
 		}
+	}
+	
+	public void npcInteract() {
+		System.out.println("Interacting with an npc...");
 	}
 	
 	public void draw(Graphics2D g2) {
@@ -136,6 +144,7 @@ public class Player extends Sprite {
 			image = right3;
 			break;
 		}
+		
 		g2.drawImage(image, screenX, screenY, this.gamePanel.getTileSize(), this.gamePanel.getTileSize(), null);
 	}
 }

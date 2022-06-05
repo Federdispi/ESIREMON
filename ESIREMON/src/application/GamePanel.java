@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import map.TileManager;
 import sprite.Player;
+import sprite.Sprite;
 import object.Object;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -36,6 +37,8 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public Object object[] = new Object[20];
 	
+	public Sprite npc[] = new Sprite[10];
+	
 	int FPS = 60;
 	
 	public GamePanel() {
@@ -47,6 +50,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void gameSetup() {
+		assetManager.setNPC();
 		assetManager.setObject();
 	}
 
@@ -88,16 +92,29 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public void update() {
 		player.update();
+		
+		for(int i = 0; i < npc.length; i++) {
+			if(npc[i] != null)
+				npc[i].update();
+		}
 	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
+		
 		tileManager.draw(g2);
+		
 		for(int i = 0; i < object.length; i++) {
 			if(object[i] != null)
 				object[i].draw(g2, this);
 		}
+		
+		for(int i = 0; i < npc.length; i++) {
+			if(npc[i] != null)
+				npc[i].draw(g2);
+		}
+		
 		player.draw(g2);
 		g2.dispose();
 	}

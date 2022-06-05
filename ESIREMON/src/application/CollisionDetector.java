@@ -101,4 +101,94 @@ public class CollisionDetector {
 		}
 		return objectCode;
 	}
+	
+	public int detectSpritesCollision(Sprite sprite1, Sprite[] sprite2) {
+		int spriteCode = -1;
+		
+		for(int i = 0; i < sprite2.length; i++) {
+			if(gamePanel.npc[i] != null) {
+				sprite1.getHitBox().x = sprite1.getX() + sprite1.getHitBox().x;
+				sprite1.getHitBox().y = sprite1.getY() + sprite1.getHitBox().y;
+				
+				sprite2[i].getHitBox().x = sprite2[i].getX() + sprite2[i].getHitBox().x;
+				sprite2[i].getHitBox().y = sprite2[i].getY() + sprite2[i].getHitBox().y;
+				
+				switch(sprite1.getDirection()) {
+				case "up":
+					sprite1.getHitBox().y -= sprite1.getSpeed();
+					if(sprite1.getHitBox().intersects(sprite2[i].getHitBox())) {
+						sprite1.setCollision(true);
+						spriteCode = i;
+					}
+					break;
+				case "down":
+					sprite1.getHitBox().y += sprite1.getSpeed();
+					if(sprite1.getHitBox().intersects(sprite2[i].getHitBox())) {
+						sprite1.setCollision(true);
+						spriteCode = i;
+					}
+					break;
+				case "left":
+					sprite1.getHitBox().x -= sprite1.getSpeed();
+					if(sprite1.getHitBox().intersects(sprite2[i].getHitBox())) {
+						sprite1.setCollision(true);
+						spriteCode = i;
+					}
+					break;
+				case "right":
+					sprite1.getHitBox().x += sprite1.getSpeed();
+					if(sprite1.getHitBox().intersects(sprite2[i].getHitBox())) {
+						sprite1.setCollision(true);
+						spriteCode = i;
+					}
+				}
+				sprite1.getHitBox().x = 8;
+				sprite1.getHitBox().y = 16;
+				sprite2[i].getHitBox().x = 0;
+				sprite2[i].getHitBox().y = 0;
+			}
+		}
+		
+		return spriteCode;
+	}
+	
+	public void detectSpriteCollision(Sprite sprite1, Sprite sprite2) {
+		if(sprite2 == null)
+			sprite2 = gamePanel.player;
+		sprite1.getHitBox().x = sprite1.getX() + sprite1.getHitBox().x;
+		sprite1.getHitBox().y = sprite1.getY() + sprite1.getHitBox().y;
+		
+		sprite2.getHitBox().x = sprite2.getX() + sprite2.getHitBox().x;
+		sprite2.getHitBox().y = sprite2.getY() + sprite2.getHitBox().y;
+		
+		switch(sprite1.getDirection()) {
+		case "up":
+			sprite1.getHitBox().y -= sprite1.getSpeed();
+			if(sprite1.getHitBox().intersects(sprite2.getHitBox())) {
+				sprite1.setCollision(true);
+			}
+			break;
+		case "down":
+			sprite1.getHitBox().y += sprite1.getSpeed();
+			if(sprite1.getHitBox().intersects(sprite2.getHitBox())) {
+				sprite1.setCollision(true);
+			}
+			break;
+		case "left":
+			sprite1.getHitBox().x -= sprite1.getSpeed();
+			if(sprite1.getHitBox().intersects(sprite2.getHitBox())) {
+				sprite1.setCollision(true);
+			}
+			break;
+		case "right":
+			sprite1.getHitBox().x += sprite1.getSpeed();
+			if(sprite1.getHitBox().intersects(sprite2.getHitBox())) {
+				sprite1.setCollision(true);
+			}
+		}
+		sprite1.getHitBox().x = sprite1.getHitBoxDefaultX();
+		sprite1.getHitBox().y = sprite1.getHitBoxDefaultY();
+		sprite2.getHitBox().x = sprite2.getHitBoxDefaultX();
+		sprite2.getHitBox().y = sprite2.getHitBoxDefaultY();
+	}
 }

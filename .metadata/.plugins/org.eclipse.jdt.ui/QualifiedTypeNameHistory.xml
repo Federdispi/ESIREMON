@@ -14,12 +14,9 @@
     <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="java.io.BufferedReader"/>
     <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
-    <fullyQualifiedTypeName name="sprite.Sprite"/>
     <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
     <fullyQualifiedTypeName name="object.Tree"/>
     <fullyQualifiedTypeName name="object.Object"/>
-    <fullyQualifiedTypeName name="java.awt.Graphics2D"/>
-    <fullyQualifiedTypeName name="application.GamePanel"/>
     <fullyQualifiedTypeName name="object.Bed"/>
     <fullyQualifiedTypeName name="object.Desk"/>
     <fullyQualifiedTypeName name="object.Bookshelf"/>
@@ -31,4 +28,9 @@
     <fullyQualifiedTypeName name="object.HorizontalDesk"/>
     <fullyQualifiedTypeName name="object.Table"/>
     <fullyQualifiedTypeName name="object.Couch"/>
+    <fullyQualifiedTypeName name="application.GamePanel"/>
+    <fullyQualifiedTypeName name="sprite.Sprite"/>
+    <fullyQualifiedTypeName name="sprite.Student"/>
+    <fullyQualifiedTypeName name="java.awt.Graphics2D"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
 </qualifiedTypeNameHistroy>

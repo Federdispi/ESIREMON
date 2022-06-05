@@ -8,11 +8,19 @@ import object.Entrance;
 import object.HorizontalDesk;
 import object.Kfet;
 import object.Table;
+import sprite.Student;
 
 public class AssetManager {
 	GamePanel gamePanel;
 	public AssetManager(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
+	}
+	
+	public void setNPC() {
+		gamePanel.npc[0] = new Student(gamePanel);
+		gamePanel.npc[0].setX(17 * gamePanel.getTileSize());
+		gamePanel.npc[0].setY(10 * gamePanel.getTileSize());
+		gamePanel.npc[0].setMoves(true);
 	}
 	
 	public void setObject() {		

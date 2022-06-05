@@ -32,7 +32,7 @@ public class KeyHandler implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		isButtonPressed = false;
+		//isButtonPressed = false;
 		if(e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_Z) {
 			upPressed = false;
 			isButtonPressed = false;
