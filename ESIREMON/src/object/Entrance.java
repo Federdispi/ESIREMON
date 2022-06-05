@@ -10,6 +10,8 @@ public class Entrance extends Object {
 		name = "Entrance";
 		width = 46;
 		height = 20;
+		interactable = true;
+		collision = false;
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/objects/entrata.png"));
 		} catch(IOException e) {

@@ -9,7 +9,6 @@ public class Bookshelf extends Object {
 		name = "Bookshelf";
 		width = 96;
 		height = 87;
-		collision = true;
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/objects/armadio.png"));
 		} catch(IOException e) {

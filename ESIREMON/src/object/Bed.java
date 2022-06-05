@@ -9,7 +9,7 @@ public class Bed extends Object {
 		name = "Bed";
 		width = 48;
 		height = 65;
-		collision = true;	
+		collision = false;	
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/objects/letto.png"));
 		} catch(IOException e) {

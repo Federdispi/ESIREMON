@@ -9,7 +9,7 @@ public class Kfet extends Object{
 		name = "Kfet";
 		width = 96;
 		height = 96;
-		
+		interactable = true;
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/objects/kfet.png"));
 		} catch(IOException e) {

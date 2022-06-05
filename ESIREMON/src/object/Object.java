@@ -8,7 +8,7 @@ import application.GamePanel;
 public class Object {
 	protected BufferedImage image;
 	protected String name;
-	protected boolean collision = false;
+	protected boolean collision = true;
 	protected int mapX, mapY;
 	protected int width, height;
 	protected boolean interactable = false;
@@ -60,6 +60,13 @@ public class Object {
 	}
 	
 	public void Interact() {
-		//TODO
+		switch(this.name) {
+		case "Entrance":
+			System.out.println("Entrée");
+			break;
+		case "Kfet":
+			System.out.println("KFet");
+			break;
+		}
 	}
 } 

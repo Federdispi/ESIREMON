@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 	public boolean isButtonPressed, upPressed, downPressed, leftPressed, rightPressed;
+	public boolean interact;
 	
 	@Override
 	public void keyTyped(KeyEvent e) {}

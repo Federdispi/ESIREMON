@@ -34,7 +34,7 @@ public class AssetManager {
 		
 		gamePanel.object[4] = new Entrance();
 		gamePanel.object[4].setX(20 * gamePanel.getTileSize());
-		gamePanel.object[4].setY(17 * gamePanel.getTileSize());
+		gamePanel.object[4].setY(17 * gamePanel.getTileSize() - 20);
 		
 		gamePanel.object[5] = new HorizontalDesk();
 		gamePanel.object[5].setX(23 * gamePanel.getTileSize());
@@ -90,10 +90,10 @@ public class AssetManager {
 		
 		gamePanel.object[18] = new Entrance();
 		gamePanel.object[18].setX(6 * gamePanel.getTileSize());
-		gamePanel.object[18].setY(6 * gamePanel.getTileSize());
+		gamePanel.object[18].setY(6 * gamePanel.getTileSize() - 20);
 		
 		gamePanel.object[19] = new Entrance();
 		gamePanel.object[19].setX(8 * gamePanel.getTileSize());
-		gamePanel.object[19].setY(6 * gamePanel.getTileSize());
+		gamePanel.object[19].setY(6 * gamePanel.getTileSize() - 20);
 	}
 }

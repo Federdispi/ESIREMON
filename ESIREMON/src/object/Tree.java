@@ -9,7 +9,6 @@ public class Tree extends Object{
 		name = "Tree";
 		width = 48;
 		height = 96;
-		
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/objects/albero.png"));
 		} catch(IOException e) {

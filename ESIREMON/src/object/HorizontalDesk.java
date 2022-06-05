@@ -8,7 +8,6 @@ public class HorizontalDesk extends Object{
 	
 	public HorizontalDesk() {
 		name = "HorizontalDesk";
-		collision = true;
 		width = 87;
 		height = 59;
 		try {
