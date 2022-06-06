@@ -17,6 +17,7 @@ public class Player extends Sprite {
 	
 	public Player(GamePanel gamePanel, KeyHandler keyHandler) {
 		super(gamePanel);
+		lifePoints = 100;
 		hitBoxX = 8;
 		hitBoxY = 16;
 		this.keyHandler = keyHandler;
@@ -69,7 +70,7 @@ public class Player extends Sprite {
 			
 			int npcIndex = gamePanel.collisionDetector.detectSpritesCollision(this, gamePanel.npc);
 			if(npcIndex != -1)
-				npcInteract();
+				npcInteract(npcIndex);
 			
 			if(!collision) {
 				switch(direction) {
@@ -99,8 +100,12 @@ public class Player extends Sprite {
 		}
 	}
 	
-	public void npcInteract() {
-		System.out.println("Interacting with an npc...");
+	public void npcInteract(int npcIndex) {
+		if(gamePanel.keyHandler.enterPressed) {
+			gamePanel.setGameState(gamePanel.dialogueState);
+			gamePanel.npc[npcIndex].talk();
+		}
+		gamePanel.keyHandler.enterPressed = false;
 	}
 	
 	public void draw(Graphics2D g2) {

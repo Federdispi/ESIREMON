@@ -27,11 +27,12 @@ public class GamePanel extends JPanel implements Runnable {
 	final private int mapWidth = tileSize * maxMapCol;
 	final private int mapHeight = tileSize * maxMapRow;
 	
-	KeyHandler keyHandler = new KeyHandler();
+	public KeyHandler keyHandler = new KeyHandler(this);
 	Thread gameThread;
 	TileManager tileManager = new TileManager(this);
 	public CollisionDetector collisionDetector = new CollisionDetector(this);
 	AssetManager assetManager = new AssetManager(this);
+	public HUD hud = new HUD(this);
 	
 	public Player player = new Player(this, keyHandler);
 	
@@ -40,6 +41,12 @@ public class GamePanel extends JPanel implements Runnable {
 	public Sprite npc[] = new Sprite[10];
 	
 	int FPS = 60;
+	
+	private int gameState;
+	public final int pauseState = 0;
+	public final int playState = 1;
+	public final int dialogueState = 2;
+	public final int battleState = 4;
 	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -52,6 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public void gameSetup() {
 		assetManager.setNPC();
 		assetManager.setObject();
+		gameState = playState;
 	}
 
 	public void startGameThread() {
@@ -91,11 +99,13 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 	
 	public void update() {
-		player.update();
+		if(gameState == playState) {
+			player.update();
 		
-		for(int i = 0; i < npc.length; i++) {
-			if(npc[i] != null)
-				npc[i].update();
+			for(int i = 0; i < npc.length; i++) {
+				if(npc[i] != null)
+					npc[i].update();
+			}
 		}
 	}
 	
@@ -116,6 +126,8 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 		
 		player.draw(g2);
+		
+		hud.draw(g2);
 		g2.dispose();
 	}
 	
@@ -153,5 +165,13 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public int getMapHeight() {
 		return this.mapHeight;
+	}
+	
+	public int getGameState() {
+		return this.gameState;
+	}
+	
+	public void setGameState(int gameState) {
+		this.gameState = gameState;
 	}
 }

@@ -16,6 +16,8 @@ public class Student extends Sprite{
 		direction = "down_stop";
 		previous_direction = "down";
 		
+		setDialogue();
+		
 		try {
 			up1 = ImageIO.read(getClass().getResourceAsStream("/player/up1.png"));
 			up2 = ImageIO.read(getClass().getResourceAsStream("/player/up3.png"));
@@ -64,4 +66,15 @@ public class Student extends Sprite{
 			}
 		}
 	}	
+	
+	public void setDialogue() {
+		dialogues[0] = "Salut, je suis un étudiant à l'ESIREM\nExactement comme toi, sauf que\nmoi je suis nul";
+		dialogues[1] = "Je suis dans la m***e car je n'ai pas révisé";
+		dialogues[2] = "Peut-on réviser ensemble stp ?";
+		dialogues[3] = "T'es mon seul espoir";
+	}
+	
+	public void talk() {
+		super.talk();
+	}
 }

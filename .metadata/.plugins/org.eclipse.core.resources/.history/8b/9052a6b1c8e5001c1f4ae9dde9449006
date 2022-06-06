@@ -1,0 +1,47 @@
+package application;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+
+public class HUD {
+	
+	GamePanel gamePanel;
+	Font arial32;
+	Graphics2D g2;
+	
+	public HUD(GamePanel gamePanel) {
+		this.gamePanel = gamePanel;
+		arial32 = new Font("Arial", Font.PLAIN, 32);
+	}
+	
+	public void draw(Graphics2D g2) {
+		this.g2 = g2;
+		this.g2.setFont(arial32);
+		this.g2.setColor(Color.white);
+		this.g2.drawString("HP: " + gamePanel.player.getLifePoints(), 25, 50);
+		dialogue();
+	}
+	
+	public void dialogue() {
+		int x = 2 * gamePanel.getTileSize(); 
+		int y = 8 * gamePanel.getTileSize();
+		int width = gamePanel.getScreenWidth() - 2 * gamePanel.getTileSize();
+		int height = 3 * gamePanel.getTileSize();
+		
+		drawWindow(x, y, width, height);
+	}
+	
+	public void drawWindow(int x, int y, int width, int height) {
+		Color color = new Color(255, 255, 255);
+		g2.setColor(color);
+		g2.fillRoundRect(x, y, width, height, 35, 35);
+		
+		color = new Color(0, 0, 0);
+		g2.setColor(color);
+		g2.setStroke(new BasicStroke(5));
+		g2.drawRoundRect(x + 5, y + 5, width - 10, height - 10, 25, 25);
+	}
+
+}

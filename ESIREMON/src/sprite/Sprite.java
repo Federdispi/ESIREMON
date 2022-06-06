@@ -25,11 +25,38 @@ public class Sprite {
 	protected boolean moves = false;
 	public int movementCounter = 0;
 	
+	protected int lifePoints;
+	
+	String dialogues[] = new String[20];
+	int dialogueIndex = 0;
+	
 	public Sprite(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
 	}
 	
 	public void movement() {}
+	
+	public void talk() {
+		if(dialogues[dialogueIndex] == null)
+			dialogueIndex = 0;
+		gamePanel.hud.setDialogue(dialogues[dialogueIndex]);
+		dialogueIndex++;
+		
+		switch(gamePanel.player.direction) {
+		case "up":
+			direction = "down";
+			break;
+		case "down":
+			direction = "up";
+			break;
+		case "left":
+			direction = "right";
+			break;
+		case "right":
+			direction = "left";
+			break;
+		}
+	}
 	
 	public void update() {
 		movement();
@@ -173,5 +200,9 @@ public class Sprite {
 	
 	public int getHitBoxDefaultY() {
 		return this.hitBoxY;
+	}
+	
+	public int getLifePoints() {
+		return this.lifePoints;
 	}
 }
