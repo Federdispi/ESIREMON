@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
 import application.GamePanel;
 
 public class Sprite {
+	protected String name;
+	
 	protected int mapX, mapY;
 	protected int hitBoxX = 0, hitBoxY = 0;
 	protected int speed = 2;
@@ -30,8 +32,9 @@ public class Sprite {
 	String dialogues[] = new String[20];
 	int dialogueIndex = 0;
 	
-	public Sprite(GamePanel gamePanel) {
+	public Sprite(GamePanel gamePanel, String name) {
 		this.gamePanel = gamePanel;
+		this.name = name;
 	}
 	
 	public void movement() {}
@@ -40,6 +43,7 @@ public class Sprite {
 		if(dialogues[dialogueIndex] == null)
 			dialogueIndex = 0;
 		gamePanel.hud.setDialogue(dialogues[dialogueIndex]);
+		gamePanel.hud.setName(name);
 		dialogueIndex++;
 		
 		switch(gamePanel.player.direction) {
@@ -142,6 +146,10 @@ public class Sprite {
 		}
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public void setX(int x) {
 		this.mapX = x;
 	}
@@ -160,6 +168,10 @@ public class Sprite {
 	
 	public void setObjectCollision(boolean objectCollision) {
 		this.objectCollision = objectCollision;
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 	
 	public int getX() {

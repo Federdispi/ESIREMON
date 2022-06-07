@@ -10,6 +10,7 @@ public class HUD {
 	GamePanel gamePanel;
 	Font arial32;
 	Graphics2D g2;
+	private String name = "";
 	private String dialogue = "";
 	
 	public HUD(GamePanel gamePanel) {
@@ -43,19 +44,26 @@ public class HUD {
 		int width = gamePanel.getScreenWidth() - 2 * gamePanel.getTileSize();
 		int height = 3 * gamePanel.getTileSize();
 		
-		drawWindow(x, y, width, height);
+		drawDialogueWindow(x, y, width, height);
 		
 		x += gamePanel.getTileSize();
 		y += gamePanel.getTileSize();
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 26F));
+		g2.setColor(Color.black);
 		
 		for(String line : dialogue.split("\n")) {
 			g2.drawString(line, x, y);
 			y += 32;
 		}
+		
+		x = gamePanel.getTileSize() + 25;
+		y = 8 * gamePanel.getTileSize() + 12;
+		g2.setColor(Color.white);
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 22F));
+		g2.drawString(name, x, y);
 	}
 	
-	public void drawWindow(int x, int y, int width, int height) {
+	public void drawDialogueWindow(int x, int y, int width, int height) {
 		Color color = new Color(255, 255, 255, 220);
 		g2.setColor(color);
 		g2.fillRoundRect(x, y, width, height, 35, 35);
@@ -64,6 +72,18 @@ public class HUD {
 		g2.setColor(color);
 		g2.setStroke(new BasicStroke(5));
 		g2.drawRoundRect(x + 5, y + 5, width - 10, height - 10, 25, 25);
+		
+		color = new Color(0, 0, 0, 0);
+		g2.fillRoundRect(x + 15, y - 15, width / 5, height / 4, 5, 5);
+		
+		color = Color.white;
+		g2.setColor(color);
+		g2.setStroke(new BasicStroke(1));
+		g2.drawRoundRect(x + 20, y - 10, width / 5 - 10, height / 4 - 10, 2, 2);
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public void setDialogue(String dialogue) {

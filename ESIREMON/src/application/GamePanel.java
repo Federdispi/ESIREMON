@@ -34,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
 	AssetManager assetManager = new AssetManager(this);
 	public HUD hud = new HUD(this);
 	
-	public Player player = new Player(this, keyHandler);
+	public Player player = new Player(this, keyHandler, "Federdispi");
 	
 	public Object object[] = new Object[20];
 	

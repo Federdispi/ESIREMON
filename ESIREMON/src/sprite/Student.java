@@ -10,8 +10,8 @@ import application.GamePanel;
 public class Student extends Sprite{
 	
 
-	public Student(GamePanel gamePanel) {
-		super(gamePanel);
+	public Student(GamePanel gamePanel, String name) {
+		super(gamePanel, name);
 		
 		direction = "down_stop";
 		previous_direction = "down";
@@ -68,7 +68,7 @@ public class Student extends Sprite{
 	}	
 	
 	public void setDialogue() {
-		dialogues[0] = "Salut, je suis un étudiant à l'ESIREM\nExactement comme toi, sauf que\nmoi je suis nul";
+		dialogues[0] = "Salut, je suis un étudiant à l'ESIREM exactement\ncomme toi, sauf que moi je suis nul";
 		dialogues[1] = "Je suis dans la m***e car je n'ai pas révisé";
 		dialogues[2] = "Peut-on réviser ensemble stp ?";
 		dialogues[3] = "T'es mon seul espoir";

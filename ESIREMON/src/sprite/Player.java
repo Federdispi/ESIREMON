@@ -15,8 +15,8 @@ public class Player extends Sprite {
 	
 	public final int screenX, screenY;
 	
-	public Player(GamePanel gamePanel, KeyHandler keyHandler) {
-		super(gamePanel);
+	public Player(GamePanel gamePanel, KeyHandler keyHandler, String name) {
+		super(gamePanel, name);
 		lifePoints = 100;
 		hitBoxX = 8;
 		hitBoxY = 16;
