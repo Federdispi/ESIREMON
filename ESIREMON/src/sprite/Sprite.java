@@ -8,6 +8,7 @@ import application.GamePanel;
 
 public class Sprite {
 	protected String name;
+	protected boolean sexe; //false man, true woman
 	
 	protected int mapX, mapY;
 	protected int hitBoxX = 0, hitBoxY = 0;
@@ -32,9 +33,10 @@ public class Sprite {
 	String dialogues[] = new String[20];
 	int dialogueIndex = 0;
 	
-	public Sprite(GamePanel gamePanel, String name) {
+	public Sprite(GamePanel gamePanel, String name, boolean sexe) {
 		this.gamePanel = gamePanel;
 		this.name = name;
+		this.sexe = sexe;
 	}
 	
 	public void movement() {}
@@ -48,16 +50,28 @@ public class Sprite {
 		
 		switch(gamePanel.player.direction) {
 		case "up":
-			direction = "down";
+			if(moves)
+				direction = "down";
+			else
+				direction = "down_stop";
 			break;
 		case "down":
-			direction = "up";
+			if(moves)
+				direction = "up";
+			else
+				direction = "up_stop";
 			break;
 		case "left":
-			direction = "right";
+			if(moves)
+				direction = "right";
+			else
+				direction = "right_stop";
 			break;
 		case "right":
-			direction = "left";
+			if(moves)
+				direction = "left";
+			else
+				direction = "left_stop";
 			break;
 		}
 	}

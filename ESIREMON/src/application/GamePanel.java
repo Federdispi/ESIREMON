@@ -34,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
 	AssetManager assetManager = new AssetManager(this);
 	public HUD hud = new HUD(this);
 	
-	public Player player = new Player(this, keyHandler, "Federdispi");
+	public Player player = new Player(this, keyHandler, "Federdispi", true);
 	
 	public Object object[] = new Object[20];
 	
@@ -46,7 +46,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int pauseState = 0;
 	public final int playState = 1;
 	public final int dialogueState = 2;
-	public final int battleState = 4;
+	public final int battleState = 3;
 	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -107,6 +107,8 @@ public class GamePanel extends JPanel implements Runnable {
 					npc[i].update();
 			}
 		}
+		if(gameState == battleState)
+			hud.drawBattle();
 	}
 	
 	public void paintComponent(Graphics g) {

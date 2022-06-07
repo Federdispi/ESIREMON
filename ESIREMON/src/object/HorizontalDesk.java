@@ -4,9 +4,12 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import application.GamePanel;
+
 public class HorizontalDesk extends Object{
 	
-	public HorizontalDesk() {
+	public HorizontalDesk(GamePanel gamePanel) {
+		super(gamePanel);
 		name = "HorizontalDesk";
 		width = 87;
 		height = 59;

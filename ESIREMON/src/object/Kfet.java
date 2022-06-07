@@ -4,8 +4,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import application.GamePanel;
+
 public class Kfet extends Object{
-	public Kfet() {
+	public Kfet(GamePanel gamePanel) {
+		super(gamePanel);
 		name = "Kfet";
 		width = 96;
 		height = 96;

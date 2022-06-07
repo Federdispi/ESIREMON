@@ -4,9 +4,12 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import application.GamePanel;
+
 public class Couch extends Object {
 	
-	public Couch() {
+	public Couch(GamePanel gamePanel) {
+		super(gamePanel);
 		name = "Couch";
 		width = 32;
 		height = 32;

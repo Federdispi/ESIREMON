@@ -4,8 +4,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import application.GamePanel;
+
 public class Bed extends Object {
-	public Bed() {
+	public Bed(GamePanel gamePanel) {
+		super(gamePanel);
 		name = "Bed";
 		width = 48;
 		height = 65;

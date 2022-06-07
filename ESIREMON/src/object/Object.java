@@ -6,12 +6,17 @@ import java.awt.image.BufferedImage;
 import application.GamePanel;
 
 public class Object {
+	GamePanel gamePanel;
 	protected BufferedImage image;
 	protected String name;
 	protected boolean collision = true;
 	protected int mapX, mapY;
 	protected int width, height;
 	protected boolean interactable = false;
+	
+	public Object(GamePanel gamePanel) {
+		this.gamePanel = gamePanel;
+	}
 	
 	public void draw(Graphics2D g2, GamePanel gamePanel) {
 		int screenX = mapX - gamePanel.player.getX() + gamePanel.player.screenX;
@@ -21,6 +26,17 @@ public class Object {
 				&& mapY + 2 * gamePanel.getTileSize() > gamePanel.player.getY() - gamePanel.player.screenY 
 				&& mapY - 2 * gamePanel.getTileSize() < gamePanel.player.getY() + gamePanel.player.screenY)
 			g2.drawImage(image, screenX, screenY, width, height, null);
+	}
+	
+	public void Interact() {
+		switch(this.name) {
+		case "Entrance":
+			System.out.println("Entrée");
+			break;
+		case "Kfet":
+			gamePanel.player.npcInteract(1);
+			break;
+		}
 	}
 	
 	public void setCollision(boolean collision) {
@@ -57,16 +73,5 @@ public class Object {
 	
 	public boolean getInteractable() {
 		return this.interactable;
-	}
-	
-	public void Interact() {
-		switch(this.name) {
-		case "Entrance":
-			System.out.println("Entrée");
-			break;
-		case "Kfet":
-			System.out.println("KFet");
-			break;
-		}
 	}
 } 
