@@ -65,7 +65,7 @@ public class HUD {
 		g2.setStroke(new BasicStroke(5));
 		g2.drawRoundRect(x + 5, y + 5, width - 10, height - 10, 25, 25);
 		
-		g2.setColor(color);
+		color = new Color(0, 0, 0, 0);
 		g2.fillRoundRect(x + 15, y - 15, width / 5, height / 4, 5, 5);
 		
 		color = Color.white;

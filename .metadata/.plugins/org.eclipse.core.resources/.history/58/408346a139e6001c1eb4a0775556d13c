@@ -17,6 +17,7 @@ public class KeyHandler implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		System.out.println(e.getKeyCode() == KeyEvent.VK_ESCAPE);
 		if(gamePanel.getGameState() == gamePanel.playState) {
 			if(e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_Z) {
 				upPressed = true;
@@ -41,12 +42,12 @@ public class KeyHandler implements KeyListener {
 				enterPressed = true;
 		}
 		
-		else if(gamePanel.getGameState() == gamePanel.pauseState) {
+		if(gamePanel.getGameState() == gamePanel.pauseState) {
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
 				gamePanel.setGameState(gamePanel.playState);
 		}
 		
-		else if(gamePanel.getGameState() == gamePanel.dialogueState) {
+		if(gamePanel.getGameState() == gamePanel.dialogueState) {
 			if(e.getKeyCode() == KeyEvent.VK_ENTER)
 				gamePanel.setGameState(gamePanel.playState);
 		}
