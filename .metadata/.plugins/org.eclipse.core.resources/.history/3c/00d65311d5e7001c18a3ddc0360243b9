@@ -22,13 +22,9 @@ public class AssetManager {
 		gamePanel.npc[0].setY(10 * gamePanel.getTileSize());
 		gamePanel.npc[0].setMoves(true);
 		
-		gamePanel.npc[1] = new Student(gamePanel, "Nicolas", true, "right_stop");
+		gamePanel.npc[1] = new Student(gamePanel, "KFet Man", true, "right_stop");
 		gamePanel.npc[1].setX(11 * gamePanel.getTileSize() + gamePanel.getTileSize() / 2);
 		gamePanel.npc[1].setY(9 * gamePanel.getTileSize());
-		
-		gamePanel.npc[2] = new Student(gamePanel, "Mael", true, "up_stop");
-		gamePanel.npc[2].setX(23 * gamePanel.getTileSize());
-		gamePanel.npc[2].setY(5 * gamePanel.getTileSize() - gamePanel.getTileSize() / 2);
 	}
 	
 	public void setObject() {		

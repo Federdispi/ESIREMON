@@ -27,8 +27,8 @@ public class AssetManager {
 		gamePanel.npc[1].setY(9 * gamePanel.getTileSize());
 		
 		gamePanel.npc[2] = new Student(gamePanel, "Mael", true, "up_stop");
-		gamePanel.npc[2].setX(23 * gamePanel.getTileSize());
-		gamePanel.npc[2].setY(5 * gamePanel.getTileSize() - gamePanel.getTileSize() / 2);
+		gamePanel.npc[2].setX(22 * gamePanel.getTileSize());
+		gamePanel.npc[2].setY(4 * gamePanel.getTileSize());
 	}
 	
 	public void setObject() {		

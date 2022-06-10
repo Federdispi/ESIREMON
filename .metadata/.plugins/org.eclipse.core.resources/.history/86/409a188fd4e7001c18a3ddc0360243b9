@@ -72,15 +72,8 @@ public class Student extends Sprite {
 	}	
 	
 	public void setDialogue() {
-		switch(name) {
-		case "Nicolas":
-			dialogues[0] = "Salut, on n'a plus de gaufres au chocolat, mais il en\nreste nature. T'en veux ?";
-			break;
-		case "Mael":
-			dialogues[0] = "Je viens d'installer un logiciel permettant de faire\ntourner Minecraft à 30 FPS sur Linux avec ma\nGTX 1660";
-			break;
-		default:
-			dialogues[0] = "Je suis " + name;
+		if(name == "Nicolas") {
+			
 		}
 	}
 	

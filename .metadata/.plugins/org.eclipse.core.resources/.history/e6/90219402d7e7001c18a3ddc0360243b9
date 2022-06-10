@@ -77,7 +77,7 @@ public class Student extends Sprite {
 			dialogues[0] = "Salut, on n'a plus de gaufres au chocolat, mais il en\nreste nature. T'en veux ?";
 			break;
 		case "Mael":
-			dialogues[0] = "Je viens d'installer un logiciel permettant de faire\ntourner Minecraft à 30 FPS sur Linux avec ma\nGTX 1660";
+			dialogues[0] = "Je viens d'installer un logiciel permettant de faire\n tourner Minecraft à 30 FPS sur Linux avec ma RTX 3090";
 			break;
 		default:
 			dialogues[0] = "Je suis " + name;
