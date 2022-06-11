@@ -1,0 +1,9 @@
+package sprite;
+
+public class KFetMan extends Sprite {
+	
+	public KFetMan(GamePanel gamePanel) {
+		super(gamePanel, "Nicolas", true);
+	}
+
+}

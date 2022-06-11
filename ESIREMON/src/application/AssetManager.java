@@ -1,13 +1,12 @@
 package application;
 
-import object.Bed;
-import object.Bookshelf;
 import object.Couch;
 import object.Desk;
 import object.Entrance;
 import object.HorizontalDesk;
 import object.Kfet;
 import object.Table;
+import sprite.KFetMan;
 import sprite.Student;
 
 public class AssetManager {
@@ -21,10 +20,6 @@ public class AssetManager {
 		gamePanel.npc[0].setX(17 * gamePanel.TILE_SIZE);
 		gamePanel.npc[0].setY(10 * gamePanel.TILE_SIZE);
 		gamePanel.npc[0].setMoves(true);
-		
-		gamePanel.npc[1] = new Student(gamePanel, "Nicolas", true, "right_stop");
-		gamePanel.npc[1].setX(11 * gamePanel.TILE_SIZE + gamePanel.TILE_SIZE / 2);
-		gamePanel.npc[1].setY(9 * gamePanel.TILE_SIZE);
 		
 		gamePanel.npc[2] = new Student(gamePanel, "Mael", true, "up_stop");
 		gamePanel.npc[2].setX(23 * gamePanel.TILE_SIZE);

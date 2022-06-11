@@ -11,12 +11,15 @@ import javax.imageio.ImageIO;
 import application.GamePanel;
 import application.KeyHandler;
 
+import object.Object;
+
 public class Player extends Sprite {
 	private KeyHandler keyHandler;
 	
 	public final int screenX, screenY;
-	private ArrayList<Object> bag = new ArrayList<>();
-	public final int BAG_CAPACITY = 20;
+	public ArrayList<Object> bag = new ArrayList<>();
+	private Sprite spriteInteract = null;
+	private int money = 5;
 	
 	public Player(GamePanel gamePanel, KeyHandler keyHandler, String name, boolean sexe) {
 		super(gamePanel, name, sexe);
@@ -114,6 +117,7 @@ public class Player extends Sprite {
 	
 	public void npcInteract(int npcIndex) {
 		if(gamePanel.keyHandler.enterPressed) {
+			spriteInteract = gamePanel.npc[npcIndex];
 			gamePanel.setGameState(gamePanel.DIALOGUE);
 			gamePanel.npc[npcIndex].talk();
 		}
@@ -163,5 +167,17 @@ public class Player extends Sprite {
 		}
 		
 		g2.drawImage(image, screenX, screenY, this.gamePanel.TILE_SIZE, this.gamePanel.TILE_SIZE, null);
+	}
+	
+	public Sprite getSpriteInteract() {
+		return this.spriteInteract;
+	}
+	
+	public int getMoney() {
+		return this.money;
+	}
+	
+	public void setMoney(int money) {
+		this.money = money;
 	}
 }

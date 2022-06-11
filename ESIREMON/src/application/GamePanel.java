@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import map.TileManager;
+import sprite.KFetMan;
 import sprite.Player;
 import sprite.Sprite;
 import object.Object;
@@ -22,12 +23,14 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int MAP_ROW = 25;
 	public final int MAP_WIDTH = TILE_SIZE * MAP_COL;
 	public final int MAP_HEIGHT = TILE_SIZE * MAP_COL;
+	public final int FPS = 60;
 	public final int MAIN_MENU = -1;
 	public final int PAUSE = 0;
 	public final int PLAY = 1;
 	public final int DIALOGUE = 2;
 	public final int BATTLE = 3;
 	public final int BAG = 4;
+	public final int KFET = 5;
 	
 	public KeyHandler keyHandler = new KeyHandler(this);
 	Thread gameThread;
@@ -42,7 +45,7 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public Sprite npc[] = new Sprite[10];
 	
-	int FPS = 60;
+	public KFetMan nicolas = new KFetMan(this);
 	
 	private int gameState;
 	
@@ -57,6 +60,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void gameSetup() {
 		assetManager.setNPC();
+		npc[1] = nicolas;
 		assetManager.setObject();
 		gameState = MAIN_MENU;
 	}
@@ -106,8 +110,6 @@ public class GamePanel extends JPanel implements Runnable {
 					npc[i].update();
 			}
 		}
-		if(gameState == BATTLE)
-			hud.drawBattle();
 	}
 	
 	public void paintComponent(Graphics g) {

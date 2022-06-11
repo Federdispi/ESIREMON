@@ -3,6 +3,8 @@ package application;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import sprite.KFetMan;
+
 public class KeyHandler implements KeyListener {
 	GamePanel gamePanel;
 	public boolean isButtonPressed, upPressed, downPressed, leftPressed, rightPressed;
@@ -70,8 +72,12 @@ public class KeyHandler implements KeyListener {
 		
 		//DIALOGUE
 		else if(gamePanel.getGameState() == gamePanel.DIALOGUE) {
-			if(e.getKeyCode() == KeyEvent.VK_ENTER)
-				gamePanel.setGameState(gamePanel.PLAY);
+			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				if(gamePanel.player.getSpriteInteract().getClass() == KFetMan.class)
+					gamePanel.setGameState(gamePanel.KFET);
+				else
+					gamePanel.setGameState(gamePanel.PLAY);
+			}
 		}
 		
 		//MAIN MENU
@@ -98,8 +104,11 @@ public class KeyHandler implements KeyListener {
 		
 		//BAG
 		else if(gamePanel.getGameState() == gamePanel.BAG) {
-			if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 				gamePanel.setGameState(gamePanel.PLAY);
+				gamePanel.hud.setBagCol(0);
+				gamePanel.hud.setBagRow(0);
+			}
 			else if((e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_Z) && gamePanel.hud.getBagRow() > 0)
 				gamePanel.hud.setBagRow(gamePanel.hud.getBagRow() - 1);
 			else if(e.getKeyCode() == KeyEvent.VK_S && gamePanel.hud.getBagRow() < 3)
@@ -108,6 +117,28 @@ public class KeyHandler implements KeyListener {
 				gamePanel.hud.setBagCol(gamePanel.hud.getBagCol() - 1);
 			else if(e.getKeyCode() == KeyEvent.VK_D && gamePanel.hud.getBagCol() < 4)
 				gamePanel.hud.setBagCol(gamePanel.hud.getBagCol() + 1);
+		}
+		
+		//KFET
+		else if(gamePanel.getGameState() == gamePanel.KFET) {
+			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				gamePanel.setGameState(gamePanel.PLAY);
+				gamePanel.hud.setBagCol(0);
+				gamePanel.hud.setBagRow(0);
+			}
+			else if((e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_Z) && gamePanel.hud.getBagRow() > 0)
+				gamePanel.hud.setBagRow(gamePanel.hud.getBagRow() - 1);
+			else if(e.getKeyCode() == KeyEvent.VK_S && gamePanel.hud.getBagRow() < 3)
+				gamePanel.hud.setBagRow(gamePanel.hud.getBagRow() + 1);
+			else if((e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_Q) && gamePanel.hud.getBagCol() > 0)
+				gamePanel.hud.setBagCol(gamePanel.hud.getBagCol() - 1);
+			else if(e.getKeyCode() == KeyEvent.VK_D && gamePanel.hud.getBagCol() < 4)
+				gamePanel.hud.setBagCol(gamePanel.hud.getBagCol() + 1);
+			else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				int itemIndex = gamePanel.hud.getBagCol() + 5 * gamePanel.hud.getBagRow();
+				if(itemIndex < gamePanel.nicolas.inventory.size() && gamePanel.player.getMoney() > gamePanel.nicolas.inventory.get(itemIndex).getPrice())
+					gamePanel.player.bag.add(gamePanel.nicolas.inventory.get(itemIndex));
+			}
 		}
 	}
 

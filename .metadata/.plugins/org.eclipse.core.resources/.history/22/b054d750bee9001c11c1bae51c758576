@@ -1,0 +1,14 @@
+package sprite;
+
+import application.GamePanel;
+
+public class KFetMan extends Sprite {
+	
+	public KFetMan(GamePanel gamePanel) {
+		super(gamePanel, "Nicolas", false);
+		
+		this.direction = "right_stop";
+		
+	}
+
+}

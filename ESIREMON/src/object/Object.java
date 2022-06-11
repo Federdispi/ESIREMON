@@ -13,6 +13,8 @@ public class Object {
 	protected int mapX, mapY;
 	protected int width, height;
 	protected boolean interactable = false;
+	protected String description;
+	protected int price = 0;
 	
 	public Object(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
@@ -73,5 +75,21 @@ public class Object {
 	
 	public boolean getInteractable() {
 		return this.interactable;
+	}
+	
+	public BufferedImage getImage() {
+		return this.image;
+	}
+	
+	public String getDescription() {
+		return this.description;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public int getPrice() {
+		return this.price;
 	}
 } 

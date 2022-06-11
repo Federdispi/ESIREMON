@@ -14,8 +14,6 @@
     <fullyQualifiedTypeName name="java.io.BufferedReader"/>
     <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
     <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
-    <fullyQualifiedTypeName name="object.Tree"/>
-    <fullyQualifiedTypeName name="object.Object"/>
     <fullyQualifiedTypeName name="object.Bed"/>
     <fullyQualifiedTypeName name="object.Desk"/>
     <fullyQualifiedTypeName name="object.Bookshelf"/>
@@ -33,7 +31,10 @@
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="java.awt.BasicStroke"/>
     <fullyQualifiedTypeName name="java.util.Random"/>
-    <fullyQualifiedTypeName name="application.GamePanel"/>
     <fullyQualifiedTypeName name="java.awt.Font"/>
+    <fullyQualifiedTypeName name="object.Tree"/>
+    <fullyQualifiedTypeName name="object.Object"/>
+    <fullyQualifiedTypeName name="application.GamePanel"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="sprite.KFetMan"/>
 </qualifiedTypeNameHistroy>

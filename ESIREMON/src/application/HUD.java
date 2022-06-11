@@ -38,6 +38,9 @@ public class HUD {
 		
 		if(gamePanel.getGameState() == gamePanel.BAG)
 			drawBag();
+		
+		if(gamePanel.getGameState() == gamePanel.KFET)
+			drawKFet();
 	}
 	
 	private void drawMainMenu() {
@@ -176,31 +179,111 @@ public class HUD {
 		g2.drawString(name, x, y);
 	}
 	
-	public void drawBag() {
-		//Window
-		int x = gamePanel.TILE_SIZE;
+	private void drawBag() {
+		//Bag window
+		int x = 2 * gamePanel.TILE_SIZE;
 		int y = gamePanel.TILE_SIZE;
 		int width = 6 * gamePanel.TILE_SIZE;
 		int height = 5 * gamePanel.TILE_SIZE;
-		
 		drawWindow(x, y, width, height);
 		
 		//Items
-		final int startX = x + 20;
-		final int startY = y + 20;
+		final int startX = x + gamePanel.TILE_SIZE / 2;
+		final int startY = y + gamePanel.TILE_SIZE / 2;
 		x = startX;
 		y = startY;
+		for(int i = 0; i < gamePanel.player.bag.size(); i++) {
+			g2.drawImage(gamePanel.player.bag.get(i).getImage(), x, y, null);
+			x += gamePanel.TILE_SIZE;
+			
+			if(i == 4 || i == 9 || i == 14) {
+				x = startX;
+				y += gamePanel.TILE_SIZE;
+			}
+		}
 		
 		//Selection
 		int selX = startX + bagCol * gamePanel.TILE_SIZE;
 		int selY = startY + bagRow * gamePanel.TILE_SIZE;
 		int selWidth = gamePanel.TILE_SIZE;
 		int selHeight = gamePanel.TILE_SIZE;
-		
 		drawWindow(selX, selY, selWidth, selHeight);
+		
+		//Description window
+		x = 8 * gamePanel.TILE_SIZE;
+		y = gamePanel.TILE_SIZE;
+		width = 6 * gamePanel.TILE_SIZE;
+		height = 2 * gamePanel.TILE_SIZE;
+		drawWindow(x, y, width, height);
+		
+		//Item name
+		int itemIndex = bagCol + 5 * bagRow;
+		x += 20;
+		y += gamePanel.TILE_SIZE;
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 32F));
+		if(itemIndex < gamePanel.player.bag.size())
+			g2.drawString(gamePanel.player.bag.get(itemIndex).getName(), selX, selY);
+		
+		//Item description
+		y += gamePanel.TILE_SIZE;
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 28F));
+		if(itemIndex < gamePanel.player.bag.size())
+			g2.drawString(gamePanel.player.bag.get(itemIndex).getDescription(), selX, selY);
 	}
 	
-	public void drawBattle() {
+	private void drawKFet() {
+		//Inventory window
+		int x = 2 * gamePanel.TILE_SIZE;
+		int y = gamePanel.TILE_SIZE;
+		int width = 6 * gamePanel.TILE_SIZE;
+		int height = 5 * gamePanel.TILE_SIZE;
+		drawWindow(x, y, width, height);
+		
+		//Items
+		final int startX = x + gamePanel.TILE_SIZE / 2;
+		final int startY = y + gamePanel.TILE_SIZE / 2;
+		x = startX;
+		y = startY;
+		for(int i = 0; i < gamePanel.nicolas.inventory.size(); i++) {
+			g2.drawImage(gamePanel.nicolas.inventory.get(i).getImage(), x, y, null);
+			x += gamePanel.TILE_SIZE;
+			
+			if(i == 4 || i == 9 || i == 14) {
+				x = startX;
+				y += gamePanel.TILE_SIZE;
+			}
+		}
+		
+		//Selection
+		int selX = startX + bagCol * gamePanel.TILE_SIZE;
+		int selY = startY + bagRow * gamePanel.TILE_SIZE;
+		int selWidth = gamePanel.TILE_SIZE;
+		int selHeight = gamePanel.TILE_SIZE;
+		drawWindow(selX, selY, selWidth, selHeight);
+		
+		//Description window
+		x = 2 * gamePanel.TILE_SIZE;
+		y = 6 * gamePanel.TILE_SIZE;
+		width = 6 * gamePanel.TILE_SIZE;
+		height = 2 * gamePanel.TILE_SIZE;
+		drawWindow(x, y, width, height);
+		
+		//Item name and price
+		int itemIndex = bagCol + 5 * bagRow;
+		x += 20;
+		y += gamePanel.TILE_SIZE;
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 32F));
+		if(itemIndex < gamePanel.nicolas.inventory.size())
+			g2.drawString(gamePanel.nicolas.inventory.get(itemIndex).getName() + " : " + gamePanel.nicolas.inventory.get(itemIndex).getPrice(), selX, selY);
+		
+		//Item description
+		y += gamePanel.TILE_SIZE;
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 28F));
+		if(itemIndex < gamePanel.nicolas.inventory.size())
+			g2.drawString(gamePanel.nicolas.inventory.get(itemIndex).getDescription(), selX, selY);
+	}
+	
+	private void drawBattle() {
 		//TODO
 	}
 	
