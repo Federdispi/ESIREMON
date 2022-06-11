@@ -21,10 +21,10 @@ public class Object {
 	public void draw(Graphics2D g2, GamePanel gamePanel) {
 		int screenX = mapX - gamePanel.player.getX() + gamePanel.player.screenX;
 		int screenY = mapY - gamePanel.player.getY() + gamePanel.player.screenY;
-		if(mapX + 2 * gamePanel.getTileSize() > gamePanel.player.getX() - gamePanel.player.screenX 
-				&& mapX - 2 * gamePanel.getTileSize() < gamePanel.player.getX() + gamePanel.player.screenX 
-				&& mapY + 2 * gamePanel.getTileSize() > gamePanel.player.getY() - gamePanel.player.screenY 
-				&& mapY - 2 * gamePanel.getTileSize() < gamePanel.player.getY() + gamePanel.player.screenY)
+		if(mapX + 2 * gamePanel.TILE_SIZE > gamePanel.player.getX() - gamePanel.player.screenX 
+				&& mapX - 2 * gamePanel.TILE_SIZE < gamePanel.player.getX() + gamePanel.player.screenX 
+				&& mapY + 2 * gamePanel.TILE_SIZE > gamePanel.player.getY() - gamePanel.player.screenY 
+				&& mapY - 2 * gamePanel.TILE_SIZE < gamePanel.player.getY() + gamePanel.player.screenY)
 			g2.drawImage(image, screenX, screenY, width, height, null);
 	}
 	

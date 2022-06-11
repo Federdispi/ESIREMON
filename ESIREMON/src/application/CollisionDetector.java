@@ -17,10 +17,10 @@ public class CollisionDetector {
 		int spriteTop = sprite.getY() + sprite.getHitBox().y;
 		int spriteBottom = sprite.getY() + sprite.getHitBox().y + sprite.getHitBox().height;
 		
-		int spriteLeftCol = spriteLeft / gamePanel.getTileSize();
-		int spriteRightCol = spriteRight / gamePanel.getTileSize();
-		int spriteTopRow = spriteTop / gamePanel.getTileSize();
-		int spriteBottomRow = spriteBottom / gamePanel.getTileSize();
+		int spriteLeftCol = spriteLeft / gamePanel.TILE_SIZE;
+		int spriteRightCol = spriteRight / gamePanel.TILE_SIZE;
+		int spriteTopRow = spriteTop / gamePanel.TILE_SIZE;
+		int spriteBottomRow = spriteBottom / gamePanel.TILE_SIZE;
 		
 		int tile1, tile2;
 		
@@ -34,7 +34,7 @@ public class CollisionDetector {
 				switch(sprite.getDirection()) {
 				case "up":
 					try {
-						spriteTopRow = (spriteTop - sprite.getSpeed()) / gamePanel.getTileSize();
+						spriteTopRow = (spriteTop - sprite.getSpeed()) / gamePanel.TILE_SIZE;
 						tile1 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteTopRow];
 						tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteTopRow];
 						if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision() || spriteTop < 0)
@@ -50,10 +50,10 @@ public class CollisionDetector {
 					break;
 				case "down":				
 					try {
-						spriteBottomRow = (spriteBottom + sprite.getSpeed()) / gamePanel.getTileSize();
+						spriteBottomRow = (spriteBottom + sprite.getSpeed()) / gamePanel.TILE_SIZE;
 						tile1 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteBottomRow];
 						tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteBottomRow];
-						if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision() || spriteBottom > gamePanel.getMapHeight())
+						if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision() || spriteBottom > gamePanel.MAP_HEIGHT)
 							sprite.setCollision(true);
 					} catch(Exception e) {
 						sprite.setCollision(true);
@@ -66,7 +66,7 @@ public class CollisionDetector {
 					break;
 				case "left":
 					try {
-						spriteLeftCol = (spriteLeft - sprite.getSpeed()) / gamePanel.getTileSize();
+						spriteLeftCol = (spriteLeft - sprite.getSpeed()) / gamePanel.TILE_SIZE;
 						tile1 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteTopRow];
 						tile2 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteBottomRow];
 						if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision() || spriteLeft < 0)
@@ -82,10 +82,10 @@ public class CollisionDetector {
 					break;
 				case "right":
 					try {
-						spriteRightCol = (spriteRight + sprite.getSpeed()) / gamePanel.getTileSize();
+						spriteRightCol = (spriteRight + sprite.getSpeed()) / gamePanel.TILE_SIZE;
 						tile1 = gamePanel.tileManager.getMap()[spriteRightCol][spriteTopRow];
 						tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteBottomRow];
-						if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision() || spriteRight > gamePanel.getMapWidth())
+						if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision() || spriteRight > gamePanel.MAP_WIDTH)
 							sprite.setCollision(true);
 					} catch(Exception e) {
 						sprite.setCollision(true);

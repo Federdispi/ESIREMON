@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -14,6 +15,8 @@ public class Player extends Sprite {
 	private KeyHandler keyHandler;
 	
 	public final int screenX, screenY;
+	private ArrayList<Object> bag = new ArrayList<>();
+	public final int BAG_CAPACITY = 20;
 	
 	public Player(GamePanel gamePanel, KeyHandler keyHandler, String name, boolean sexe) {
 		super(gamePanel, name, sexe);
@@ -21,11 +24,11 @@ public class Player extends Sprite {
 		hitBoxX = 8;
 		hitBoxY = 16;
 		this.keyHandler = keyHandler;
-		hitBox = new Rectangle(hitBoxX, hitBoxY, gamePanel.getTileSize() - gamePanel.getTileSize() / 3, gamePanel.getTileSize() - gamePanel.getTileSize() / 3);
-		screenX = gamePanel.getScreenWidth() / 2 - gamePanel.getTileSize() / 2;
-		screenY = gamePanel.getScreenHeight() / 2 - gamePanel.getTileSize() / 2;
-		mapX = gamePanel.getTileSize() * 14;
-		mapY = gamePanel.getTileSize() * 20;
+		hitBox = new Rectangle(hitBoxX, hitBoxY, gamePanel.TILE_SIZE - gamePanel.TILE_SIZE / 3, gamePanel.TILE_SIZE - gamePanel.TILE_SIZE / 3);
+		screenX = gamePanel.SCREEN_WIDTH / 2 - gamePanel.TILE_SIZE / 2;
+		screenY = gamePanel.SCREEN_HEIGHT / 2 - gamePanel.TILE_SIZE / 2;
+		mapX = gamePanel.TILE_SIZE * 14;
+		mapY = gamePanel.TILE_SIZE * 20;
 		direction = "up";
 		previous_direction = "up";
 		
@@ -49,6 +52,10 @@ public class Player extends Sprite {
 		} else {
 			//TODO
 		}
+	}
+	
+	public void addItem(Object item) {
+		bag.add(item);
 	}
 	
 	public void update() {
@@ -107,7 +114,7 @@ public class Player extends Sprite {
 	
 	public void npcInteract(int npcIndex) {
 		if(gamePanel.keyHandler.enterPressed) {
-			gamePanel.setGameState(gamePanel.dialogueState);
+			gamePanel.setGameState(gamePanel.DIALOGUE);
 			gamePanel.npc[npcIndex].talk();
 		}
 		gamePanel.keyHandler.enterPressed = false;
@@ -155,6 +162,6 @@ public class Player extends Sprite {
 			break;
 		}
 		
-		g2.drawImage(image, screenX, screenY, this.gamePanel.getTileSize(), this.gamePanel.getTileSize(), null);
+		g2.drawImage(image, screenX, screenY, this.gamePanel.TILE_SIZE, this.gamePanel.TILE_SIZE, null);
 	}
 }

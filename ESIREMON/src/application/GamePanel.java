@@ -12,20 +12,22 @@ import sprite.Player;
 import sprite.Sprite;
 import object.Object;
 
-public class GamePanel extends JPanel implements Runnable {
-	final private int originalTileSize = 16;
-	final private int scale = 3;
-	
-	final private int tileSize = originalTileSize * scale;
-	final private int maxScreenCol = 16;
-	final private int maxScreenRow = 12;
-	final private int screenWidth = tileSize * maxScreenCol;
-	final private int screenHeight = tileSize * maxScreenRow;
-	
-	final private int maxMapCol = 28;
-	final private int maxMapRow = 25;
-	final private int mapWidth = tileSize * maxMapCol;
-	final private int mapHeight = tileSize * maxMapRow;
+public class GamePanel extends JPanel implements Runnable {	
+	public final int TILE_SIZE = 48;
+	public final int SCREEN_COL = 16;
+	public final int SCREEN_ROW = 12;
+	public final int SCREEN_WIDTH = TILE_SIZE * SCREEN_COL;
+	public final int SCREEN_HEIGHT = TILE_SIZE * SCREEN_ROW;
+	public final int MAP_COL = 28;
+	public final int MAP_ROW = 25;
+	public final int MAP_WIDTH = TILE_SIZE * MAP_COL;
+	public final int MAP_HEIGHT = TILE_SIZE * MAP_COL;
+	public final int MAIN_MENU = -1;
+	public final int PAUSE = 0;
+	public final int PLAY = 1;
+	public final int DIALOGUE = 2;
+	public final int BATTLE = 3;
+	public final int BAG = 4;
 	
 	public KeyHandler keyHandler = new KeyHandler(this);
 	Thread gameThread;
@@ -43,13 +45,10 @@ public class GamePanel extends JPanel implements Runnable {
 	int FPS = 60;
 	
 	private int gameState;
-	public final int pauseState = 0;
-	public final int playState = 1;
-	public final int dialogueState = 2;
-	public final int battleState = 3;
+	
 	
 	public GamePanel() {
-		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 		this.setBackground(Color.black);
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyHandler);
@@ -59,7 +58,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public void gameSetup() {
 		assetManager.setNPC();
 		assetManager.setObject();
-		gameState = playState;
+		gameState = MAIN_MENU;
 	}
 
 	public void startGameThread() {
@@ -99,7 +98,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 	
 	public void update() {
-		if(gameState == playState) {
+		if(gameState == PLAY) {
 			player.update();
 		
 			for(int i = 0; i < npc.length; i++) {
@@ -107,7 +106,7 @@ public class GamePanel extends JPanel implements Runnable {
 					npc[i].update();
 			}
 		}
-		if(gameState == battleState)
+		if(gameState == BATTLE)
 			hud.drawBattle();
 	}
 	
@@ -115,58 +114,27 @@ public class GamePanel extends JPanel implements Runnable {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		
-		tileManager.draw(g2);
-		
-		for(int i = 0; i < object.length; i++) {
-			if(object[i] != null)
-				object[i].draw(g2, this);
+		if(gameState == MAIN_MENU) {
+			hud.draw(g2);
+		} else {
+			tileManager.draw(g2);
+			
+			for(int i = 0; i < object.length; i++) {
+				if(object[i] != null)
+					object[i].draw(g2, this);
+			}
+			
+			for(int i = 0; i < npc.length; i++) {
+				if(npc[i] != null)
+					npc[i].draw(g2);
+			}
+			
+			player.draw(g2);
+			
+			hud.draw(g2);
 		}
 		
-		for(int i = 0; i < npc.length; i++) {
-			if(npc[i] != null)
-				npc[i].draw(g2);
-		}
-		
-		player.draw(g2);
-		
-		hud.draw(g2);
 		g2.dispose();
-	}
-	
-	public int getTileSize() {
-		return this.tileSize;
-	}
-	
-	public int getMaxScreenCol() {
-		return this.maxScreenCol;
-	}
-	
-	public int getMaxScreenRow() {
-		return this.maxScreenRow;
-	}
-	
-	public int getScreenWidth() {
-		return this.screenWidth;
-	}
-	
-	public int getScreenHeight() {
-		return this.screenHeight;
-	}
-	
-	public int getMapCol() {
-		return this.maxMapCol;
-	}
-	
-	public int getMapRow() {
-		return this.maxMapRow;
-	}
-	
-	public int getMapWidth() {
-		return this.mapWidth;
-	}
-	
-	public int getMapHeight() {
-		return this.mapHeight;
 	}
 	
 	public int getGameState() {

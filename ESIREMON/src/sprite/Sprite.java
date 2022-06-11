@@ -113,10 +113,10 @@ public class Sprite {
 		int screenX = mapX - gamePanel.player.getX() + gamePanel.player.screenX;
 		int screenY = mapY - gamePanel.player.getY() + gamePanel.player.screenY;
 		
-		if(mapX + 2 * gamePanel.getTileSize() > gamePanel.player.getX() - gamePanel.player.screenX 
-				&& mapX - 2 * gamePanel.getTileSize() < gamePanel.player.getX() + gamePanel.player.screenX 
-				&& mapY + 2 * gamePanel.getTileSize() > gamePanel.player.getY() - gamePanel.player.screenY 
-				&& mapY - 2 * gamePanel.getTileSize() < gamePanel.player.getY() + gamePanel.player.screenY) {
+		if(mapX + 2 * gamePanel.TILE_SIZE > gamePanel.player.getX() - gamePanel.player.screenX 
+				&& mapX - 2 * gamePanel.TILE_SIZE < gamePanel.player.getX() + gamePanel.player.screenX 
+				&& mapY + 2 * gamePanel.TILE_SIZE > gamePanel.player.getY() - gamePanel.player.screenY 
+				&& mapY - 2 * gamePanel.TILE_SIZE < gamePanel.player.getY() + gamePanel.player.screenY) {
 			switch(direction) {
 			case "up":
 				if(firstSprite)
@@ -156,7 +156,7 @@ public class Sprite {
 				break;
 			}
 			
-			g2.drawImage(image, screenX, screenY, gamePanel.getTileSize(), gamePanel.getTileSize(), null);
+			g2.drawImage(image, screenX, screenY, gamePanel.TILE_SIZE, gamePanel.TILE_SIZE, null);
 		}
 	}
 	

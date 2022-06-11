@@ -17,7 +17,9 @@ public class KeyHandler implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(gamePanel.getGameState() == gamePanel.playState) {
+		
+		//PLAY
+		if(gamePanel.getGameState() == gamePanel.PLAY) {
 			if(e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_Z) {
 				upPressed = true;
 				isButtonPressed = true;
@@ -36,19 +38,76 @@ public class KeyHandler implements KeyListener {
 			}
 			
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
-				gamePanel.setGameState(gamePanel.pauseState);
+				gamePanel.setGameState(gamePanel.PAUSE);
 			if(e.getKeyCode() == KeyEvent.VK_ENTER)
 				enterPressed = true;
 		}
 		
-		else if(gamePanel.getGameState() == gamePanel.pauseState) {
+		//PAUSE
+		else if(gamePanel.getGameState() == gamePanel.PAUSE) {
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
-				gamePanel.setGameState(gamePanel.playState);
+				gamePanel.setGameState(gamePanel.PLAY);
+			else if((e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_Z) && gamePanel.hud.getMenuIndex() > 0)
+				gamePanel.hud.setMenuIndex(gamePanel.hud.getMenuIndex() - 1);
+			else if(e.getKeyCode() == KeyEvent.VK_S && gamePanel.hud.getMenuIndex() < 2)
+				gamePanel.hud.setMenuIndex(gamePanel.hud.getMenuIndex() + 1);
+			else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				switch(gamePanel.hud.getMenuIndex()) {
+				case 0:
+					gamePanel.setGameState(gamePanel.PLAY);
+					break;
+				case 1:
+					gamePanel.setGameState(gamePanel.BAG);
+					break;
+				case 2:
+					gamePanel.setGameState(gamePanel.MAIN_MENU);
+					break;
+				}
+				gamePanel.hud.setMenuIndex(0);
+			}
+			
 		}
 		
-		else if(gamePanel.getGameState() == gamePanel.dialogueState) {
+		//DIALOGUE
+		else if(gamePanel.getGameState() == gamePanel.DIALOGUE) {
 			if(e.getKeyCode() == KeyEvent.VK_ENTER)
-				gamePanel.setGameState(gamePanel.playState);
+				gamePanel.setGameState(gamePanel.PLAY);
+		}
+		
+		//MAIN MENU
+		else if(gamePanel.getGameState() == gamePanel.MAIN_MENU) {
+			if((e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_Z) && gamePanel.hud.getMenuIndex() > 0)
+				gamePanel.hud.setMenuIndex(gamePanel.hud.getMenuIndex() - 1);
+			else if(e.getKeyCode() == KeyEvent.VK_S && gamePanel.hud.getMenuIndex() < 2)
+				gamePanel.hud.setMenuIndex(gamePanel.hud.getMenuIndex() + 1);
+			else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				switch(gamePanel.hud.getMenuIndex()) {
+				case 0:
+					gamePanel.setGameState(gamePanel.PLAY);
+					break;
+				case 1:
+					//TODO
+					break;
+				case 2:
+					System.exit(0);
+					break;
+				}
+				gamePanel.hud.setMenuIndex(0);
+			}
+		}
+		
+		//BAG
+		else if(gamePanel.getGameState() == gamePanel.BAG) {
+			if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+				gamePanel.setGameState(gamePanel.PLAY);
+			else if((e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_Z) && gamePanel.hud.getBagRow() > 0)
+				gamePanel.hud.setBagRow(gamePanel.hud.getBagRow() - 1);
+			else if(e.getKeyCode() == KeyEvent.VK_S && gamePanel.hud.getBagRow() < 3)
+				gamePanel.hud.setBagRow(gamePanel.hud.getBagRow() + 1);
+			else if((e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_Q) && gamePanel.hud.getBagCol() > 0)
+				gamePanel.hud.setBagCol(gamePanel.hud.getBagCol() - 1);
+			else if(e.getKeyCode() == KeyEvent.VK_D && gamePanel.hud.getBagCol() < 4)
+				gamePanel.hud.setBagCol(gamePanel.hud.getBagCol() + 1);
 		}
 	}
 

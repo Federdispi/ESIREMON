@@ -18,7 +18,7 @@ public class TileManager {
 	public TileManager(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
 		tileTypes = new Tile[12];
-		map = new int[gamePanel.getMapCol()][gamePanel.getMapCol()];
+		map = new int[gamePanel.MAP_COL][gamePanel.MAP_COL];
 		for(int i = 0; i < tileTypes.length; i++) {
 			tileTypes[i] = new Tile();
 		}
@@ -52,18 +52,18 @@ public class TileManager {
 	}
 	
 	public void draw(Graphics2D g2) {
-		for(int iRow = 0; iRow < gamePanel.getMapRow() ; iRow++) {
-			for(int iCol = 0; iCol < gamePanel.getMapCol(); iCol++) {
-				int mapX = iCol * gamePanel.getTileSize();
-				int mapY = iRow * gamePanel.getTileSize();
+		for(int iRow = 0; iRow < gamePanel.MAP_ROW ; iRow++) {
+			for(int iCol = 0; iCol < gamePanel.MAP_COL; iCol++) {
+				int mapX = iCol * gamePanel.TILE_SIZE;
+				int mapY = iRow * gamePanel.TILE_SIZE;
 				int screenX = mapX - gamePanel.player.getX() + gamePanel.player.screenX;
 				int screenY = mapY - gamePanel.player.getY() + gamePanel.player.screenY;
 				if(map[iCol][iRow] != -1 
-						&& mapX + gamePanel.getTileSize() > gamePanel.player.getX() - gamePanel.player.screenX 
-						&& mapX - gamePanel.getTileSize() < gamePanel.player.getX() + gamePanel.player.screenX 
-						&& mapY + gamePanel.getTileSize() > gamePanel.player.getY() - gamePanel.player.screenY 
-						&& mapY - gamePanel.getTileSize() < gamePanel.player.getY() + gamePanel.player.screenY)
-					g2.drawImage(tileTypes[map[iCol][iRow]].image, screenX, screenY, gamePanel.getTileSize(), gamePanel.getTileSize(), null);
+						&& mapX + gamePanel.TILE_SIZE > gamePanel.player.getX() - gamePanel.player.screenX 
+						&& mapX - gamePanel.TILE_SIZE < gamePanel.player.getX() + gamePanel.player.screenX 
+						&& mapY + gamePanel.TILE_SIZE > gamePanel.player.getY() - gamePanel.player.screenY 
+						&& mapY - gamePanel.TILE_SIZE < gamePanel.player.getY() + gamePanel.player.screenY)
+					g2.drawImage(tileTypes[map[iCol][iRow]].image, screenX, screenY, gamePanel.TILE_SIZE, gamePanel.TILE_SIZE, null);
 			}
 		}
 	}
@@ -73,9 +73,9 @@ public class TileManager {
 			InputStream inputStream = getClass().getResourceAsStream(pathName);
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 			
-			for(int iRow = 0; iRow < gamePanel.getMapRow(); iRow++) {
+			for(int iRow = 0; iRow < gamePanel.MAP_ROW; iRow++) {
 				String line = bufferedReader.readLine();
-				for(int iCol = 0; iCol < gamePanel.getMapCol(); iCol++) {
+				for(int iCol = 0; iCol < gamePanel.MAP_COL; iCol++) {
 					String numbers[] = line.split(" ");
 					int num = Integer.parseInt(numbers[iCol]);
 					map[iCol][iRow] = num - 1;
