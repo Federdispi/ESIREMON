@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import application.GamePanel;
+import object.Beer;
+import object.Coffee;
 import object.Object;
+import object.Waffle;
 
 public class KFetMan extends Sprite {
 	
@@ -18,6 +21,10 @@ public class KFetMan extends Sprite {
 		setDialogue();
 		mapX = 11 * gamePanel.TILE_SIZE + gamePanel.TILE_SIZE / 2;
 		mapY = 9 * gamePanel.TILE_SIZE;
+		
+		inventory.add(new Waffle(gamePanel));
+		inventory.add(new Coffee(gamePanel));
+		inventory.add(new Beer(gamePanel));
 		
 		try {
 			up1 = ImageIO.read(getClass().getResourceAsStream("/player/up1.png"));

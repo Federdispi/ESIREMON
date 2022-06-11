@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -19,7 +21,7 @@ public class Player extends Sprite {
 	public final int screenX, screenY;
 	public ArrayList<Object> bag = new ArrayList<>();
 	private Sprite spriteInteract = null;
-	private int money = 5;
+	private BigDecimal money = new BigDecimal(5.00).setScale(1, RoundingMode.HALF_UP);
 	
 	public Player(GamePanel gamePanel, KeyHandler keyHandler, String name, boolean sexe) {
 		super(gamePanel, name, sexe);
@@ -173,11 +175,11 @@ public class Player extends Sprite {
 		return this.spriteInteract;
 	}
 	
-	public int getMoney() {
+	public BigDecimal getMoney() {
 		return this.money;
 	}
 	
-	public void setMoney(int money) {
+	public void setMoney(BigDecimal money) {
 		this.money = money;
 	}
 }

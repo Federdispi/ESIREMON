@@ -41,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public Player player = new Player(this, keyHandler, "Federdispi", true);
 	
-	public Object object[] = new Object[20];
+	public Object object[] = new Object[30];
 	
 	public Sprite npc[] = new Sprite[10];
 	
@@ -116,9 +116,9 @@ public class GamePanel extends JPanel implements Runnable {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		
-		if(gameState == MAIN_MENU) {
+		if(gameState == MAIN_MENU || gameState == BATTLE)
 			hud.draw(g2);
-		} else {
+		else {
 			tileManager.draw(g2);
 			
 			for(int i = 0; i < object.length; i++) {

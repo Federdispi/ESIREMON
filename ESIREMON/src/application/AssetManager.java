@@ -20,10 +20,20 @@ public class AssetManager {
 		gamePanel.npc[0].setX(17 * gamePanel.TILE_SIZE);
 		gamePanel.npc[0].setY(10 * gamePanel.TILE_SIZE);
 		gamePanel.npc[0].setMoves(true);
+		gamePanel.npc[0].setBattle(true);
 		
 		gamePanel.npc[2] = new Student(gamePanel, "Mael", true, "up_stop");
 		gamePanel.npc[2].setX(23 * gamePanel.TILE_SIZE);
 		gamePanel.npc[2].setY(5 * gamePanel.TILE_SIZE - gamePanel.TILE_SIZE / 2);
+		
+		gamePanel.npc[3] = new Student(gamePanel, "Benjamin", true, "down_stop");
+		gamePanel.npc[3].setX(23 * gamePanel.TILE_SIZE - 10);
+		gamePanel.npc[3].setY(9 * gamePanel.TILE_SIZE - 20);
+		
+		gamePanel.npc[4] = new Student(gamePanel, "Insigam", true, "down_stop");
+		gamePanel.npc[4].setX(2 * gamePanel.TILE_SIZE);
+		gamePanel.npc[4].setY(15 * gamePanel.TILE_SIZE);
+		gamePanel.npc[4].setMoves(true);
 	}
 	
 	public void setObject() {		
@@ -106,5 +116,13 @@ public class AssetManager {
 		gamePanel.object[19] = new Entrance(gamePanel);
 		gamePanel.object[19].setX(8 * gamePanel.TILE_SIZE);
 		gamePanel.object[19].setY(6 * gamePanel.TILE_SIZE - 20);
+		
+		gamePanel.object[20] = new Entrance(gamePanel);
+		gamePanel.object[20].setX(8 * gamePanel.TILE_SIZE);
+		gamePanel.object[20].setY(15 * gamePanel.TILE_SIZE);
+		
+		gamePanel.object[21] = new Entrance(gamePanel);
+		gamePanel.object[21].setX(18 * gamePanel.TILE_SIZE);
+		gamePanel.object[21].setY(gamePanel.TILE_SIZE);
 	}
 }

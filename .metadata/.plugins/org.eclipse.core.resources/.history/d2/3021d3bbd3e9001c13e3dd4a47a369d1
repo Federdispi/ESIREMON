@@ -1,0 +1,23 @@
+package object;
+
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import application.GamePanel;
+
+public class Waffle extends Object {
+	
+	public Waffle(GamePanel gamePanel) {
+		super(gamePanel);
+		name = "Gaufre";
+		price = 0.40F;
+		description = "Une gaufre délicieuse et pas chère qui te fais gagner 20PV";
+		try {
+			image = ImageIO.read(getClass().getResourceAsStream("/objects/gaufre.png"));
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

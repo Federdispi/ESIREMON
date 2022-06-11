@@ -4,6 +4,10 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class HUD {
 	
@@ -27,6 +31,8 @@ public class HUD {
 		
 		if(gamePanel.getGameState() == gamePanel.MAIN_MENU)
 			drawMainMenu();
+		else if(gamePanel.getGameState() == gamePanel.BATTLE)
+			drawBattle();
 		else
 			drawLifePoints();
 				
@@ -87,7 +93,7 @@ public class HUD {
 	
 	private void drawLifePoints() {
 		this.g2.setColor(Color.white);
-		this.g2.drawString("HP: ", 25, 40);
+		this.g2.drawString("PV : ", 25, 40);
 		this.g2.fillRoundRect(25, 50, 300, gamePanel.TILE_SIZE / 2, 20, 20);
 		
 		if(gamePanel.player.getLifePoints() >= 70)
@@ -187,48 +193,51 @@ public class HUD {
 		int height = 5 * gamePanel.TILE_SIZE;
 		drawWindow(x, y, width, height);
 		
-		//Items
-		final int startX = x + gamePanel.TILE_SIZE / 2;
-		final int startY = y + gamePanel.TILE_SIZE / 2;
-		x = startX;
-		y = startY;
-		for(int i = 0; i < gamePanel.player.bag.size(); i++) {
-			g2.drawImage(gamePanel.player.bag.get(i).getImage(), x, y, null);
-			x += gamePanel.TILE_SIZE;
-			
-			if(i == 4 || i == 9 || i == 14) {
-				x = startX;
-				y += gamePanel.TILE_SIZE;
-			}
-		}
+
 		
 		//Selection
+
+		final int startX = x + gamePanel.TILE_SIZE / 2;
+		final int startY = y + gamePanel.TILE_SIZE / 2;
 		int selX = startX + bagCol * gamePanel.TILE_SIZE;
 		int selY = startY + bagRow * gamePanel.TILE_SIZE;
 		int selWidth = gamePanel.TILE_SIZE;
 		int selHeight = gamePanel.TILE_SIZE;
 		drawWindow(selX, selY, selWidth, selHeight);
 		
+		//Items
+		x = startX + gamePanel.TILE_SIZE / 4;
+		y = startY + gamePanel.TILE_SIZE / 4;
+		for(int i = 0; i < gamePanel.player.bag.size(); i++) {
+			g2.drawImage(gamePanel.player.bag.get(i).getImage(), x, y, gamePanel.TILE_SIZE / 2, gamePanel.TILE_SIZE / 2, null);
+			x += gamePanel.TILE_SIZE;
+			
+			if(i == 4 || i == 9 || i == 14) {
+				x = startX + gamePanel.TILE_SIZE / 4;
+				y += gamePanel.TILE_SIZE;
+			}
+		}
+		
 		//Description window
-		x = 8 * gamePanel.TILE_SIZE;
-		y = gamePanel.TILE_SIZE;
-		width = 6 * gamePanel.TILE_SIZE;
+		x = 2 * gamePanel.TILE_SIZE;
+		y = 6 * gamePanel.TILE_SIZE;
+		width = 12 * gamePanel.TILE_SIZE;
 		height = 2 * gamePanel.TILE_SIZE;
 		drawWindow(x, y, width, height);
 		
 		//Item name
 		int itemIndex = bagCol + 5 * bagRow;
 		x += 20;
-		y += gamePanel.TILE_SIZE;
-		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 32F));
+		y += 42;
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 24F));
 		if(itemIndex < gamePanel.player.bag.size())
-			g2.drawString(gamePanel.player.bag.get(itemIndex).getName(), selX, selY);
+			g2.drawString(gamePanel.player.bag.get(itemIndex).getName(), x, y);
 		
 		//Item description
-		y += gamePanel.TILE_SIZE;
-		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 28F));
+		y += gamePanel.TILE_SIZE / 2;
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 16F));
 		if(itemIndex < gamePanel.player.bag.size())
-			g2.drawString(gamePanel.player.bag.get(itemIndex).getDescription(), selX, selY);
+			g2.drawString(gamePanel.player.bag.get(itemIndex).getDescription(), x, y);
 	}
 	
 	private void drawKFet() {
@@ -239,52 +248,84 @@ public class HUD {
 		int height = 5 * gamePanel.TILE_SIZE;
 		drawWindow(x, y, width, height);
 		
-		//Items
+		//Selection
 		final int startX = x + gamePanel.TILE_SIZE / 2;
 		final int startY = y + gamePanel.TILE_SIZE / 2;
-		x = startX;
-		y = startY;
-		for(int i = 0; i < gamePanel.nicolas.inventory.size(); i++) {
-			g2.drawImage(gamePanel.nicolas.inventory.get(i).getImage(), x, y, null);
-			x += gamePanel.TILE_SIZE;
-			
-			if(i == 4 || i == 9 || i == 14) {
-				x = startX;
-				y += gamePanel.TILE_SIZE;
-			}
-		}
-		
-		//Selection
 		int selX = startX + bagCol * gamePanel.TILE_SIZE;
 		int selY = startY + bagRow * gamePanel.TILE_SIZE;
 		int selWidth = gamePanel.TILE_SIZE;
 		int selHeight = gamePanel.TILE_SIZE;
 		drawWindow(selX, selY, selWidth, selHeight);
 		
+		//Items
+		x = startX + gamePanel.TILE_SIZE / 4;
+		y = startY + gamePanel.TILE_SIZE / 4;
+		for(int i = 0; i < gamePanel.nicolas.inventory.size(); i++) {
+			g2.drawImage(gamePanel.nicolas.inventory.get(i).getImage(), x, y, gamePanel.TILE_SIZE / 2, gamePanel.TILE_SIZE / 2, null);
+			x += gamePanel.TILE_SIZE;
+			
+			if(i == 4 || i == 9 || i == 14) {
+				x = startX + gamePanel.TILE_SIZE / 2;
+				y += gamePanel.TILE_SIZE;
+			}
+		}
+		
 		//Description window
 		x = 2 * gamePanel.TILE_SIZE;
 		y = 6 * gamePanel.TILE_SIZE;
-		width = 6 * gamePanel.TILE_SIZE;
+		width = 12 * gamePanel.TILE_SIZE;
 		height = 2 * gamePanel.TILE_SIZE;
 		drawWindow(x, y, width, height);
 		
 		//Item name and price
 		int itemIndex = bagCol + 5 * bagRow;
 		x += 20;
-		y += gamePanel.TILE_SIZE;
-		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 32F));
+		y += 42;
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 24F));
 		if(itemIndex < gamePanel.nicolas.inventory.size())
-			g2.drawString(gamePanel.nicolas.inventory.get(itemIndex).getName() + " : " + gamePanel.nicolas.inventory.get(itemIndex).getPrice(), selX, selY);
+			g2.drawString(gamePanel.nicolas.inventory.get(itemIndex).getName() + " : " + gamePanel.nicolas.inventory.get(itemIndex).getPrice() + "0", x, y);
 		
 		//Item description
-		y += gamePanel.TILE_SIZE;
-		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 28F));
+		y += gamePanel.TILE_SIZE / 2;
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 16F));
 		if(itemIndex < gamePanel.nicolas.inventory.size())
-			g2.drawString(gamePanel.nicolas.inventory.get(itemIndex).getDescription(), selX, selY);
+			g2.drawString(gamePanel.nicolas.inventory.get(itemIndex).getDescription(), x, y);
+		
+		//Money window
+		x = 11 * gamePanel.TILE_SIZE;
+		y = gamePanel.TILE_SIZE;
+		width = 3 * gamePanel.TILE_SIZE;
+		height = gamePanel.TILE_SIZE + gamePanel.TILE_SIZE / 2;
+		drawWindow(x, y, width, height);
+		
+		//Money icon
+		x += 13;
+		y += 13;
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(getClass().getResourceAsStream("/objects/moneta.png"));
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		g2.drawImage(image, x, y, gamePanel.TILE_SIZE, gamePanel.TILE_SIZE, null);
+		
+		//Money amount
+		x += gamePanel.TILE_SIZE + gamePanel.TILE_SIZE / 4;
+		y += 36;
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 32F));
+		g2.drawString(gamePanel.player.getMoney() + "0", x, y);
+		
 	}
 	
 	private void drawBattle() {
-		//TODO
+		g2.setColor(Color.white);
+		g2.fillRect(0, 0, gamePanel.SCREEN_WIDTH, gamePanel.SCREEN_HEIGHT);
+		
+		g2.setColor(Color.black);
+		String text = "BATTLE";
+		int x = centerTextX(text);
+		int y = gamePanel.SCREEN_HEIGHT / 2;
+		g2.drawString(text, x, y);
 	}
 	
 	private void drawWindow(int x, int y, int width, int height) {

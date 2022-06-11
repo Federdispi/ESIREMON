@@ -13,6 +13,7 @@ public class Couch extends Object {
 		name = "Couch";
 		width = 32;
 		height = 32;
+		collision = false;
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/objects/divano.png"));
 		} catch(IOException e) {

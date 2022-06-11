@@ -1,0 +1,25 @@
+package object;
+
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import application.GamePanel;
+
+public class Coffee extends Object {
+	
+	public Coffee(GamePanel gamePanel) {
+		super(gamePanel);
+		name = "Café";
+		width = gamePanel.TILE_SIZE;
+		height = gamePanel.TILE_SIZE;
+		price = 1;
+		description = "Café fait avec une nouvelle machine qui te fais récupérer 40PV";
+		try {
+			image = ImageIO.read(getClass().getResourceAsStream("/objects/caffe.png"));
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

@@ -2,6 +2,7 @@ package object;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.math.BigDecimal;
 
 import application.GamePanel;
 
@@ -14,7 +15,7 @@ public class Object {
 	protected int width, height;
 	protected boolean interactable = false;
 	protected String description;
-	protected int price = 0;
+	protected BigDecimal price;
 	
 	public Object(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
@@ -89,7 +90,7 @@ public class Object {
 		return this.name;
 	}
 	
-	public int getPrice() {
+	public BigDecimal getPrice() {
 		return this.price;
 	}
 } 

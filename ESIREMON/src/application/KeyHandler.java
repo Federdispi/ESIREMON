@@ -75,6 +75,8 @@ public class KeyHandler implements KeyListener {
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				if(gamePanel.player.getSpriteInteract().getClass() == KFetMan.class)
 					gamePanel.setGameState(gamePanel.KFET);
+				else if(gamePanel.player.getSpriteInteract().getBattle())
+					gamePanel.setGameState(gamePanel.BATTLE);
 				else
 					gamePanel.setGameState(gamePanel.PLAY);
 			}
@@ -136,8 +138,10 @@ public class KeyHandler implements KeyListener {
 				gamePanel.hud.setBagCol(gamePanel.hud.getBagCol() + 1);
 			else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				int itemIndex = gamePanel.hud.getBagCol() + 5 * gamePanel.hud.getBagRow();
-				if(itemIndex < gamePanel.nicolas.inventory.size() && gamePanel.player.getMoney() > gamePanel.nicolas.inventory.get(itemIndex).getPrice())
+				if(itemIndex < gamePanel.nicolas.inventory.size() && gamePanel.player.getMoney().compareTo(gamePanel.nicolas.inventory.get(itemIndex).getPrice()) >= 0) {
 					gamePanel.player.bag.add(gamePanel.nicolas.inventory.get(itemIndex));
+					gamePanel.player.setMoney(gamePanel.player.getMoney().subtract(gamePanel.nicolas.inventory.get(itemIndex).getPrice()));
+				}
 			}
 		}
 	}

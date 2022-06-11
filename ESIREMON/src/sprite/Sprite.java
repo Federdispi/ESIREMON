@@ -31,6 +31,8 @@ public class Sprite {
 	
 	protected int lifePoints;
 	
+	protected boolean battle = false;
+	
 	String dialogues[] = new String[20];
 	int dialogueIndex = 0;
 	
@@ -184,6 +186,14 @@ public class Sprite {
 	public void setObjectCollision(boolean objectCollision) {
 		this.objectCollision = objectCollision;
 	}
+
+	public void setMoves(boolean moves) {
+		this.moves = moves;
+	}
+	
+	public void setBattle(boolean battle) {
+		this.battle = battle;
+	}
 	
 	public String getName() {
 		return this.name;
@@ -217,10 +227,6 @@ public class Sprite {
 		return this.hitBox;
 	}
 	
-	public void setMoves(boolean moves) {
-		this.moves = moves;
-	}
-	
 	public int getHitBoxDefaultX() {
 		return this.hitBoxX;
 	}
@@ -231,5 +237,9 @@ public class Sprite {
 	
 	public int getLifePoints() {
 		return this.lifePoints;
+	}
+	
+	public boolean getBattle() {
+		return this.battle;
 	}
 }
