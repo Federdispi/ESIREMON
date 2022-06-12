@@ -3,7 +3,6 @@ package application;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import sprite.KFetMan;
 
@@ -53,7 +52,7 @@ public class KeyHandler implements KeyListener {
 				gamePanel.setGameState(gamePanel.PLAY);
 			else if((e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_Z) && gamePanel.hud.getMenuIndex() > 0)
 				gamePanel.hud.setMenuIndex(gamePanel.hud.getMenuIndex() - 1);
-			else if(e.getKeyCode() == KeyEvent.VK_S && gamePanel.hud.getMenuIndex() < 2)
+			else if(e.getKeyCode() == KeyEvent.VK_S && gamePanel.hud.getMenuIndex() < 3)
 				gamePanel.hud.setMenuIndex(gamePanel.hud.getMenuIndex() + 1);
 			else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				switch(gamePanel.hud.getMenuIndex()) {
@@ -64,6 +63,9 @@ public class KeyHandler implements KeyListener {
 					gamePanel.setGameState(gamePanel.BAG);
 					break;
 				case 2:
+					gamePanel.save.saveGame();
+					break;
+				case 3:
 					gamePanel.setGameState(gamePanel.MAIN_MENU);
 					break;
 				}
@@ -98,7 +100,8 @@ public class KeyHandler implements KeyListener {
 					gamePanel.setGameState(gamePanel.PLAY);
 					break;
 				case 1:
-					//TODO
+					gamePanel.save.loadGame();
+					gamePanel.setGameState(gamePanel.PLAY);
 					break;
 				case 2:
 					System.exit(0);

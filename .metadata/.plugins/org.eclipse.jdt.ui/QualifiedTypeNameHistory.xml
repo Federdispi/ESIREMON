@@ -11,7 +11,6 @@
     <fullyQualifiedTypeName name="sprite.Player"/>
     <fullyQualifiedTypeName name="map.TileManager"/>
     <fullyQualifiedTypeName name="java.io.InputStream"/>
-    <fullyQualifiedTypeName name="java.io.BufferedReader"/>
     <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
     <fullyQualifiedTypeName name="object.Bed"/>
     <fullyQualifiedTypeName name="object.Desk"/>
@@ -32,9 +31,6 @@
     <fullyQualifiedTypeName name="object.Object"/>
     <fullyQualifiedTypeName name="sprite.KFetMan"/>
     <fullyQualifiedTypeName name="application.GamePanel"/>
-    <fullyQualifiedTypeName name="object.Waffle"/>
-    <fullyQualifiedTypeName name="object.Coffee"/>
-    <fullyQualifiedTypeName name="object.Beer"/>
     <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="java.math.RoundingMode"/>
@@ -45,4 +41,11 @@
     <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
     <fullyQualifiedTypeName name="java.math.BigDecimal"/>
+    <fullyQualifiedTypeName name="java.io.FileWriter"/>
+    <fullyQualifiedTypeName name="java.io.BufferedWriter"/>
+    <fullyQualifiedTypeName name="java.io.FileReader"/>
+    <fullyQualifiedTypeName name="java.io.BufferedReader"/>
+    <fullyQualifiedTypeName name="object.Waffle"/>
+    <fullyQualifiedTypeName name="object.Coffee"/>
+    <fullyQualifiedTypeName name="object.Beer"/>
 </qualifiedTypeNameHistroy>

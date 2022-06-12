@@ -7,8 +7,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
@@ -80,7 +78,7 @@ public class HUD {
 			g2.setColor(Color.yellow);
 		else
 			g2.setColor(Color.white);
-		text = "CHARGER UNE PARTIE";
+		text = "CONTINUER LA PARTIE";
 		x = centerTextX(text);
 		y += gamePanel.TILE_SIZE;
 		g2.drawString(text, x, y);
@@ -149,6 +147,16 @@ public class HUD {
 		
 		//3rd OPTION
 		if(menuIndex == 2)
+			g2.setColor(Color.yellow);
+		else
+			g2.setColor(Color.white);
+		text = "SAUVEGARDER";
+		x = centerTextX(text);
+		y += gamePanel.TILE_SIZE;
+		g2.drawString(text, x, y);
+		
+		//4th OPTION
+		if(menuIndex == 3)
 			g2.setColor(Color.yellow);
 		else
 			g2.setColor(Color.white);

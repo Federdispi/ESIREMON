@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 import application.GamePanel;
 
@@ -12,7 +11,7 @@ import attack.Attack;
 
 public class Sprite {
 	protected String name;
-	protected boolean sexe; //false man, true woman
+	protected boolean sex; //false man, true woman
 	protected int level;
 	
 	protected int mapX, mapY;
@@ -42,10 +41,10 @@ public class Sprite {
 	
 	public ArrayList<Attack> moveSet = new ArrayList<>();
 	
-	public Sprite(GamePanel gamePanel, String name, boolean sexe, int level) {
+	public Sprite(GamePanel gamePanel, String name, boolean sex, int level) {
 		this.gamePanel = gamePanel;
 		this.name = name;
-		this.sexe = sexe;
+		this.sex = sex;
 		this.level = level;
 	}
 	
@@ -225,6 +224,14 @@ public class Sprite {
 		this.level = level;
 	}
 	
+	public void setSex(boolean sex) {
+		this.sex = sex;
+	}
+	
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+	
 	/*
 	 * GETTERS	
 	 */
@@ -278,5 +285,9 @@ public class Sprite {
 	
 	public int getLevel() {
 		return this.level;
+	}
+	
+	public boolean getSex() {
+		return this.sex;
 	}
 }

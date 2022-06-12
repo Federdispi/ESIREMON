@@ -38,6 +38,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public CollisionDetector collisionDetector = new CollisionDetector(this);
 	AssetManager assetManager = new AssetManager(this);
 	public HUD hud = new HUD(this);
+	public Save save = new Save(this);
 	
 	public Player player = new Player(this, keyHandler, "Federdispi", true);
 	
