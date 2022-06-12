@@ -37,9 +37,9 @@
     <fullyQualifiedTypeName name="object.Waffle"/>
     <fullyQualifiedTypeName name="object.Coffee"/>
     <fullyQualifiedTypeName name="object.Beer"/>
-    <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
     <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="java.math.BigDecimal"/>
     <fullyQualifiedTypeName name="java.math.RoundingMode"/>
+    <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
 </qualifiedTypeNameHistroy>

@@ -3,7 +3,6 @@ package sprite;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import application.GamePanel;
 
@@ -29,7 +28,7 @@ public class Sprite {
 	protected boolean moves = false;
 	public int movementCounter = 0;
 	
-	protected int lifePoints;
+	protected int lifePoints = 100;
 	
 	protected boolean battle = false;
 	

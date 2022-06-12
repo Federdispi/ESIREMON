@@ -17,9 +17,9 @@ public class HUD {
 	private String name = "";
 	private String dialogue = "";
 	private int menuIndex = 0;
+	private int submenu = 0;
 	private int bagCol = 0;
-	private int bagRow = 0;
-	
+	private int bagRow = 0;	
 	public HUD(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
 		arial22 = new Font("Arial", Font.PLAIN, 22);
@@ -92,18 +92,18 @@ public class HUD {
 	}
 	
 	private void drawLifePoints() {
-		this.g2.setColor(Color.white);
-		this.g2.drawString("PV : ", 25, 40);
-		this.g2.fillRoundRect(25, 50, 300, gamePanel.TILE_SIZE / 2, 20, 20);
+		g2.setColor(Color.white);
+		g2.drawString("PV : ", 25, 40);
+		g2.fillRoundRect(25, 50, 300, gamePanel.TILE_SIZE / 2, 20, 20);
 		
 		if(gamePanel.player.getLifePoints() >= 70)
-			this.g2.setColor(Color.green);
+			g2.setColor(Color.green);
 		else if(gamePanel.player.getLifePoints() >= 30 && gamePanel.player.getLifePoints() < 70)
-			this.g2.setColor(Color.yellow);
+			g2.setColor(Color.yellow);
 		else
-			this.g2.setColor(Color.red);
+			g2.setColor(Color.red);
 		
-		this.g2.fillRect(30, 55, 3 * gamePanel.player.getLifePoints() - 10, gamePanel.TILE_SIZE / 2 - 10);
+		g2.fillRect(30, 55, 3 * gamePanel.player.getLifePoints() - 10, gamePanel.TILE_SIZE / 2 - 10);
 	}
 	
 	private void drawPause() {
@@ -318,14 +318,164 @@ public class HUD {
 	}
 	
 	private void drawBattle() {
-		g2.setColor(Color.white);
+		//Background
+		g2.setColor(Color.gray);
 		g2.fillRect(0, 0, gamePanel.SCREEN_WIDTH, gamePanel.SCREEN_HEIGHT);
 		
+		//Enemy info window
+		int x = 2 * gamePanel.TILE_SIZE;
+		int y = gamePanel.TILE_SIZE;
+		int width = 6 * gamePanel.TILE_SIZE;
+		int height = 2 * gamePanel.TILE_SIZE;
+		drawWindow(x, y, width, height);
+		
+		//Enemy name window
 		g2.setColor(Color.black);
-		String text = "BATTLE";
-		int x = centerTextX(text);
-		int y = gamePanel.SCREEN_HEIGHT / 2;
-		g2.drawString(text, x, y);
+		g2.fillRoundRect(x + 15, y - 10, width / 2, height / 3, 5, 5);
+		g2.setColor(Color.white);
+		g2.setStroke(new BasicStroke(1));
+		g2.drawRoundRect(x + 20, y - 5, width / 2 - 10, height / 3 - 10, 2, 2);
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 22F));
+		g2.drawString(name, x + 25, y + 15);
+		
+		x += gamePanel.TILE_SIZE / 2;
+		y += gamePanel.TILE_SIZE ;
+
+		//Enemy HP
+		g2.setColor(Color.black);
+		g2.drawString("PV : ", x, y);
+		y += gamePanel.TILE_SIZE / 4;
+		if(gamePanel.player.getSpriteInteract().getLifePoints() >= 70)
+			g2.setColor(Color.green);
+		else if(gamePanel.player.getSpriteInteract().getLifePoints() >= 30 && gamePanel.player.getSpriteInteract().getLifePoints() < 70)
+			g2.setColor(Color.yellow);
+		else
+			g2.setColor(Color.red);
+		
+		g2.fillRect(x, y, 2 * gamePanel.player.getSpriteInteract().getLifePoints() + gamePanel.player.getSpriteInteract().getLifePoints() / 2, gamePanel.TILE_SIZE / 2 - 10);
+		
+		//Enemy image
+		x = 9 * gamePanel.TILE_SIZE;
+		y = gamePanel.TILE_SIZE;
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(getClass().getResourceAsStream("/player/down2.png"));
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		g2.drawImage(image, x, y, 150, 150, null);
+		
+		//Player info window
+		x = 7 * gamePanel.TILE_SIZE;
+		y = 6 * gamePanel.TILE_SIZE;
+		drawWindow(x, y, width, height);
+		
+		//Player name window
+		g2.setColor(Color.black);
+		g2.fillRoundRect(x + 15, y - 10, width / 2, height / 3, 5, 5);
+		g2.setColor(Color.white);
+		g2.setStroke(new BasicStroke(1));
+		g2.drawRoundRect(x + 20, y - 5, width / 2 - 10, height / 3 - 10, 2, 2);
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 22F));
+		g2.drawString(gamePanel.player.getName(), x + 25, y + 15);
+		
+		x += gamePanel.TILE_SIZE / 2;
+		y += gamePanel.TILE_SIZE ;
+		
+		//Player HP
+		g2.setColor(Color.black);
+		g2.drawString("PV : ", x, y);
+		y += gamePanel.TILE_SIZE / 4;
+		if(gamePanel.player.getLifePoints() >= 70)
+			g2.setColor(Color.green);
+		else if(gamePanel.player.getLifePoints() >= 30 && gamePanel.player.getLifePoints() < 70)
+			g2.setColor(Color.yellow);
+		else
+			g2.setColor(Color.red);
+		
+		g2.fillRect(x, y, 2 * gamePanel.player.getLifePoints() + gamePanel.player.getLifePoints() / 2, gamePanel.TILE_SIZE / 2 - 10);
+		
+		//Player image
+		x = 3 * gamePanel.TILE_SIZE;
+		y = 5 * gamePanel.TILE_SIZE;
+		try {
+			image = ImageIO.read(getClass().getResourceAsStream("/player/up2.png"));
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		g2.drawImage(image, x, y, 150, 150, null);
+		
+		//Menu window
+		x = 5 * gamePanel.TILE_SIZE;
+		y = 8 * gamePanel.TILE_SIZE;
+		width = 6 * gamePanel.TILE_SIZE;
+		height = 4 * gamePanel.TILE_SIZE;
+		drawWindow(x, y, width, height);
+		
+		//MENU
+		if(submenu == 0) {
+			//1st OPTION
+			g2.setFont(g2.getFont().deriveFont(Font.BOLD, 28F));
+			if(menuIndex == 0)
+				g2.setColor(Color.red);
+			else
+				g2.setColor(Color.black);
+			String text = "ATTAQUES";
+			x = centerTextX(text);
+			y += gamePanel.TILE_SIZE;
+			g2.drawString(text, x, y);
+			
+			//2nd OPTION
+			if(menuIndex == 1)
+				g2.setColor(Color.red);
+			else
+				g2.setColor(Color.black);
+			text = "SAC";
+			x = centerTextX(text);
+			y = 9 * gamePanel.TILE_SIZE;
+			g2.drawString(text, x, y);
+		} else if(submenu == 1) {
+			//1st OPTION
+			g2.setFont(g2.getFont().deriveFont(Font.BOLD, 24F));
+			if(menuIndex == 0)
+				g2.setColor(Color.red);
+			else
+				g2.setColor(Color.black);
+			String text = "ATTAQUE 1";
+			x = centerTextX(text);
+			y = 9 * gamePanel.TILE_SIZE;
+			g2.drawString(text, x, y);
+			
+			//2nd OPTION
+			if(menuIndex == 1)
+				g2.setColor(Color.red);
+			else
+				g2.setColor(Color.black);
+			text = "ATTAQUE 2";
+			x = centerTextX(text);
+			y += gamePanel.TILE_SIZE - gamePanel.TILE_SIZE / 4;
+			g2.drawString(text, x, y);
+			
+			//3rd OPTION
+			if(menuIndex == 2)
+				g2.setColor(Color.red);
+			else
+				g2.setColor(Color.black);
+			text = "ATTAQUE 3";
+			x = centerTextX(text);
+			y += gamePanel.TILE_SIZE - gamePanel.TILE_SIZE / 4;
+			g2.drawString(text, x, y);
+			
+			//4th OPTION
+			if(menuIndex == 3)
+				g2.setColor(Color.red);
+			else
+				g2.setColor(Color.black);
+			text = "ATTAQUE 4";
+			x = centerTextX(text);
+			y += gamePanel.TILE_SIZE - gamePanel.TILE_SIZE / 4;
+			g2.drawString(text, x, y);
+		}
 	}
 	
 	private void drawWindow(int x, int y, int width, int height) {
@@ -339,6 +489,9 @@ public class HUD {
 		g2.drawRoundRect(x + 5, y + 5, width - 10, height - 10, 25, 25);
 	}
 	
+	/*
+	 * SETTERS
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -358,7 +511,14 @@ public class HUD {
 	public void setBagRow(int bagRow) {
 		this.bagRow = bagRow;
 	}
+
+	public void setSubMenu(int submenu) {
+		this.submenu = submenu;
+	}
 	
+	/*
+	 * GETTERS
+	 */
 	public int getMenuIndex() {
 		return this.menuIndex;
 	}
@@ -371,6 +531,11 @@ public class HUD {
 		return this.bagRow;
 	}
 	
+	public int getSubMenu() {
+		return this.submenu;
+	}
+	
+	//Return x to center a text on the screen
 	private int centerTextX(String text) {
 		int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
 		int x = gamePanel.SCREEN_WIDTH / 2 - length / 2;

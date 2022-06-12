@@ -6,7 +6,6 @@ import object.Entrance;
 import object.HorizontalDesk;
 import object.Kfet;
 import object.Table;
-import sprite.KFetMan;
 import sprite.Student;
 
 public class AssetManager {

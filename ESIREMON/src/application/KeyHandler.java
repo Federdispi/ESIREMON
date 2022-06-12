@@ -144,6 +144,43 @@ public class KeyHandler implements KeyListener {
 				}
 			}
 		}
+		
+		//BATTLE
+		else if(gamePanel.getGameState() == gamePanel.BATTLE) {
+			if((e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_Z) && gamePanel.hud.getMenuIndex() > 0)
+				gamePanel.hud.setMenuIndex(gamePanel.hud.getMenuIndex() - 1);
+			else if(e.getKeyCode() == KeyEvent.VK_S && (gamePanel.hud.getMenuIndex() < 1 && gamePanel.hud.getSubMenu() == 0 || gamePanel.hud.getMenuIndex() < 3 && gamePanel.hud.getSubMenu() == 1))
+				gamePanel.hud.setMenuIndex(gamePanel.hud.getMenuIndex() + 1);
+			else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				switch(gamePanel.hud.getSubMenu()) {
+				case 0:
+					switch(gamePanel.hud.getMenuIndex()) {
+					case 0:
+						gamePanel.hud.setSubMenu(1);
+						break;
+					case 1:
+						gamePanel.setGameState(gamePanel.BAG);
+						break;
+					}
+					break;
+				case 1:
+					switch(gamePanel.hud.getMenuIndex()) {
+					case 0:
+						break;
+					case 1:
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+					}
+					break;
+				}
+				gamePanel.hud.setMenuIndex(0);
+			}
+			else if(e.getKeyCode() == KeyEvent.VK_ESCAPE && gamePanel.hud.getSubMenu() == 1)
+				gamePanel.hud.setSubMenu(0);
+		}
 	}
 
 	@Override
