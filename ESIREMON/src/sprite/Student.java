@@ -11,8 +11,8 @@ import attack.Attack;
 public class Student extends Sprite {
 	
 
-	public Student(GamePanel gamePanel, String name, boolean sexe, String direction) {
-		super(gamePanel, name, sexe);
+	public Student(GamePanel gamePanel, String name, boolean sexe, String direction, int level) {
+		super(gamePanel, name, sexe, level);
 		
 		this.direction = direction;
 		previous_direction = "down";

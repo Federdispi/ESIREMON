@@ -32,9 +32,9 @@ public class Object {
 	}
 	
 	public void Interact() {
-		switch(this.name) {
+		switch(name) {
 		case "Entrance":
-			System.out.println("Entrée");
+			System.out.println(description);
 			break;
 		case "Kfet":
 			gamePanel.player.npcInteract(1);

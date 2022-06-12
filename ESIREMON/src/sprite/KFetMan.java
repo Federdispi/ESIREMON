@@ -16,7 +16,7 @@ public class KFetMan extends Sprite {
 	public ArrayList<Object> inventory = new ArrayList<>();
 	
 	public KFetMan(GamePanel gamePanel) {
-		super(gamePanel, "Nicolas", false);
+		super(gamePanel, "Nicolas", false, 1);
 		direction = "right_stop";
 		setDialogue();
 		mapX = 11 * gamePanel.TILE_SIZE + gamePanel.TILE_SIZE / 2;

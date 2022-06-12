@@ -24,8 +24,8 @@ public class Player extends Sprite {
 	private BigDecimal money = new BigDecimal(5.00).setScale(1, RoundingMode.HALF_UP);
 	
 	public Player(GamePanel gamePanel, KeyHandler keyHandler, String name, boolean sexe) {
-		super(gamePanel, name, sexe);
-		lifePoints = 20;
+		super(gamePanel, name, sexe, 5);
+		lifePoints = 100;
 		hitBoxX = 8;
 		hitBoxY = 16;
 		this.keyHandler = keyHandler;

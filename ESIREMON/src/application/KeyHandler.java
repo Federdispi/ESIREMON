@@ -2,6 +2,8 @@ package application;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import sprite.KFetMan;
 
@@ -121,6 +123,22 @@ public class KeyHandler implements KeyListener {
 				gamePanel.hud.setBagCol(gamePanel.hud.getBagCol() - 1);
 			else if(e.getKeyCode() == KeyEvent.VK_D && gamePanel.hud.getBagCol() < 4)
 				gamePanel.hud.setBagCol(gamePanel.hud.getBagCol() + 1);
+			else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				if(gamePanel.player.getLifePoints() < 100) {
+					switch(gamePanel.player.bag.get(gamePanel.hud.getBagCol() + 5 * gamePanel.hud.getBagRow()).getName()) {
+					case "Gaufre":
+						gamePanel.player.setLifePoints(gamePanel.player.getLifePoints() + 10);
+						break;
+					case "Café":
+						gamePanel.player.setLifePoints(gamePanel.player.getLifePoints() + 20);
+						break;
+					case "Grand café":
+						gamePanel.player.setLifePoints(gamePanel.player.getLifePoints() + 50);
+						break;
+					}
+					gamePanel.player.bag.remove(gamePanel.hud.getBagCol() + 5 * gamePanel.hud.getBagRow());
+				}
+			}
 		}
 		
 		//KFET
@@ -140,7 +158,7 @@ public class KeyHandler implements KeyListener {
 				gamePanel.hud.setBagCol(gamePanel.hud.getBagCol() + 1);
 			else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				int itemIndex = gamePanel.hud.getBagCol() + 5 * gamePanel.hud.getBagRow();
-				if(itemIndex < gamePanel.nicolas.inventory.size() && gamePanel.player.getMoney().compareTo(gamePanel.nicolas.inventory.get(itemIndex).getPrice()) >= 0) {
+				if(itemIndex < gamePanel.nicolas.inventory.size() && gamePanel.player.getMoney().compareTo(gamePanel.nicolas.inventory.get(itemIndex).getPrice()) >= 0 && gamePanel.player.bag.size() < 20) {
 					gamePanel.player.bag.add(gamePanel.nicolas.inventory.get(itemIndex));
 					gamePanel.player.setMoney(gamePanel.player.getMoney().subtract(gamePanel.nicolas.inventory.get(itemIndex).getPrice()));
 				}
@@ -180,33 +198,42 @@ public class KeyHandler implements KeyListener {
 							gamePanel.player.setLifePoints(gamePanel.player.getLifePoints() + 50);
 							break;
 						}
+						gamePanel.hud.setDialogue(gamePanel.player.getName() + " utilise " + gamePanel.player.bag.get(gamePanel.hud.getBagCol() + 5 * gamePanel.hud.getBagRow()).getName());
 						gamePanel.player.bag.remove(gamePanel.hud.getBagCol() + 5 * gamePanel.hud.getBagRow());
+						gamePanel.hud.setPlayerTurn(false);
 					}
 				}
 			}
 			else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-				switch(gamePanel.hud.getSubMenu()) {
-				case 0:
-					switch(gamePanel.hud.getMenuIndex()) {
+				if(gamePanel.hud.getPlayerTurn()) {
+					switch(gamePanel.hud.getSubMenu()) {
 					case 0:
-						gamePanel.hud.setSubMenu(1);
+						switch(gamePanel.hud.getMenuIndex()) {
+						case 0:
+							gamePanel.hud.setSubMenu(1);
+							break;
+						case 1:
+							gamePanel.hud.setSubMenu(2);
+							break;
+						}
+						gamePanel.hud.setMenuIndex(0);
 						break;
 					case 1:
-						gamePanel.hud.setSubMenu(2);
+						if(gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()).getLimit() > 0) {
+//							gamePanel.hud.setDialogue(gamePanel.player.getName() + " utilise " + gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()).getName());
+//							gamePanel.hud.setPlayerTurn(false);
+//							gamePanel.player.getSpriteInteract().setLifePoints(gamePanel.player.getSpriteInteract().getLifePoints() - gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()).getPower());
+//							gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()).setLimit(gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()).getLimit() - 1);
+							gamePanel.player.attack(gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()), gamePanel.player.getSpriteInteract());
+						}
 						break;
 					}
-					gamePanel.hud.setMenuIndex(0);
-					break;
-				case 1:
-					if(gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()).getLimit() > 0) {
-						gamePanel.hud.setDialogue(gamePanel.player.getName() + " utilise " + gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()));
-						if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-							gamePanel.player.getSpriteInteract().setLifePoints(gamePanel.player.getSpriteInteract().getLifePoints() - gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()).getPower());
-							gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()).setLimit(gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()).getLimit() - 1);
-							gamePanel.hud.setDialogue("");
-						}
+				} else {
+					Random random = new Random();
+					int move = random.nextInt(4);
+					if(gamePanel.player.getSpriteInteract().moveSet.get(move).getLimit() > 0) {
+						gamePanel.player.getSpriteInteract().attack(gamePanel.player.getSpriteInteract().moveSet.get(move), gamePanel.player);
 					}
-					break;
 				}
 			}
 			else if(e.getKeyCode() == KeyEvent.VK_ESCAPE && gamePanel.hud.getSubMenu() >= 1) {

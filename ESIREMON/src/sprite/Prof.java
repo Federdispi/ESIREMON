@@ -9,8 +9,8 @@ import application.GamePanel;
 
 public class Prof extends Sprite {
 	
-	public Prof(GamePanel gamePanel, String name, boolean sexe, String direction) {
-		super(gamePanel, name, sexe);
+	public Prof(GamePanel gamePanel, String name, boolean sexe, String direction, int level) {
+		super(gamePanel, name, sexe, level);
 		
 		this.direction = direction;
 		previous_direction = "down";

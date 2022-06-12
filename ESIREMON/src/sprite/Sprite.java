@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import application.GamePanel;
 
@@ -12,6 +13,7 @@ import attack.Attack;
 public class Sprite {
 	protected String name;
 	protected boolean sexe; //false man, true woman
+	protected int level;
 	
 	protected int mapX, mapY;
 	protected int hitBoxX = 0, hitBoxY = 0;
@@ -40,10 +42,11 @@ public class Sprite {
 	
 	public ArrayList<Attack> moveSet = new ArrayList<>();
 	
-	public Sprite(GamePanel gamePanel, String name, boolean sexe) {
+	public Sprite(GamePanel gamePanel, String name, boolean sexe, int level) {
 		this.gamePanel = gamePanel;
 		this.name = name;
 		this.sexe = sexe;
+		this.level = level;
 	}
 	
 	public void movement() {}
@@ -81,6 +84,14 @@ public class Sprite {
 				direction = "left_stop";
 			break;
 		}
+	}
+	
+	public void attack(Attack attack, Sprite target) {
+		gamePanel.hud.setDialogue(name + " utilise " + attack.getName());
+		int amount = attack.getPower() + (level - target.getLevel()) * (attack.getPower() / 10);
+		target.setLifePoints(target.getLifePoints() - amount);
+		attack.setLimit(attack.getLimit() - 1);
+		gamePanel.hud.setPlayerTurn(!gamePanel.hud.getPlayerTurn());
 	}
 	
 	public void update() {
@@ -210,6 +221,10 @@ public class Sprite {
 			this.lifePoints = 100;
 	}
 	
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	
 	/*
 	 * GETTERS	
 	 */
@@ -259,5 +274,9 @@ public class Sprite {
 	
 	public boolean getBattle() {
 		return this.battle;
+	}
+	
+	public int getLevel() {
+		return this.level;
 	}
 }
