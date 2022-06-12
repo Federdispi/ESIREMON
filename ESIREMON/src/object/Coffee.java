@@ -14,7 +14,7 @@ public class Coffee extends Object {
 		super(gamePanel);
 		name = "Café";
 		price = new BigDecimal(1.00).setScale(1, RoundingMode.HALF_UP);
-		description = "Café fait avec une nouvelle machine qui te fais récupérer 50PV";
+		description = "Café fait avec une nouvelle machine qui te fais récupérer 20PV";
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/objects/caffe.png"));
 		} catch(IOException e) {

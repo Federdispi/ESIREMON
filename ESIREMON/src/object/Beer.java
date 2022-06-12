@@ -14,7 +14,7 @@ public class Beer extends Object {
 		super(gamePanel);
 		name = "Grand café";
 		price = new BigDecimal(3.00).setScale(1, RoundingMode.HALF_UP);
-		description = "Un café mystique d'une couleur et forme bizarres qui te fais gagner 200PV";
+		description = "Un café d'une couleur bizarre qui te fais récupérer 50PV";
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/objects/birra.png"));
 		} catch(IOException e) {

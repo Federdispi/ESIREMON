@@ -1,0 +1,15 @@
+package attack;
+
+public class Attack {
+	protected String name;
+	protected int limitMax;
+	protected int limit;
+	protected int power;
+	
+	public Attack(String name, int limitMax, int power) {
+		this.name = name;
+		this.limitMax = limitMax;
+		this.limit = this.limitMax;
+		this.power = power;
+	}
+}

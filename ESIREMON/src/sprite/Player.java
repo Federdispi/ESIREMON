@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 
 import application.GamePanel;
 import application.KeyHandler;
-
+import attack.Attack;
 import object.Object;
 
 public class Player extends Sprite {
@@ -25,7 +25,7 @@ public class Player extends Sprite {
 	
 	public Player(GamePanel gamePanel, KeyHandler keyHandler, String name, boolean sexe) {
 		super(gamePanel, name, sexe);
-		lifePoints = 100;
+		lifePoints = 20;
 		hitBoxX = 8;
 		hitBoxY = 16;
 		this.keyHandler = keyHandler;
@@ -36,6 +36,15 @@ public class Player extends Sprite {
 		mapY = gamePanel.TILE_SIZE * 20;
 		direction = "up";
 		previous_direction = "up";
+		
+		Attack att1 = new Attack("Att1", 5, 20);
+		Attack att2 = new Attack("Att2", 5, 30);
+		Attack att3 = new Attack("Att3", 20, 10);
+		Attack att4 = new Attack("Att4", 10, 20);
+		moveSet.add(att1);
+		moveSet.add(att2);
+		moveSet.add(att3);
+		moveSet.add(att4);
 		
 		if(sexe) {
 		try {
@@ -57,10 +66,6 @@ public class Player extends Sprite {
 		} else {
 			//TODO
 		}
-	}
-	
-	public void addItem(Object item) {
-		bag.add(item);
 	}
 	
 	public void update() {

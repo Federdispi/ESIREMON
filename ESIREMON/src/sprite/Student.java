@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import application.GamePanel;
+import attack.Attack;
 
 public class Student extends Sprite {
 	
@@ -15,6 +16,15 @@ public class Student extends Sprite {
 		
 		this.direction = direction;
 		previous_direction = "down";
+		
+		Attack att1 = new Attack("Att1", 5, 20);
+		Attack att2 = new Attack("Att2", 5, 30);
+		Attack att3 = new Attack("Att3", 20, 10);
+		Attack att4 = new Attack("Att4", 10, 20);
+		moveSet.add(att1);
+		moveSet.add(att2);
+		moveSet.add(att3);
+		moveSet.add(att4);
 		
 		setDialogue();
 		

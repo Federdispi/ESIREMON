@@ -75,8 +75,10 @@ public class KeyHandler implements KeyListener {
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				if(gamePanel.player.getSpriteInteract().getClass() == KFetMan.class)
 					gamePanel.setGameState(gamePanel.KFET);
-				else if(gamePanel.player.getSpriteInteract().getBattle())
+				else if(gamePanel.player.getSpriteInteract().getBattle()) {
 					gamePanel.setGameState(gamePanel.BATTLE);
+					gamePanel.hud.setDialogue("");
+				}
 				else
 					gamePanel.setGameState(gamePanel.PLAY);
 			}
@@ -151,6 +153,37 @@ public class KeyHandler implements KeyListener {
 				gamePanel.hud.setMenuIndex(gamePanel.hud.getMenuIndex() - 1);
 			else if(e.getKeyCode() == KeyEvent.VK_S && (gamePanel.hud.getMenuIndex() < 1 && gamePanel.hud.getSubMenu() == 0 || gamePanel.hud.getMenuIndex() < 3 && gamePanel.hud.getSubMenu() == 1))
 				gamePanel.hud.setMenuIndex(gamePanel.hud.getMenuIndex() + 1);
+			else if(gamePanel.hud.getSubMenu() == 2) {
+				if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					gamePanel.hud.setSubMenu(0);
+					gamePanel.hud.setBagCol(0);
+					gamePanel.hud.setBagRow(0);
+				}
+				else if((e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_Z) && gamePanel.hud.getBagRow() > 0)
+					gamePanel.hud.setBagRow(gamePanel.hud.getBagRow() - 1);
+				else if(e.getKeyCode() == KeyEvent.VK_S && gamePanel.hud.getBagRow() < 3)
+					gamePanel.hud.setBagRow(gamePanel.hud.getBagRow() + 1);
+				else if((e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_Q) && gamePanel.hud.getBagCol() > 0)
+					gamePanel.hud.setBagCol(gamePanel.hud.getBagCol() - 1);
+				else if(e.getKeyCode() == KeyEvent.VK_D && gamePanel.hud.getBagCol() < 4)
+					gamePanel.hud.setBagCol(gamePanel.hud.getBagCol() + 1);
+				else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if(gamePanel.player.getLifePoints() < 100) {
+						switch(gamePanel.player.bag.get(gamePanel.hud.getBagCol() + 5 * gamePanel.hud.getBagRow()).getName()) {
+						case "Gaufre":
+							gamePanel.player.setLifePoints(gamePanel.player.getLifePoints() + 10);
+							break;
+						case "Café":
+							gamePanel.player.setLifePoints(gamePanel.player.getLifePoints() + 20);
+							break;
+						case "Grand café":
+							gamePanel.player.setLifePoints(gamePanel.player.getLifePoints() + 50);
+							break;
+						}
+						gamePanel.player.bag.remove(gamePanel.hud.getBagCol() + 5 * gamePanel.hud.getBagRow());
+					}
+				}
+			}
 			else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				switch(gamePanel.hud.getSubMenu()) {
 				case 0:
@@ -159,27 +192,27 @@ public class KeyHandler implements KeyListener {
 						gamePanel.hud.setSubMenu(1);
 						break;
 					case 1:
-						gamePanel.setGameState(gamePanel.BAG);
+						gamePanel.hud.setSubMenu(2);
 						break;
 					}
+					gamePanel.hud.setMenuIndex(0);
 					break;
 				case 1:
-					switch(gamePanel.hud.getMenuIndex()) {
-					case 0:
-						break;
-					case 1:
-						break;
-					case 2:
-						break;
-					case 3:
-						break;
+					if(gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()).getLimit() > 0) {
+						gamePanel.hud.setDialogue(gamePanel.player.getName() + " utilise " + gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()));
+						if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+							gamePanel.player.getSpriteInteract().setLifePoints(gamePanel.player.getSpriteInteract().getLifePoints() - gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()).getPower());
+							gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()).setLimit(gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()).getLimit() - 1);
+							gamePanel.hud.setDialogue("");
+						}
 					}
 					break;
 				}
+			}
+			else if(e.getKeyCode() == KeyEvent.VK_ESCAPE && gamePanel.hud.getSubMenu() >= 1) {
+				gamePanel.hud.setSubMenu(0);
 				gamePanel.hud.setMenuIndex(0);
 			}
-			else if(e.getKeyCode() == KeyEvent.VK_ESCAPE && gamePanel.hud.getSubMenu() == 1)
-				gamePanel.hud.setSubMenu(0);
 		}
 	}
 
