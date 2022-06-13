@@ -9,13 +9,18 @@ import application.GamePanel;
 import attack.Attack;
 
 public class Prof extends Sprite {
-	
+	/*
+	 * Constructor
+	 */
 	public Prof(GamePanel gamePanel, String name, String direction, int level) {
 		super(gamePanel, name, false, level);
 		
 		this.direction = direction;
 		previous_direction = "down";
 		
+		/*
+		 * Attacks
+		 */
 		Attack att1 = new Attack("Acknowledgement Numb", 5, 20);
 		Attack att2 = new Attack("Pas de piège", 2, 30);
 		Attack att3 = new Attack("Control applikesh", 20, 10);
@@ -26,6 +31,8 @@ public class Prof extends Sprite {
 		moveSet.add(att4);
 		
 		setDialogue();
+		
+		//Sprite images
 		try {
 			up1 = ImageIO.read(getClass().getResourceAsStream("/prof/up1.png"));
 			up2 = ImageIO.read(getClass().getResourceAsStream("/prof/up3.png"));
@@ -44,6 +51,9 @@ public class Prof extends Sprite {
 		}
 	}
 	
+	/*
+	 * Simple AI which moves the sprite randomly
+	 */
 	public void movement() {
 		if(moves) {
 			movementCounter++;
@@ -75,15 +85,16 @@ public class Prof extends Sprite {
 		}
 	}
 	
-	public void setDialogue() {
-		dialogues[0] = "Y a pas de piège";
-		dialogues[1] = "Wallah y a pas de piège";
-		dialogues[2] = "Ah, bah là si";
-		dialogues[3] = "Là t'es tombé dans le piège";
-	}
-	
 	public void talk() {
 		super.talk();
 	}
-
+	
+	/*
+	 * SETTERS
+	 */
+	public void setDialogue() {
+		dialogues[0] = "Y a pas de piège";
+		dialogues[1] = "Ah, bah là si";
+		dialogues[2] = "Là t'es tombé dans le piège";
+	}
 }

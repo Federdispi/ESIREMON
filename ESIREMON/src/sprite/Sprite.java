@@ -40,8 +40,11 @@ public class Sprite {
 	String dialogues[] = new String[20];
 	int dialogueIndex = 0;
 	
-	public ArrayList<Attack> moveSet = new ArrayList<>();
+	public ArrayList<Attack> moveSet = new ArrayList<>(); //List of the attacks
 	
+	/*
+	 * Constructor
+	 */
 	public Sprite(GamePanel gamePanel, String name, boolean sex, int level) {
 		this.gamePanel = gamePanel;
 		this.name = name;
@@ -51,6 +54,9 @@ public class Sprite {
 	
 	public void movement() {}
 	
+	/*
+	 * Let the sprite talk
+	 */
 	public void talk() {
 		if(dialogues[dialogueIndex] == null)
 			dialogueIndex = 0;
@@ -86,6 +92,9 @@ public class Sprite {
 		}
 	}
 	
+	/*
+	 * Let the sprite attack
+	 */
 	public void attack(Attack attack, Sprite target) {
 		Random random = new Random();
 		int accuracy = random.nextInt(4); // 75% accuracy
@@ -100,6 +109,9 @@ public class Sprite {
 		gamePanel.hud.setPlayerTurn(!gamePanel.hud.getPlayerTurn());
 	}
 	
+	/*
+	 * Updates the sprite
+	 */
 	public void update() {
 		movement();
 		
@@ -131,6 +143,9 @@ public class Sprite {
 		}
 	}
 	
+	/*
+	 * Draws the sprite
+	 */
 	public void draw(Graphics2D g2) {
 		
 		BufferedImage image = null;

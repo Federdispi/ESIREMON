@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 
 import javax.imageio.ImageIO;
 
+import sprite.Prof;
 import sprite.Student;
 
 public class HUD {
@@ -17,20 +18,36 @@ public class HUD {
 	GamePanel gamePanel;
 	Font arial22;
 	Graphics2D g2;
-	private String name = "";
-	private String dialogue = "";
+	
+	private String name = ""; //Name of the npc who speaks
+	private String dialogue = ""; //Dialogue of the npc
+	
+	//Menu
 	private int menuIndex = 0;
 	private int submenu = 0;
+	
+	//Bag
 	private int bagCol = 0;
 	private int bagRow = 0;	
-	private boolean playerTurn = true;
-	float alpha = 0.0f;
 	
+	//Battle
+	private boolean playerTurn = true;
+	private boolean win = false;
+	
+	//Darkness
+	private float alpha = 0.0f;
+	
+	/*
+	 * Constructor
+	 */
 	public HUD(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
 		arial22 = new Font("Arial", Font.PLAIN, 22);
 	}
 	
+	/*
+	 * Draws depending on the game state
+	 */
 	public void draw(Graphics2D g2) {
 		this.g2 = g2;
 		this.g2.setFont(arial22);
@@ -41,8 +58,6 @@ public class HUD {
 			drawBattle();
 		else if(gamePanel.getGameState() == gamePanel.NEW_GAME)
 			drawNewGame();
-		else if(gamePanel.getGameState() == gamePanel.GAME_OVER)
-			drawGameOver();
 		else if(gamePanel.getGameState() == gamePanel.TOILETS)
 			drawToilets();
 		else
@@ -59,17 +74,51 @@ public class HUD {
 		
 		if(gamePanel.getGameState() == gamePanel.KFET)
 			drawKFet();
+		
+		if(gamePanel.getGameState() == gamePanel.GAME_OVER)
+			drawGameOver();
+		
+		if(gamePanel.getMap() == 3)
+			drawDark();
 	}
 	
+	/*
+	 * Applies a dark filter
+	 */
+	private void drawDark() {
+		Color color = new Color(0, 0, 0, 100);
+		g2.setColor(color);
+		g2.fillRect(0, 0, gamePanel.SCREEN_WIDTH, gamePanel.SCREEN_HEIGHT);
+	}
+	
+	/*
+	 * Game over or You won screen
+	 */
 	private void drawGameOver() {
+		Color color = new Color(0, 0, 0, alpha);
+		g2.setColor(color);
+		g2.fillRect(0, 0, gamePanel.SCREEN_WIDTH, gamePanel.SCREEN_HEIGHT);
+		alpha += 0.01f;
+		if(alpha >= 1.0f)
+			alpha = 1.0f;
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 100F));
-		String text = "GAME OVER";
+		String text = "";
+		if(win) {
+			text = "YOU WIN";
+			g2.setColor(Color.green);
+		}
+		else {
+			text = "GAME OVER";
+			g2.setColor(Color.red);
+		}
 		int x = centerTextX(text);
 		int y = gamePanel.SCREEN_HEIGHT / 2;
-		g2.setColor(Color.red);
 		g2.drawString(text, x, y);
 	}
 	
+	/*
+	 * Healing animation
+	 */
 	private void drawToilets() {
 		Color color = new Color(0, 0, 0, alpha);
 		g2.setColor(color);
@@ -90,10 +139,14 @@ public class HUD {
 					gamePanel.player.moveSet.get(i).setLimit(gamePanel.player.moveSet.get(i).getLimitMax());
 				gamePanel.setGameState(gamePanel.PLAY);
 				submenu = 0;
+				alpha = 0.0f;
 			}
 		}
 	}
 	
+	/*
+	 * New Game menu
+	 */
 	private void drawNewGame() {
 		if(submenu == 0) {
 			g2.setFont(g2.getFont().deriveFont(Font.BOLD, 72F));
@@ -141,6 +194,9 @@ public class HUD {
 		}
 	}
 	
+	/*
+	 * Main menu
+	 */
 	private void drawMainMenu() {
 		//TITLE
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 72F));
@@ -183,6 +239,9 @@ public class HUD {
 		g2.drawString(text, x, y);
 	}
 	
+	/*
+	 * Life Points bar
+	 */
 	private void drawLifePoints() {
 		g2.setColor(Color.white);
 		g2.drawString("PV :                        LV : " + gamePanel.player.getLevel(), 25, 40);
@@ -198,6 +257,9 @@ public class HUD {
 		g2.fillRect(30, 55, 3 * gamePanel.player.getLifePoints() - 10, gamePanel.TILE_SIZE / 2 - 10);
 	}
 	
+	/*
+	 * Pause menu
+	 */
 	private void drawPause() {
 		//Background
 		Color color = new Color(0, 0, 0, 230);
@@ -255,6 +317,9 @@ public class HUD {
 		g2.drawString(text, x, y);
 	}
 	
+	/*
+	 * Dialogues
+	 */
 	private void drawDialogue() {
 		int x = gamePanel.TILE_SIZE; 
 		int y = 8 * gamePanel.TILE_SIZE;
@@ -287,6 +352,9 @@ public class HUD {
 		g2.drawString(name, x, y);
 	}
 	
+	/*
+	 * Player bag
+	 */
 	private void drawBag() {
 		//Bag window
 		int x = 2 * gamePanel.TILE_SIZE;
@@ -340,9 +408,10 @@ public class HUD {
 		if(itemIndex < gamePanel.player.bag.size())
 			g2.drawString(gamePanel.player.bag.get(itemIndex).getDescription(), x, y);
 		
-		x = 11 * gamePanel.TILE_SIZE;
+		//Money window
+		x = 10 * gamePanel.TILE_SIZE;
 		y = gamePanel.TILE_SIZE;
-		width = 3 * gamePanel.TILE_SIZE;
+		width = 4 * gamePanel.TILE_SIZE;
 		height = gamePanel.TILE_SIZE + gamePanel.TILE_SIZE / 2;
 		drawWindow(x, y, width, height);
 		
@@ -364,6 +433,9 @@ public class HUD {
 		g2.drawString(gamePanel.player.getMoney() + "0", x, y);
 	}
 	
+	/*
+	 * Exchange menu with the KFet
+	 */
 	private void drawKFet() {
 		//Inventory window
 		int x = 2 * gamePanel.TILE_SIZE;
@@ -416,9 +488,9 @@ public class HUD {
 			g2.drawString(gamePanel.nicolas.inventory.get(itemIndex).getDescription(), x, y);
 		
 		//Money window
-		x = 11 * gamePanel.TILE_SIZE;
+		x = 10 * gamePanel.TILE_SIZE;
 		y = gamePanel.TILE_SIZE;
-		width = 3 * gamePanel.TILE_SIZE;
+		width = 4 * gamePanel.TILE_SIZE;
 		height = gamePanel.TILE_SIZE + gamePanel.TILE_SIZE / 2;
 		drawWindow(x, y, width, height);
 		
@@ -441,6 +513,9 @@ public class HUD {
 		
 	}
 	
+	/*
+	 * Battle screen/mechanics
+	 */
 	private void drawBattle() {
 		//Background
 		g2.setColor(Color.gray);
@@ -653,17 +728,25 @@ public class HUD {
 					g2.drawString(gamePanel.player.bag.get(itemIndex).getDescription(), x, y);
 			}
 		}
-		if(gamePanel.player.getLifePoints() == 0)
+		if(gamePanel.player.getLifePoints() == 0) //If we lose
 			gamePanel.setGameState(gamePanel.GAME_OVER);
-		else if(gamePanel.player.getSpriteInteract().getLifePoints() == 0) {
+		else if(gamePanel.player.getSpriteInteract().getLifePoints() == 0) { //If we win the battle
 			playerTurn = true;
 			gamePanel.player.getSpriteInteract().setBattle(false);
 			gamePanel.player.setMoney(gamePanel.player.getMoney().add(new BigDecimal(2.00)));
 			gamePanel.player.setLevel(gamePanel.player.getLevel() + 2);
-			gamePanel.setGameState(gamePanel.PLAY);
+			if(gamePanel.player.getSpriteInteract().getClass() == Prof.class) { //If we win
+				gamePanel.setGameState(gamePanel.GAME_OVER);
+				win = true;
+			}
+			else
+				gamePanel.setGameState(gamePanel.PLAY);
 		}
 	}
 	
+	/*
+	 * Creates a window
+	 */
 	private void drawWindow(int x, int y, int width, int height) {
 		Color color = new Color(255, 255, 255, 220);
 		g2.setColor(color);
@@ -704,6 +787,14 @@ public class HUD {
 	
 	public void setPlayerTurn(boolean playerTurn) {
 		this.playerTurn = playerTurn;
+	}
+	
+	public void setAlpha(float alpha) {
+		this.alpha = alpha;
+	}
+	
+	public void setWin(boolean win) {
+		this.win = win;
 	}
 	
 	/*

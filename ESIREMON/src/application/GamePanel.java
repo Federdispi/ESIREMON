@@ -39,27 +39,29 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int TOILETS = 7;
 	public final int GAME_OVER = 8;
 	
-	public KeyHandler keyHandler = new KeyHandler(this);
-	Thread gameThread;
-	TileManager tileManager = new TileManager(this);
-	public CollisionDetector collisionDetector = new CollisionDetector(this);
-	AssetManager assetManager = new AssetManager(this);
-	public HUD hud = new HUD(this);
-	public Save save = new Save(this);
+	public KeyHandler keyHandler = new KeyHandler(this); //Keyboard inputs
+	Thread gameThread; //Game Thread
+	TileManager tileManager = new TileManager(this); //Tiles handling
+	public CollisionDetector collisionDetector = new CollisionDetector(this); //Collision detection
+	AssetManager assetManager = new AssetManager(this); //Objects and npc handling
+	public HUD hud = new HUD(this); //HUD
+	public Save save = new Save(this); //Saves and restores
 	
-	public Player player = new Player(this, keyHandler, "?", true);
+	public Player player = new Player(this, keyHandler, "?", true); //Player
 	
-	public Object object[][] = new Object[30][5];
+	public Object object[][] = new Object[30][5]; //Object list
 	
-	public Sprite npc[][] = new Sprite[10][5];
+	public Sprite npc[][] = new Sprite[10][5]; //Npc list
 	
-	public KFetMan nicolas = new KFetMan(this);
+	public KFetMan nicolas = new KFetMan(this); //Npc that works at the KFet
 	
-	private int gameState;
+	private int gameState; //Game state that switches between the constants above
 	
-	private int map = 0;
+	private int map = 0; //First map is Appart.txt
 	
-	
+	/*
+	 * Constructor
+	 */
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 		this.setBackground(Color.black);
@@ -68,6 +70,9 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setFocusable(true);
 	}
 
+	/*
+	 * Setup a new game
+	 */
 	public void gameSetup() {
 		assetManager.setNPC();
 		nicolas.setBattle(false);
@@ -75,13 +80,26 @@ public class GamePanel extends JPanel implements Runnable {
 		assetManager.setObject();
 		map = 0;
 		player = new Player(this, keyHandler, "?", true);
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < npc.length; j++) {
+				if(npc[j][i] != null)
+					npc[j][i].setLifePoints(100);
+			}
+		}
+		hud.setWin(false);
 	}
-
+	
+	/*
+	 * Start the game loop
+	 */
 	public void startGameThread() {
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
 	
+	/*
+	 * Game loop
+	 */
 	@Override
 	public void run() {
 		
@@ -113,6 +131,9 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 	
+	/*
+	 * Updates player and npc
+	 */
 	public void update() {
 		if(gameState == PLAY) {
 			player.update();
@@ -124,11 +145,14 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 	
+	/*
+	 * Draw
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		
-		if(gameState == MAIN_MENU || gameState == BATTLE || gameState == NEW_GAME || gameState == GAME_OVER)
+		if(gameState == MAIN_MENU || gameState == BATTLE || gameState == NEW_GAME)
 			hud.draw(g2);
 		else {
 			tileManager.draw(g2);
@@ -151,6 +175,7 @@ public class GamePanel extends JPanel implements Runnable {
 		g2.dispose();
 	}
 	
+	//GETTERS
 	public int getGameState() {
 		return this.gameState;
 	}
@@ -159,6 +184,7 @@ public class GamePanel extends JPanel implements Runnable {
 		return this.map;
 	}
 	
+	//SETTERS
 	public void setGameState(int gameState) {
 		this.gameState = gameState;
 	}

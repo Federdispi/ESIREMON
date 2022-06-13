@@ -7,7 +7,9 @@ import javax.imageio.ImageIO;
 import application.GamePanel;
 
 public class HorizontalDesk extends Object{
-	
+	/*
+	 * Constructor
+	 */
 	public HorizontalDesk(GamePanel gamePanel) {
 		super(gamePanel);
 		name = "HorizontalDesk";

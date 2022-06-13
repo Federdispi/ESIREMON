@@ -7,7 +7,9 @@ import javax.imageio.ImageIO;
 import application.GamePanel;
 
 public class Table extends Object {
-	
+	/*
+	 * Constructor
+	 */
 	public Table(GamePanel gamePanel) {
 		super(gamePanel);
 		name = "Table";

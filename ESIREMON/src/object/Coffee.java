@@ -9,7 +9,9 @@ import javax.imageio.ImageIO;
 import application.GamePanel;
 
 public class Coffee extends Object {
-	
+	/*
+	 * Constructor
+	 */
 	public Coffee(GamePanel gamePanel) {
 		super(gamePanel);
 		name = "Café";

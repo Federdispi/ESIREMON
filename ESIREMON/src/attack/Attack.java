@@ -6,6 +6,9 @@ public class Attack {
 	protected int limit;
 	protected int power;
 	
+	/*
+	 * Constructor
+	 */
 	public Attack(String name, int limitMax, int power) {
 		this.name = name;
 		this.limitMax = limitMax;

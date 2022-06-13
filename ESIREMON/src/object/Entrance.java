@@ -7,7 +7,9 @@ import javax.imageio.ImageIO;
 import application.GamePanel;
 
 public class Entrance extends Object {
-	
+	/*
+	 * Constructor
+	 */
 	public Entrance(GamePanel gamePanel, String destination) {
 		super(gamePanel);
 		name = "Entrance";

@@ -17,10 +17,16 @@ public class Object {
 	protected String description;
 	protected BigDecimal price;
 	
+	/*
+	 * Constructor
+	 */
 	public Object(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
 	}
 	
+	/*
+	 * Draws the object
+	 */
 	public void draw(Graphics2D g2, GamePanel gamePanel) {
 		int screenX = mapX - gamePanel.player.getX() + gamePanel.player.screenX;
 		int screenY = mapY - gamePanel.player.getY() + gamePanel.player.screenY;
@@ -31,6 +37,9 @@ public class Object {
 			g2.drawImage(image, screenX, screenY, width, height, null);
 	}
 	
+	/*
+	 * Handles interaction with the player
+	 */
 	public void Interact() {
 		switch(name) {
 		case "Entrance":
@@ -51,13 +60,16 @@ public class Object {
 				gamePanel.player.teleport(3, 3, 0);
 				break;
 			case "Steinbrunn_Right":
-				gamePanel.player.teleport(3, 26, 0);
+				gamePanel.player.teleport(3, 16, 0);
 				break;
 			case "Steinbrunn_LeftExit":
 				gamePanel.player.teleport(2, 20, 16);
 				break;
 			case "Steinbrunn_RightExit":
 				gamePanel.player.teleport(2, 25, 16);
+				break;
+			case "Exit":
+				gamePanel.player.teleport(1, 2, 0);
 				break;
 			default:
 				gamePanel.player.setSpriteInteract(null);
@@ -70,9 +82,15 @@ public class Object {
 		case "Kfet":
 			gamePanel.player.npcInteract(1);
 			break;
+		case "Bed":
+			gamePanel.setGameState(gamePanel.TOILETS);
+			break;
 		}
 	}
 	
+	/*
+	 * SETTERS
+	 */
 	public void setCollision(boolean collision) {
 		this.collision = collision;
 	}
@@ -85,6 +103,9 @@ public class Object {
 		this.mapY = y;
 	}
 	
+	/*
+	 * GETTERS
+	 */
 	public boolean getCollision() {
 		return this.collision;
 	}

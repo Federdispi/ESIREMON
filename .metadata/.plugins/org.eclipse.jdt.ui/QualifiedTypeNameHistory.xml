@@ -12,9 +12,7 @@
     <fullyQualifiedTypeName name="map.TileManager"/>
     <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
-    <fullyQualifiedTypeName name="object.Bed"/>
     <fullyQualifiedTypeName name="object.Desk"/>
-    <fullyQualifiedTypeName name="object.Bookshelf"/>
     <fullyQualifiedTypeName name="java.awt.Rectangle"/>
     <fullyQualifiedTypeName name="object.Kfet"/>
     <fullyQualifiedTypeName name="object.Entrance"/>
@@ -26,7 +24,6 @@
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="java.awt.BasicStroke"/>
     <fullyQualifiedTypeName name="java.awt.Font"/>
-    <fullyQualifiedTypeName name="object.Tree"/>
     <fullyQualifiedTypeName name="object.Object"/>
     <fullyQualifiedTypeName name="sprite.KFetMan"/>
     <fullyQualifiedTypeName name="application.GamePanel"/>
@@ -38,7 +35,6 @@
     <fullyQualifiedTypeName name="attack.Attack"/>
     <fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
     <fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
-    <fullyQualifiedTypeName name="java.math.BigDecimal"/>
     <fullyQualifiedTypeName name="java.io.FileWriter"/>
     <fullyQualifiedTypeName name="java.io.BufferedWriter"/>
     <fullyQualifiedTypeName name="java.io.FileReader"/>
@@ -46,7 +42,11 @@
     <fullyQualifiedTypeName name="object.Waffle"/>
     <fullyQualifiedTypeName name="object.Coffee"/>
     <fullyQualifiedTypeName name="object.Beer"/>
-    <fullyQualifiedTypeName name="sprite.Student"/>
     <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="sprite.Student"/>
+    <fullyQualifiedTypeName name="object.Bed"/>
+    <fullyQualifiedTypeName name="object.Bookshelf"/>
+    <fullyQualifiedTypeName name="object.Tree"/>
     <fullyQualifiedTypeName name="sprite.Prof"/>
+    <fullyQualifiedTypeName name="java.math.BigDecimal"/>
 </qualifiedTypeNameHistroy>

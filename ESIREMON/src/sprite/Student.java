@@ -9,14 +9,18 @@ import application.GamePanel;
 import attack.Attack;
 
 public class Student extends Sprite {
-	
-
+	/*
+	 * Constructor
+	 */
 	public Student(GamePanel gamePanel, String name, boolean sexe, String direction, int level) {
 		super(gamePanel, name, sexe, level);
 		
 		this.direction = direction;
 		previous_direction = "down";
 		
+		/*
+		 * Attacks
+		 */
 		Attack att1 = new Attack("Souvenir du Lycée", 5, 20);
 		Attack att2 = new Attack("Révisions de la veille", 2, 30);
 		Attack att3 = new Attack("Annale de 2016", 20, 10);
@@ -28,6 +32,9 @@ public class Student extends Sprite {
 		
 		setDialogue();
 		
+		/*
+		 * Sprite images
+		 */
 		if(sexe) {
 			try {
 				up1 = ImageIO.read(getClass().getResourceAsStream("/student_girl/up1.png"));
@@ -65,6 +72,9 @@ public class Student extends Sprite {
 		}
 	}
 	
+	/*
+	 * Simple AI which moves the sprite randomly
+	 */
 	public void movement() {
 		if(moves) {
 			movementCounter++;
@@ -95,18 +105,52 @@ public class Student extends Sprite {
 			}
 		}
 	}	
+
+	public void talk() {
+		super.talk();
+	}
 	
+	/*
+	 * SETTERS
+	 */
 	public void setDialogue() {
 		switch(name) {
+		case "Justin":
+			dialogues[0] = "Je ne trouve pas l'ESIREM, tu peux m'aider s'il\nte plaît ?";
+			dialogues[1] = "Je n'entends rien avec mon casque";
+			break;
+		case "Pierre":
+			dialogues[0] = "J'ai pas le temps d'aller en cours, il faut que\nj'aille à la salle";
+			dialogues[1] = "Je serai capable de te battre quand EGLD sera à\n+20000%";
+			break;
+		case "Laurine":
+			dialogues[0] = "Depuis qu'on m'a volé mon vélo je suis obligée\nd'aller en cours à pied";
+			dialogues[1] = "La prochaine fois j'appellerai un taxi";
+			break;
+		case "Tom":
+			dialogues[0] = "J'ai des cacahuètes pour la KFet";
+			break;
+		case "Aya":
+			dialogues[0] = "Où est Insigam ?";
+			break;
+		case "Lucas":
+			dialogues[0] = "Je suis allergique à toi";
+			dialogues[1] = "Maintenant je saigne du nez";
+			break;
 		case "Mael":
 			dialogues[0] = "Je viens d'installer un logiciel permettant de faire\ntourner Minecraft à 30 FPS sur Linux avec ma\nGTX 1660";
+			dialogues[1] = "J'avais codé un script permettant de te battre,\napparemment ça n'a pas suffit";
+			break;
+		case "Benjamin":
+			dialogues[0] = "J'ai soif";
+			dialogues[1] = "Je crois que je vais chercher un grand café à la Kfet";
+			break;
+		case "Insigam":
+			dialogues[0] = "Aujourd'hui je suis venue à l'heure !";
+			dialogues[1] = "Je vais acheter une gaufre à la Kfet";
 			break;
 		default:
 			dialogues[0] = "Je suis " + name;
 		}
-	}
-	
-	public void talk() {
-		super.talk();
 	}
 }

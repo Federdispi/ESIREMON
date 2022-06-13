@@ -7,6 +7,9 @@ import javax.imageio.ImageIO;
 import application.GamePanel;
 
 public class Tree extends Object{
+	/*
+	 * Constructor
+	 */
 	public Tree(GamePanel gamePanel) {
 		super(gamePanel);
 		name = "Tree";

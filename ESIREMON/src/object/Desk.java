@@ -7,6 +7,9 @@ import javax.imageio.ImageIO;
 import application.GamePanel;
 
 public class Desk extends Object{
+	/*
+	 * Constructor
+	 */
 	public Desk(GamePanel gamePanel) {
 		super(gamePanel);
 		name = "Desk";

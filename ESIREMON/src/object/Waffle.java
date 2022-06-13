@@ -9,7 +9,9 @@ import javax.imageio.ImageIO;
 import application.GamePanel;
 
 public class Waffle extends Object {
-	
+	/*
+	 * Constructor
+	 */
 	public Waffle(GamePanel gamePanel) {
 		super(gamePanel);
 		name = "Gaufre";

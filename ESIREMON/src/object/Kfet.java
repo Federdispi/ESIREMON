@@ -7,6 +7,9 @@ import javax.imageio.ImageIO;
 import application.GamePanel;
 
 public class Kfet extends Object{
+	/*
+	 * Constructor
+	 */
 	public Kfet(GamePanel gamePanel) {
 		super(gamePanel);
 		name = "Kfet";

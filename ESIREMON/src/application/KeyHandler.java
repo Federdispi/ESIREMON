@@ -11,6 +11,9 @@ public class KeyHandler implements KeyListener {
 	public boolean isButtonPressed, upPressed, downPressed, leftPressed, rightPressed;
 	public boolean enterPressed;
 	
+	/*
+	 * Constructor
+	 */
 	public KeyHandler(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
 	}
@@ -211,6 +214,7 @@ public class KeyHandler implements KeyListener {
 						}
 						gamePanel.hud.setDialogue(gamePanel.player.getName() + " utilise " + gamePanel.player.bag.get(gamePanel.hud.getBagCol() + 5 * gamePanel.hud.getBagRow()).getName());
 						gamePanel.player.bag.remove(gamePanel.hud.getBagCol() + 5 * gamePanel.hud.getBagRow());
+						gamePanel.hud.setSubMenu(0);
 						gamePanel.hud.setPlayerTurn(false);
 					}
 				}
@@ -285,8 +289,10 @@ public class KeyHandler implements KeyListener {
 		
 		//GAME OVER
 		else if(gamePanel.getGameState() == gamePanel.GAME_OVER) {
-			if(e.getKeyCode() == KeyEvent.VK_ENTER)
+			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				gamePanel.setGameState(gamePanel.MAIN_MENU);
+				gamePanel.hud.setAlpha(0.0f);
+			}
 		}
 	}
 

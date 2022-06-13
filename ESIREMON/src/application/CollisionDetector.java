@@ -5,13 +5,21 @@ import sprite.Sprite;
 public class CollisionDetector {
 	
 	GamePanel gamePanel;
-	
+
+	/*
+	 * Constructor
+	 */
 	public CollisionDetector(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
 	}
 	
+	/*
+	 * Detects if a sprite has a collision with a tile or an object
+	 */
 	public int detectCollision(Sprite sprite) {
-		int objectCode = -1;
+		int objectCode = -1; //Code to return
+		
+		//get every side of the sprite so that we can check the collision in every direction
 		int spriteLeft = sprite.getX() + sprite.getHitBox().x;
 		int spriteRight = sprite.getX() + sprite.getHitBox().x + sprite.getHitBox().width;
 		int spriteTop = sprite.getY() + sprite.getHitBox().y;
@@ -22,8 +30,11 @@ public class CollisionDetector {
 		int spriteTopRow = spriteTop / gamePanel.TILE_SIZE;
 		int spriteBottomRow = spriteBottom / gamePanel.TILE_SIZE;
 		
-		int tile1, tile2;
+		int tile1, tile2; //Tiles that we check
 		
+		/*
+		 * Check the collision with a tile or an object and set the sprite collision attribute
+		 */
 		for(int i = 0; i < gamePanel.object.length; i++) {
 			if(gamePanel.object[i][gamePanel.getMap()] != null) {
 				int objectLeft = gamePanel.object[i][gamePanel.getMap()].getX();
@@ -99,12 +110,16 @@ public class CollisionDetector {
 				}
 			}
 		}
-		return objectCode;
+		return objectCode; //returns the object code or -1 if there is not a collision with an object
 	}
 	
+	/*
+	 * Detects a sprite collision with a list of sprites
+	 */
 	public int detectSpritesCollision(Sprite sprite1, Sprite[][] sprite2) {
-		int spriteCode = -1;
+		int spriteCode = -1; //Sprite code to return
 		
+		//Checks the collision depending on which direction we are walking
 		for(int i = 0; i < sprite2.length; i++) {
 			if(gamePanel.npc[i][gamePanel.getMap()] != null && gamePanel.npc[i][gamePanel.getMap()] != sprite1) {
 				sprite1.getHitBox().x = sprite1.getX() + sprite1.getHitBox().x;
@@ -149,9 +164,12 @@ public class CollisionDetector {
 			}
 		}
 		
-		return spriteCode;
+		return spriteCode; //returns the sprite code or -1 if there is not a collision with a sprite
 	}
 	
+	/*
+	 * Detects a collision between a sprite and another specific sprite
+	 */
 	public void detectSpriteCollision(Sprite sprite1, Sprite sprite2) {
 		if(sprite2 == null)
 			sprite2 = gamePanel.player;

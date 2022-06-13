@@ -13,7 +13,7 @@ import object.Waffle;
 
 public class KFetMan extends Sprite {
 	
-	public ArrayList<Object> inventory = new ArrayList<>();
+	public ArrayList<Object> inventory = new ArrayList<>(); //List of the products sold by the KFet
 	
 	public KFetMan(GamePanel gamePanel) {
 		super(gamePanel, "Nicolas", false, 1);
@@ -22,10 +22,12 @@ public class KFetMan extends Sprite {
 		mapX = 11 * gamePanel.TILE_SIZE + gamePanel.TILE_SIZE / 2;
 		mapY = 9 * gamePanel.TILE_SIZE;
 		
+		//Products
 		inventory.add(new Waffle(gamePanel));
 		inventory.add(new Coffee(gamePanel));
 		inventory.add(new Beer(gamePanel));
 		
+		//Sprite images
 		try {
 			up1 = ImageIO.read(getClass().getResourceAsStream("/student_boy/up1.png"));
 			up2 = ImageIO.read(getClass().getResourceAsStream("/student_boy/up3.png"));
@@ -44,11 +46,14 @@ public class KFetMan extends Sprite {
 		}		
 	}
 	
-	public void setDialogue() {
-		dialogues[0] = "Salut, on n'a plus de gaufres au chocolat, mais il en\nreste nature. T'en veux ?";
-	}
-	
 	public void talk() {
 		super.talk();
+	}
+	
+	/*
+	 * SETTERS
+	 */
+	public void setDialogue() {
+		dialogues[0] = "Salut, on n'a plus de gaufres au chocolat, mais il en\nreste nature. T'en veux ?";
 	}
 }

@@ -7,12 +7,15 @@ import javax.imageio.ImageIO;
 import application.GamePanel;
 
 public class Bed extends Object {
+	/*
+	 * Constructor
+	 */
 	public Bed(GamePanel gamePanel) {
 		super(gamePanel);
 		name = "Bed";
 		width = 48;
 		height = 65;
-		collision = false;	
+		interactable = true;
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/objects/letto.png"));
 		} catch(IOException e) {

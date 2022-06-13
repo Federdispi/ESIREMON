@@ -12,9 +12,12 @@ import application.GamePanel;
 
 public class TileManager {
 	GamePanel gamePanel;
-	public Tile[] tileTypes;
-	int map[][][];
+	public Tile[] tileTypes; //List of the types of tile
+	int map[][][]; //List of the maps
 	
+	/*
+	 * Constructor
+	 */
 	public TileManager(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
 		tileTypes = new Tile[12];
@@ -23,12 +26,17 @@ public class TileManager {
 			tileTypes[i] = new Tile();
 		}
 		getTileImage();
+		
+		//Load the maps
 		loadMap("/maps/Appart.txt", 0);
 		loadMap("/maps/Route.txt", 1);
 		loadMap("/maps/ESIREM.txt", 2);
 		loadMap("/maps/Steinbrunn.txt", 3);
 	}
 	
+	/*
+	 * Loads the image of each type of tile
+	 */
 	public void getTileImage() {
 		try {
 			tileTypes[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Parquet.png"));
@@ -54,6 +62,9 @@ public class TileManager {
 		}
 	}
 	
+	/*
+	 * Draws the map
+	 */
 	public void draw(Graphics2D g2) {
 		for(int iRow = 0; iRow < gamePanel.MAP_ROW ; iRow++) {
 			for(int iCol = 0; iCol < gamePanel.MAP_COL; iCol++) {
@@ -71,6 +82,9 @@ public class TileManager {
 		}
 	}
 	
+	/*
+	 * Loads the map from a .txt file
+	 */
 	public void loadMap(String pathName, int _map) {
 		try {
 			InputStream inputStream = getClass().getResourceAsStream(pathName);
@@ -90,6 +104,9 @@ public class TileManager {
 		}
 	}
 	
+	/*
+	 * GETTERS
+	 */
 	public int[][][] getMap() {
 		return this.map;
 	}
