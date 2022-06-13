@@ -36,7 +36,6 @@ public class Object {
 		case "Entrance":
 			switch(description) {
 			case "Toilettes":
-				gamePanel.setGameState(gamePanel.TOILETS);
 				break;
 			}
 			break;

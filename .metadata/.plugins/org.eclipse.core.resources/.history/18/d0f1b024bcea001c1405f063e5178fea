@@ -41,8 +41,6 @@ public class HUD {
 			drawBattle();
 		else if(gamePanel.getGameState() == gamePanel.NEW_GAME)
 			drawNewGame();
-		else if(gamePanel.getGameState() == gamePanel.TOILETS)
-			drawToilets();
 		else
 			drawLifePoints();
 				
@@ -57,6 +55,9 @@ public class HUD {
 		
 		if(gamePanel.getGameState() == gamePanel.KFET)
 			drawKFet();
+		
+		if(gamePanel.getGameState() == gamePanel.TOILETS)
+			drawToilets();
 	}
 	
 	private void drawToilets() {

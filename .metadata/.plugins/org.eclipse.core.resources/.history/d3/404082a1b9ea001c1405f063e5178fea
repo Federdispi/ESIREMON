@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int BAG = 4;
 	public final int KFET = 5;
 	public final int NEW_GAME = 6;
-	public final int TOILETS = 7;
+	public final int TOILETTES = 7;
 	
 	public int autoWalkTargetX;
 	public int autoWalkTargetY;
