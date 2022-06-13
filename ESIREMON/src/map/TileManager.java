@@ -26,6 +26,7 @@ public class TileManager {
 		loadMap("/maps/Appart.txt", 0);
 		loadMap("/maps/Route.txt", 1);
 		loadMap("/maps/ESIREM.txt", 2);
+		loadMap("/maps/Steinbrunn.txt", 3);
 	}
 	
 	public void getTileImage() {

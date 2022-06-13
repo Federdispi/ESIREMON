@@ -106,7 +106,7 @@ public class CollisionDetector {
 		int spriteCode = -1;
 		
 		for(int i = 0; i < sprite2.length; i++) {
-			if(gamePanel.npc[i][gamePanel.getMap()] != null) {
+			if(gamePanel.npc[i][gamePanel.getMap()] != null && gamePanel.npc[i][gamePanel.getMap()] != sprite1) {
 				sprite1.getHitBox().x = sprite1.getX() + sprite1.getHitBox().x;
 				sprite1.getHitBox().y = sprite1.getY() + sprite1.getHitBox().y;
 				

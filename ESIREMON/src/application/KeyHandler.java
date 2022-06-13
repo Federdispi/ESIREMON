@@ -48,8 +48,10 @@ public class KeyHandler implements KeyListener {
 		
 		//PAUSE
 		else if(gamePanel.getGameState() == gamePanel.PAUSE) {
-			if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 				gamePanel.setGameState(gamePanel.PLAY);
+				gamePanel.hud.setMenuIndex(0);
+			}
 			else if((e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_Z) && gamePanel.hud.getMenuIndex() > 0)
 				gamePanel.hud.setMenuIndex(gamePanel.hud.getMenuIndex() - 1);
 			else if(e.getKeyCode() == KeyEvent.VK_S && gamePanel.hud.getMenuIndex() < 3)
@@ -78,7 +80,9 @@ public class KeyHandler implements KeyListener {
 		//DIALOGUE
 		else if(gamePanel.getGameState() == gamePanel.DIALOGUE) {
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-				if(gamePanel.player.getSpriteInteract().getClass() == KFetMan.class)
+				if(gamePanel.player.getSpriteInteract() == null)
+					gamePanel.setGameState(gamePanel.PLAY);
+				else if(gamePanel.player.getSpriteInteract().getClass() == KFetMan.class)
 					gamePanel.setGameState(gamePanel.KFET);
 				else if(gamePanel.player.getSpriteInteract().getBattle()) {
 					gamePanel.setGameState(gamePanel.BATTLE);
@@ -226,8 +230,10 @@ public class KeyHandler implements KeyListener {
 						gamePanel.hud.setMenuIndex(0);
 						break;
 					case 1:
-						if(gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()).getLimit() > 0)
+						if(gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()).getLimit() > 0) {
 							gamePanel.player.attack(gamePanel.player.moveSet.get(gamePanel.hud.getMenuIndex()), gamePanel.player.getSpriteInteract());
+							gamePanel.hud.setMenuIndex(0);
+						}
 						break;
 					}
 				} else {

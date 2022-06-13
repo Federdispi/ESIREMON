@@ -35,7 +35,7 @@ public class Sprite {
 	
 	protected int lifePoints = 100;
 	
-	protected boolean battle = false;
+	protected boolean battle = true;
 	
 	String dialogues[] = new String[20];
 	int dialogueIndex = 0;
@@ -106,6 +106,7 @@ public class Sprite {
 		collision = false;
 		gamePanel.collisionDetector.detectCollision(this);
 		gamePanel.collisionDetector.detectSpriteCollision(this, null);
+		gamePanel.collisionDetector.detectSpritesCollision(this, gamePanel.npc);
 		
 		if(!collision) {
 			switch(direction) {

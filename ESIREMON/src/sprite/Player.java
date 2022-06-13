@@ -199,6 +199,10 @@ public class Player extends Sprite {
 		g2.drawImage(image, screenX, screenY, this.gamePanel.TILE_SIZE, this.gamePanel.TILE_SIZE, null);
 	}
 	
+	public void setSpriteInteract(Sprite sprite) {
+		this.spriteInteract = sprite;
+	}
+	
 	public Sprite getSpriteInteract() {
 		return this.spriteInteract;
 	}

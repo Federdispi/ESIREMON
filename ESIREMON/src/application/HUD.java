@@ -339,6 +339,29 @@ public class HUD {
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 16F));
 		if(itemIndex < gamePanel.player.bag.size())
 			g2.drawString(gamePanel.player.bag.get(itemIndex).getDescription(), x, y);
+		
+		x = 11 * gamePanel.TILE_SIZE;
+		y = gamePanel.TILE_SIZE;
+		width = 3 * gamePanel.TILE_SIZE;
+		height = gamePanel.TILE_SIZE + gamePanel.TILE_SIZE / 2;
+		drawWindow(x, y, width, height);
+		
+		//Money icon
+		x += 13;
+		y += 13;
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(getClass().getResourceAsStream("/objects/moneta.png"));
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		g2.drawImage(image, x, y, gamePanel.TILE_SIZE, gamePanel.TILE_SIZE, null);
+		
+		//Money amount
+		x += gamePanel.TILE_SIZE + gamePanel.TILE_SIZE / 4;
+		y += 36;
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 32F));
+		g2.drawString(gamePanel.player.getMoney() + "0", x, y);
 	}
 	
 	private void drawKFet() {

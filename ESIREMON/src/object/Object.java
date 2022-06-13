@@ -39,7 +39,31 @@ public class Object {
 				gamePanel.setGameState(gamePanel.TOILETS);
 				break;
 			case "Route":
-				gamePanel.player.teleport(2, 14, 20);
+				gamePanel.player.teleport(1, 26, 0);
+				break;
+			case "ESIREM":
+				gamePanel.player.teleport(2, 14, 24);
+				break;
+			case "Appart":
+				gamePanel.player.teleport(0, 3, 3);
+				break;
+			case "Steinbrunn_Left":
+				gamePanel.player.teleport(3, 3, 0);
+				break;
+			case "Steinbrunn_Right":
+				gamePanel.player.teleport(3, 26, 0);
+				break;
+			case "Steinbrunn_LeftExit":
+				gamePanel.player.teleport(2, 20, 16);
+				break;
+			case "Steinbrunn_RightExit":
+				gamePanel.player.teleport(2, 25, 16);
+				break;
+			default:
+				gamePanel.player.setSpriteInteract(null);
+				gamePanel.hud.setName("M. Digrizzly");
+				gamePanel.hud.setDialogue("TRAVAUX EN COURS : Il n'est pas possible\nd'accéder à cette zone");
+				gamePanel.setGameState(gamePanel.DIALOGUE);
 				break;
 			}
 			break;

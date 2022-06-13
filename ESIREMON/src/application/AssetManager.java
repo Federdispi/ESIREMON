@@ -23,7 +23,6 @@ public class AssetManager {
 		gamePanel.npc[0][2].setX(17 * gamePanel.TILE_SIZE);
 		gamePanel.npc[0][2].setY(10 * gamePanel.TILE_SIZE);
 		gamePanel.npc[0][2].setMoves(true);
-		gamePanel.npc[0][2].setBattle(true);
 		
 		gamePanel.npc[2][2] = new Student(gamePanel, "Mael", false, "up_stop", 5);
 		gamePanel.npc[2][2].setX(23 * gamePanel.TILE_SIZE);
@@ -37,11 +36,12 @@ public class AssetManager {
 		gamePanel.npc[4][2].setX(2 * gamePanel.TILE_SIZE);
 		gamePanel.npc[4][2].setY(15 * gamePanel.TILE_SIZE);
 		gamePanel.npc[4][2].setMoves(true);
-		
-		gamePanel.npc[5][2] = new Prof(gamePanel, "Nade Herr", "down_stop", 90);
-		gamePanel.npc[5][2].setX(18 * gamePanel.TILE_SIZE);
-		gamePanel.npc[5][2].setY(11 * gamePanel.TILE_SIZE);
-		gamePanel.npc[5][2].setBattle(true);
+		/*
+		 * Map 3 : Steinbrunn
+		 */		
+		gamePanel.npc[0][3] = new Prof(gamePanel, "Nade Herr", "up_stop", 90);
+		gamePanel.npc[0][3].setX(15 * gamePanel.TILE_SIZE);
+		gamePanel.npc[0][3].setY(19 * gamePanel.TILE_SIZE);
 	}
 	
 	public void setObject() {	
@@ -51,6 +51,16 @@ public class AssetManager {
 		gamePanel.object[0][0] = new Entrance(gamePanel, "Route");
 		gamePanel.object[0][0].setX(3 * gamePanel.TILE_SIZE);
 		gamePanel.object[0][0].setY(4 * gamePanel.TILE_SIZE - 20);
+		/*
+		 * Map 1 : Route
+		 */
+		gamePanel.object[0][1] = new Entrance(gamePanel, "Appart");
+		gamePanel.object[0][1].setX(26 * gamePanel.TILE_SIZE);
+		gamePanel.object[0][1].setY(gamePanel.TILE_SIZE - 20);
+		
+		gamePanel.object[1][1] = new Entrance(gamePanel, "ESIREM");
+		gamePanel.object[1][1].setX(2 * gamePanel.TILE_SIZE);
+		gamePanel.object[1][1].setY(gamePanel.TILE_SIZE - 20);
 		/*
 		 * Map 2 : ESIREM
 		 */
@@ -70,7 +80,7 @@ public class AssetManager {
 		gamePanel.object[3][2].setX(11 * gamePanel.TILE_SIZE);
 		gamePanel.object[3][2].setY(9 * gamePanel.TILE_SIZE);
 		
-		gamePanel.object[4][2] = new Entrance(gamePanel, "Steinbrunn");
+		gamePanel.object[4][2] = new Entrance(gamePanel, "Steinbrunn_Left");
 		gamePanel.object[4][2].setX(20 * gamePanel.TILE_SIZE);
 		gamePanel.object[4][2].setY(17 * gamePanel.TILE_SIZE - 20);
 		
@@ -136,10 +146,32 @@ public class AssetManager {
 		
 		gamePanel.object[20][2] = new Entrance(gamePanel, "Toilettes");
 		gamePanel.object[20][2].setX(8 * gamePanel.TILE_SIZE);
-		gamePanel.object[20][2].setY(15 * gamePanel.TILE_SIZE);
+		gamePanel.object[20][2].setY(15 * gamePanel.TILE_SIZE - 20);
 		
 		gamePanel.object[21][2] = new Entrance(gamePanel, "Salles");
 		gamePanel.object[21][2].setX(18 * gamePanel.TILE_SIZE);
 		gamePanel.object[21][2].setY(gamePanel.TILE_SIZE);
+		
+		gamePanel.object[22][2] = new Entrance(gamePanel, "Steinbrunn_Right");
+		gamePanel.object[22][2].setX(25 * gamePanel.TILE_SIZE);
+		gamePanel.object[22][2].setY(17 * gamePanel.TILE_SIZE - 20);
+		
+		gamePanel.object[23][2] = new Entrance(gamePanel, "Haut");
+		gamePanel.object[23][2].setX(6 * gamePanel.TILE_SIZE);
+		gamePanel.object[23][2].setY(18 * gamePanel.TILE_SIZE - 20);
+		
+		gamePanel.object[24][2] = new Entrance(gamePanel, "Bas");
+		gamePanel.object[24][2].setX(8 * gamePanel.TILE_SIZE);
+		gamePanel.object[24][2].setY(18 * gamePanel.TILE_SIZE - 20);
+		/*
+		 * Map 3 : Steinbrunn
+		 */
+		gamePanel.object[0][3] = new Entrance(gamePanel, "Steinbrunn_LeftExit");
+		gamePanel.object[0][3].setX(3 * gamePanel.TILE_SIZE);
+		gamePanel.object[0][3].setY(0);
+		
+		gamePanel.object[1][3] = new Entrance(gamePanel, "Steinbrunn_RightExit");
+		gamePanel.object[1][3].setX(26 * gamePanel.TILE_SIZE);
+		gamePanel.object[1][3].setY(0);
 	}
 }

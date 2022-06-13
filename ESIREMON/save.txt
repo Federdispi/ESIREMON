@@ -1,9 +1,9 @@
-Feder
+F
 false
 100
 5
-672
-986
+144
+200
 down_stop
 
 
@@ -29,7 +29,7 @@ down_stop
 2
 20
 10
-2
+3
 
 
 
@@ -51,7 +51,7 @@ down_stop
 
 
 816
-480
+600
 down_stop
 true
 552
@@ -61,17 +61,13 @@ false
 1104
 216
 up_stop
-false
+true
 1094
 412
 down_stop
-false
+true
 96
-720
-down_stop
-false
-864
-528
+840
 down_stop
 true
 
@@ -79,6 +75,10 @@ true
 
 
 
+720
+912
+up_stop
+true
 
 
 

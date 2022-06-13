@@ -70,6 +70,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void gameSetup() {
 		assetManager.setNPC();
+		nicolas.setBattle(false);
 		npc[1][2] = nicolas;
 		assetManager.setObject();
 		map = 0;
