@@ -41,6 +41,8 @@ public class HUD {
 			drawBattle();
 		else if(gamePanel.getGameState() == gamePanel.NEW_GAME)
 			drawNewGame();
+		else if(gamePanel.getGameState() == gamePanel.GAME_OVER)
+			drawGameOver();
 		else if(gamePanel.getGameState() == gamePanel.TOILETS)
 			drawToilets();
 		else
@@ -59,6 +61,15 @@ public class HUD {
 			drawKFet();
 	}
 	
+	private void drawGameOver() {
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 100F));
+		String text = "GAME OVER";
+		int x = centerTextX(text);
+		int y = gamePanel.SCREEN_HEIGHT / 2;
+		g2.setColor(Color.red);
+		g2.drawString(text, x, y);
+	}
+	
 	private void drawToilets() {
 		Color color = new Color(0, 0, 0, alpha);
 		g2.setColor(color);
@@ -75,6 +86,8 @@ public class HUD {
 				alpha = 0.0f;
 			if(alpha == 0.0f) {
 				gamePanel.player.setLifePoints(100);
+				for(int i = 0; i < 4; i++)
+					gamePanel.player.moveSet.get(i).setLimit(gamePanel.player.moveSet.get(i).getLimitMax());
 				gamePanel.setGameState(gamePanel.PLAY);
 				submenu = 0;
 			}
@@ -618,8 +631,9 @@ public class HUD {
 			}
 		}
 		if(gamePanel.player.getLifePoints() == 0)
-			gamePanel.setGameState(gamePanel.MAIN_MENU);
+			gamePanel.setGameState(gamePanel.GAME_OVER);
 		else if(gamePanel.player.getSpriteInteract().getLifePoints() == 0) {
+			playerTurn = true;
 			gamePanel.player.getSpriteInteract().setBattle(false);
 			gamePanel.player.setMoney(gamePanel.player.getMoney().add(new BigDecimal(2.00)));
 			gamePanel.player.setLevel(gamePanel.player.getLevel() + 2);

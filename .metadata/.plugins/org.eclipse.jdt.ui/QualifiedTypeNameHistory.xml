@@ -37,7 +37,6 @@
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="attack.Attack"/>
     <fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
-    <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
     <fullyQualifiedTypeName name="java.math.BigDecimal"/>
     <fullyQualifiedTypeName name="java.io.FileWriter"/>
@@ -48,4 +47,6 @@
     <fullyQualifiedTypeName name="object.Coffee"/>
     <fullyQualifiedTypeName name="object.Beer"/>
     <fullyQualifiedTypeName name="sprite.Student"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="sprite.Prof"/>
 </qualifiedTypeNameHistroy>

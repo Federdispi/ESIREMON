@@ -14,16 +14,20 @@ import sprite.Sprite;
 import object.Object;
 
 public class GamePanel extends JPanel implements Runnable {	
+	/*
+	 * Constants
+	 */
 	public final int TILE_SIZE = 48;
 	public final int SCREEN_COL = 16;
 	public final int SCREEN_ROW = 12;
 	public final int SCREEN_WIDTH = TILE_SIZE * SCREEN_COL;
 	public final int SCREEN_HEIGHT = TILE_SIZE * SCREEN_ROW;
-	public final int MAP_COL = 28;
-	public final int MAP_ROW = 25;
+	public final int MAP_COL = 30;
+	public final int MAP_ROW = 30;
 	public final int MAP_WIDTH = TILE_SIZE * MAP_COL;
 	public final int MAP_HEIGHT = TILE_SIZE * MAP_COL;
 	public final int FPS = 60;
+	//Game states
 	public final int MAIN_MENU = -1;
 	public final int PAUSE = 0;
 	public final int PLAY = 1;
@@ -33,9 +37,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int KFET = 5;
 	public final int NEW_GAME = 6;
 	public final int TOILETS = 7;
-	
-	public int autoWalkTargetX;
-	public int autoWalkTargetY;
+	public final int GAME_OVER = 8;
 	
 	public KeyHandler keyHandler = new KeyHandler(this);
 	Thread gameThread;
@@ -45,15 +47,17 @@ public class GamePanel extends JPanel implements Runnable {
 	public HUD hud = new HUD(this);
 	public Save save = new Save(this);
 	
-	public Player player = new Player(this, keyHandler, "Federdispi", true);
+	public Player player = new Player(this, keyHandler, "?", true);
 	
-	public Object object[] = new Object[30];
+	public Object object[][] = new Object[30][5];
 	
-	public Sprite npc[] = new Sprite[10];
+	public Sprite npc[][] = new Sprite[10][5];
 	
 	public KFetMan nicolas = new KFetMan(this);
 	
 	private int gameState;
+	
+	private int map = 0;
 	
 	
 	public GamePanel() {
@@ -66,9 +70,10 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void gameSetup() {
 		assetManager.setNPC();
-		npc[1] = nicolas;
+		npc[1][2] = nicolas;
 		assetManager.setObject();
-		gameState = MAIN_MENU;
+		map = 0;
+		player = new Player(this, keyHandler, "?", true);
 	}
 
 	public void startGameThread() {
@@ -112,8 +117,8 @@ public class GamePanel extends JPanel implements Runnable {
 			player.update();
 		
 			for(int i = 0; i < npc.length; i++) {
-				if(npc[i] != null)
-					npc[i].update();
+				if(npc[i][map] != null)
+					npc[i][map].update();
 			}
 		}
 	}
@@ -122,19 +127,19 @@ public class GamePanel extends JPanel implements Runnable {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		
-		if(gameState == MAIN_MENU || gameState == BATTLE || gameState == NEW_GAME)
+		if(gameState == MAIN_MENU || gameState == BATTLE || gameState == NEW_GAME || gameState == GAME_OVER)
 			hud.draw(g2);
 		else {
 			tileManager.draw(g2);
 			
 			for(int i = 0; i < object.length; i++) {
-				if(object[i] != null)
-					object[i].draw(g2, this);
+				if(object[i][map] != null)
+					object[i][map].draw(g2, this);
 			}
 			
 			for(int i = 0; i < npc.length; i++) {
-				if(npc[i] != null)
-					npc[i].draw(g2);
+				if(npc[i][map] != null)
+					npc[i][map].draw(g2);
 			}
 			
 			player.draw(g2);
@@ -149,7 +154,15 @@ public class GamePanel extends JPanel implements Runnable {
 		return this.gameState;
 	}
 	
+	public int getMap() {
+		return this.map;
+	}
+	
 	public void setGameState(int gameState) {
 		this.gameState = gameState;
+	}
+	
+	public void setMap(int map) {
+		this.map = map;
 	}
 }

@@ -25,18 +25,18 @@ public class CollisionDetector {
 		int tile1, tile2;
 		
 		for(int i = 0; i < gamePanel.object.length; i++) {
-			if(gamePanel.object[i] != null) {
-				int objectLeft = gamePanel.object[i].getX();
-				int objectRight = gamePanel.object[i].getX() + gamePanel.object[i].getWidth();
-				int objectTop = gamePanel.object[i].getY();
-				int objectBottom = gamePanel.object[i].getY() + gamePanel.object[i].getHeight();
-				boolean objectCollision = gamePanel.object[i].getCollision();
+			if(gamePanel.object[i][gamePanel.getMap()] != null) {
+				int objectLeft = gamePanel.object[i][gamePanel.getMap()].getX();
+				int objectRight = gamePanel.object[i][gamePanel.getMap()].getX() + gamePanel.object[i][gamePanel.getMap()].getWidth();
+				int objectTop = gamePanel.object[i][gamePanel.getMap()].getY();
+				int objectBottom = gamePanel.object[i][gamePanel.getMap()].getY() + gamePanel.object[i][gamePanel.getMap()].getHeight();
+				boolean objectCollision = gamePanel.object[i][gamePanel.getMap()].getCollision();
 				switch(sprite.getDirection()) {
 				case "up":
 					try {
 						spriteTopRow = (spriteTop - sprite.getSpeed()) / gamePanel.TILE_SIZE;
-						tile1 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteTopRow];
-						tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteTopRow];
+						tile1 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteTopRow][gamePanel.getMap()];
+						tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteTopRow][gamePanel.getMap()];
 						if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision() || spriteTop < 0)
 							sprite.setCollision(true);
 					} catch(Exception e) {
@@ -51,8 +51,8 @@ public class CollisionDetector {
 				case "down":				
 					try {
 						spriteBottomRow = (spriteBottom + sprite.getSpeed()) / gamePanel.TILE_SIZE;
-						tile1 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteBottomRow];
-						tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteBottomRow];
+						tile1 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteBottomRow][gamePanel.getMap()];
+						tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteBottomRow][gamePanel.getMap()];
 						if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision() || spriteBottom > gamePanel.MAP_HEIGHT)
 							sprite.setCollision(true);
 					} catch(Exception e) {
@@ -67,8 +67,8 @@ public class CollisionDetector {
 				case "left":
 					try {
 						spriteLeftCol = (spriteLeft - sprite.getSpeed()) / gamePanel.TILE_SIZE;
-						tile1 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteTopRow];
-						tile2 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteBottomRow];
+						tile1 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteTopRow][gamePanel.getMap()];
+						tile2 = gamePanel.tileManager.getMap()[spriteLeftCol][spriteBottomRow][gamePanel.getMap()];
 						if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision() || spriteLeft < 0)
 							sprite.setCollision(true);
 					} catch(Exception e) {
@@ -83,8 +83,8 @@ public class CollisionDetector {
 				case "right":
 					try {
 						spriteRightCol = (spriteRight + sprite.getSpeed()) / gamePanel.TILE_SIZE;
-						tile1 = gamePanel.tileManager.getMap()[spriteRightCol][spriteTopRow];
-						tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteBottomRow];
+						tile1 = gamePanel.tileManager.getMap()[spriteRightCol][spriteTopRow][gamePanel.getMap()];
+						tile2 = gamePanel.tileManager.getMap()[spriteRightCol][spriteBottomRow][gamePanel.getMap()];
 						if(gamePanel.tileManager.tileTypes[tile1].getCollision() || gamePanel.tileManager.tileTypes[tile2].getCollision() || spriteRight > gamePanel.MAP_WIDTH)
 							sprite.setCollision(true);
 					} catch(Exception e) {
@@ -102,50 +102,50 @@ public class CollisionDetector {
 		return objectCode;
 	}
 	
-	public int detectSpritesCollision(Sprite sprite1, Sprite[] sprite2) {
+	public int detectSpritesCollision(Sprite sprite1, Sprite[][] sprite2) {
 		int spriteCode = -1;
 		
 		for(int i = 0; i < sprite2.length; i++) {
-			if(gamePanel.npc[i] != null) {
+			if(gamePanel.npc[i][gamePanel.getMap()] != null) {
 				sprite1.getHitBox().x = sprite1.getX() + sprite1.getHitBox().x;
 				sprite1.getHitBox().y = sprite1.getY() + sprite1.getHitBox().y;
 				
-				sprite2[i].getHitBox().x = sprite2[i].getX() + sprite2[i].getHitBox().x;
-				sprite2[i].getHitBox().y = sprite2[i].getY() + sprite2[i].getHitBox().y;
+				sprite2[i][gamePanel.getMap()].getHitBox().x = sprite2[i][gamePanel.getMap()].getX() + sprite2[i][gamePanel.getMap()].getHitBox().x;
+				sprite2[i][gamePanel.getMap()].getHitBox().y = sprite2[i][gamePanel.getMap()].getY() + sprite2[i][gamePanel.getMap()].getHitBox().y;
 				
 				switch(sprite1.getDirection()) {
 				case "up":
 					sprite1.getHitBox().y -= sprite1.getSpeed();
-					if(sprite1.getHitBox().intersects(sprite2[i].getHitBox())) {
+					if(sprite1.getHitBox().intersects(sprite2[i][gamePanel.getMap()].getHitBox())) {
 						sprite1.setCollision(true);
 						spriteCode = i;
 					}
 					break;
 				case "down":
 					sprite1.getHitBox().y += sprite1.getSpeed();
-					if(sprite1.getHitBox().intersects(sprite2[i].getHitBox())) {
+					if(sprite1.getHitBox().intersects(sprite2[i][gamePanel.getMap()].getHitBox())) {
 						sprite1.setCollision(true);
 						spriteCode = i;
 					}
 					break;
 				case "left":
 					sprite1.getHitBox().x -= sprite1.getSpeed();
-					if(sprite1.getHitBox().intersects(sprite2[i].getHitBox())) {
+					if(sprite1.getHitBox().intersects(sprite2[i][gamePanel.getMap()].getHitBox())) {
 						sprite1.setCollision(true);
 						spriteCode = i;
 					}
 					break;
 				case "right":
 					sprite1.getHitBox().x += sprite1.getSpeed();
-					if(sprite1.getHitBox().intersects(sprite2[i].getHitBox())) {
+					if(sprite1.getHitBox().intersects(sprite2[i][gamePanel.getMap()].getHitBox())) {
 						sprite1.setCollision(true);
 						spriteCode = i;
 					}
 				}
 				sprite1.getHitBox().x = 8;
 				sprite1.getHitBox().y = 16;
-				sprite2[i].getHitBox().x = 0;
-				sprite2[i].getHitBox().y = 0;
+				sprite2[i][gamePanel.getMap()].getHitBox().x = 0;
+				sprite2[i][gamePanel.getMap()].getHitBox().y = 0;
 			}
 		}
 		

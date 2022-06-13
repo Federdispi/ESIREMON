@@ -1,10 +1,10 @@
-Federdispi
-true
-40
-7
-764
-442
-left_stop
+Feder
+false
+100
+5
+672
+986
+down_stop
 
 
 
@@ -25,14 +25,35 @@ left_stop
 
 
 
-3
-0
+5
+2
 20
 10
-756
-360
-up_stop
-false
+2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+816
+480
+down_stop
+true
 552
 432
 right_stop
@@ -45,10 +66,33 @@ false
 412
 down_stop
 false
-276
+96
 720
-right_stop
+down_stop
 false
+864
+528
+down_stop
+true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

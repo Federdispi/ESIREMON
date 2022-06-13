@@ -17,6 +17,7 @@ public class Main {
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
 		
+		gamePanel.setGameState(gamePanel.MAIN_MENU);
 		gamePanel.gameSetup();
 		
 		gamePanel.startGameThread();

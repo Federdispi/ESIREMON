@@ -13,17 +13,19 @@ import application.GamePanel;
 public class TileManager {
 	GamePanel gamePanel;
 	public Tile[] tileTypes;
-	int map[][];
+	int map[][][];
 	
 	public TileManager(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
 		tileTypes = new Tile[12];
-		map = new int[gamePanel.MAP_COL][gamePanel.MAP_COL];
+		map = new int[gamePanel.MAP_COL][gamePanel.MAP_COL][5];
 		for(int i = 0; i < tileTypes.length; i++) {
 			tileTypes[i] = new Tile();
 		}
 		getTileImage();
-		loadMap("/maps/ESIREM.txt");
+		loadMap("/maps/Appart.txt", 0);
+		loadMap("/maps/Route.txt", 1);
+		loadMap("/maps/ESIREM.txt", 2);
 	}
 	
 	public void getTileImage() {
@@ -58,17 +60,17 @@ public class TileManager {
 				int mapY = iRow * gamePanel.TILE_SIZE;
 				int screenX = mapX - gamePanel.player.getX() + gamePanel.player.screenX;
 				int screenY = mapY - gamePanel.player.getY() + gamePanel.player.screenY;
-				if(map[iCol][iRow] != -1 
+				if(map[iCol][iRow][gamePanel.getMap()] != -1 
 						&& mapX + gamePanel.TILE_SIZE > gamePanel.player.getX() - gamePanel.player.screenX 
 						&& mapX - gamePanel.TILE_SIZE < gamePanel.player.getX() + gamePanel.player.screenX 
 						&& mapY + gamePanel.TILE_SIZE > gamePanel.player.getY() - gamePanel.player.screenY 
 						&& mapY - gamePanel.TILE_SIZE < gamePanel.player.getY() + gamePanel.player.screenY)
-					g2.drawImage(tileTypes[map[iCol][iRow]].image, screenX, screenY, gamePanel.TILE_SIZE, gamePanel.TILE_SIZE, null);
+					g2.drawImage(tileTypes[map[iCol][iRow][gamePanel.getMap()]].image, screenX, screenY, gamePanel.TILE_SIZE, gamePanel.TILE_SIZE, null);
 			}
 		}
 	}
 	
-	public void loadMap(String pathName) {
+	public void loadMap(String pathName, int _map) {
 		try {
 			InputStream inputStream = getClass().getResourceAsStream(pathName);
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -78,7 +80,7 @@ public class TileManager {
 				for(int iCol = 0; iCol < gamePanel.MAP_COL; iCol++) {
 					String numbers[] = line.split(" ");
 					int num = Integer.parseInt(numbers[iCol]);
-					map[iCol][iRow] = num - 1;
+					map[iCol][iRow][_map] = num - 1;
 				}
 			}
 			bufferedReader.close();
@@ -87,7 +89,7 @@ public class TileManager {
 		}
 	}
 	
-	public int[][] getMap() {
+	public int[][][] getMap() {
 		return this.map;
 	}
 }

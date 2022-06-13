@@ -32,8 +32,8 @@ public class Player extends Sprite {
 		hitBox = new Rectangle(hitBoxX, hitBoxY, gamePanel.TILE_SIZE - gamePanel.TILE_SIZE / 3, gamePanel.TILE_SIZE - gamePanel.TILE_SIZE / 3);
 		screenX = gamePanel.SCREEN_WIDTH / 2 - gamePanel.TILE_SIZE / 2;
 		screenY = gamePanel.SCREEN_HEIGHT / 2 - gamePanel.TILE_SIZE / 2;
-		mapX = gamePanel.TILE_SIZE * 14;
-		mapY = gamePanel.TILE_SIZE * 20;
+		mapX = gamePanel.TILE_SIZE * 3;
+		mapY = gamePanel.TILE_SIZE * 1;
 		direction = "up";
 		previous_direction = "up";
 		
@@ -103,8 +103,8 @@ public class Player extends Sprite {
 			int objectIndex = gamePanel.collisionDetector.detectCollision(this);
 			if(objectIndex != -1)
 			{
-				if(gamePanel.object[objectIndex].getInteractable())
-					gamePanel.object[objectIndex].Interact();
+				if(gamePanel.object[objectIndex][gamePanel.getMap()].getInteractable())
+					gamePanel.object[objectIndex][gamePanel.getMap()].Interact();
 			}
 			
 			int npcIndex = gamePanel.collisionDetector.detectSpritesCollision(this, gamePanel.npc);
@@ -141,11 +141,17 @@ public class Player extends Sprite {
 	
 	public void npcInteract(int npcIndex) {
 		if(gamePanel.keyHandler.enterPressed) {
-			spriteInteract = gamePanel.npc[npcIndex];
+			spriteInteract = gamePanel.npc[npcIndex][gamePanel.getMap()];
 			gamePanel.setGameState(gamePanel.DIALOGUE);
-			gamePanel.npc[npcIndex].talk();
+			gamePanel.npc[npcIndex][gamePanel.getMap()].talk();
 		}
 		gamePanel.keyHandler.enterPressed = false;
+	}
+	
+	public void teleport(int map, int x, int y) {
+		gamePanel.setMap(map);
+		mapX = x * gamePanel.TILE_SIZE;
+		mapY = y * gamePanel.TILE_SIZE;
 	}
 	
 	public void draw(Graphics2D g2) {

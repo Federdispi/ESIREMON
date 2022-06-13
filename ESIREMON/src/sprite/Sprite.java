@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Random;
 
 import application.GamePanel;
 
@@ -86,9 +87,15 @@ public class Sprite {
 	}
 	
 	public void attack(Attack attack, Sprite target) {
-		gamePanel.hud.setDialogue(name + " utilise " + attack.getName());
-		int amount = attack.getPower() + (level - target.getLevel()) * (attack.getPower() / 10);
-		target.setLifePoints(target.getLifePoints() - amount);
+		Random random = new Random();
+		int accuracy = random.nextInt(4); // 75% accuracy
+		if(accuracy == 0)
+			gamePanel.hud.setDialogue(name + " a échoué !");
+		else {
+			gamePanel.hud.setDialogue(name + " utilise " + attack.getName());
+			int amount = attack.getPower() + (level - target.getLevel()) * (attack.getPower() / 10);
+			target.setLifePoints(target.getLifePoints() - amount);
+		}
 		attack.setLimit(attack.getLimit() - 1);
 		gamePanel.hud.setPlayerTurn(!gamePanel.hud.getPlayerTurn());
 	}

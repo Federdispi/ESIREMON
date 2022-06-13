@@ -38,6 +38,9 @@ public class Object {
 			case "Toilettes":
 				gamePanel.setGameState(gamePanel.TOILETS);
 				break;
+			case "Route":
+				gamePanel.player.teleport(2, 14, 20);
+				break;
 			}
 			break;
 		case "Kfet":
