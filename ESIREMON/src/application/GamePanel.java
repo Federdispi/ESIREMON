@@ -31,6 +31,10 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int BATTLE = 3;
 	public final int BAG = 4;
 	public final int KFET = 5;
+	public final int NEW_GAME = 6;
+	
+	public int autoWalkTargetX;
+	public int autoWalkTargetY;
 	
 	public KeyHandler keyHandler = new KeyHandler(this);
 	Thread gameThread;
@@ -117,7 +121,7 @@ public class GamePanel extends JPanel implements Runnable {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		
-		if(gameState == MAIN_MENU || gameState == BATTLE)
+		if(gameState == MAIN_MENU || gameState == BATTLE || gameState == NEW_GAME)
 			hud.draw(g2);
 		else {
 			tileManager.draw(g2);

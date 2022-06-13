@@ -142,7 +142,8 @@ public class Save {
 					}
 				}
 				bufferedReader.close();
-			}
+			} else
+				gamePanel.setGameState(gamePanel.NEW_GAME);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

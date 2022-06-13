@@ -1,14 +1,10 @@
 Federdispi
 true
-10
+40
 7
-794
-480
+764
+442
 left_stop
-Gaufre
-Café
-Grand café
-Gaufre
 
 
 
@@ -25,13 +21,17 @@ Gaufre
 
 
 
-1
-5
-19
-9
-922
-480
-right
+
+
+
+
+3
+0
+20
+10
+756
+360
+up_stop
 false
 552
 432
@@ -45,9 +45,9 @@ false
 412
 down_stop
 false
-38
+276
 720
-left
+right_stop
 false
 
 

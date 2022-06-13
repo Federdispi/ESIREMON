@@ -34,7 +34,10 @@ public class Object {
 	public void Interact() {
 		switch(name) {
 		case "Entrance":
-			System.out.println(description);
+			switch(description) {
+			case "Toilettes":
+				break;
+			}
 			break;
 		case "Kfet":
 			gamePanel.player.npcInteract(1);

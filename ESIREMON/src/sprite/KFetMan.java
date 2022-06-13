@@ -27,18 +27,18 @@ public class KFetMan extends Sprite {
 		inventory.add(new Beer(gamePanel));
 		
 		try {
-			up1 = ImageIO.read(getClass().getResourceAsStream("/player/up1.png"));
-			up2 = ImageIO.read(getClass().getResourceAsStream("/player/up3.png"));
-			up3 = ImageIO.read(getClass().getResourceAsStream("/player/up2.png"));
-			down1 = ImageIO.read(getClass().getResourceAsStream("/player/down1.png"));
-			down2 = ImageIO.read(getClass().getResourceAsStream("/player/down3.png"));
-			down3 = ImageIO.read(getClass().getResourceAsStream("/player/down2.png"));
-			left1 = ImageIO.read(getClass().getResourceAsStream("/player/left1.png"));
-			left2 = ImageIO.read(getClass().getResourceAsStream("/player/left3.png"));
-			left3 = ImageIO.read(getClass().getResourceAsStream("/player/left2.png"));
-			right1 = ImageIO.read(getClass().getResourceAsStream("/player/right1.png"));
-			right2 = ImageIO.read(getClass().getResourceAsStream("/player/right3.png"));
-			right3 = ImageIO.read(getClass().getResourceAsStream("/player/right2.png"));
+			up1 = ImageIO.read(getClass().getResourceAsStream("/student_boy/up1.png"));
+			up2 = ImageIO.read(getClass().getResourceAsStream("/student_boy/up3.png"));
+			up3 = ImageIO.read(getClass().getResourceAsStream("/student_boy/up2.png"));
+			down1 = ImageIO.read(getClass().getResourceAsStream("/student_boy/down1.png"));
+			down2 = ImageIO.read(getClass().getResourceAsStream("/student_boy/down3.png"));
+			down3 = ImageIO.read(getClass().getResourceAsStream("/student_boy/down2.png"));
+			left1 = ImageIO.read(getClass().getResourceAsStream("/student_boy/left1.png"));
+			left2 = ImageIO.read(getClass().getResourceAsStream("/student_boy/left3.png"));
+			left3 = ImageIO.read(getClass().getResourceAsStream("/student_boy/left2.png"));
+			right1 = ImageIO.read(getClass().getResourceAsStream("/student_boy/right1.png"));
+			right2 = ImageIO.read(getClass().getResourceAsStream("/student_boy/right3.png"));
+			right3 = ImageIO.read(getClass().getResourceAsStream("/student_boy/right2.png"));
 		} catch(IOException e) {
 			e.printStackTrace();
 		}		

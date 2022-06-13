@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 
 import javax.imageio.ImageIO;
 
+import sprite.Student;
+
 public class HUD {
 	
 	GamePanel gamePanel;
@@ -36,6 +38,8 @@ public class HUD {
 			drawMainMenu();
 		else if(gamePanel.getGameState() == gamePanel.BATTLE)
 			drawBattle();
+		else if(gamePanel.getGameState() == gamePanel.NEW_GAME)
+			drawNewGame();
 		else
 			drawLifePoints();
 				
@@ -50,6 +54,53 @@ public class HUD {
 		
 		if(gamePanel.getGameState() == gamePanel.KFET)
 			drawKFet();
+	}
+	
+	private void drawNewGame() {
+		if(submenu == 0) {
+			g2.setFont(g2.getFont().deriveFont(Font.BOLD, 72F));
+			g2.setColor(Color.white);
+			String text = "NOM";
+			int x = centerTextX(text);
+			int y = gamePanel.SCREEN_HEIGHT / 2 - gamePanel.TILE_SIZE;
+			g2.drawString(text, x, y);
+			
+			g2.setFont(g2.getFont().deriveFont(Font.PLAIN));
+			if(name.length() < 10)
+				text = name + "_";
+			else
+				text = name;
+			x = centerTextX(text);
+			y += 2 * gamePanel.TILE_SIZE;
+			g2.drawString(text, x, y);
+		} else if(submenu == 1) {
+			g2.setFont(g2.getFont().deriveFont(Font.BOLD, 72F));
+			g2.setColor(Color.white);
+			String text = "SEXE";
+			int x = centerTextX(text);
+			int y = gamePanel.SCREEN_HEIGHT / 2 - gamePanel.TILE_SIZE;
+			g2.drawString(text, x, y);
+			
+			g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 48F));
+			if(menuIndex == 0)
+				g2.setColor(Color.yellow);
+			else
+				g2.setColor(Color.white);
+			text = "GARÇON";
+			x = centerTextX(text);
+			y += 2 * gamePanel.TILE_SIZE;
+			g2.drawString(text, x, y);
+			
+			g2.setFont(g2.getFont().deriveFont(Font.PLAIN));
+			if(menuIndex == 1)
+				g2.setColor(Color.yellow);
+			else
+				g2.setColor(Color.white);
+			text = "FILLE";
+			x = centerTextX(text);
+			y += gamePanel.TILE_SIZE;
+			g2.drawString(text, x, y);
+		}
 	}
 	
 	private void drawMainMenu() {
@@ -371,7 +422,14 @@ public class HUD {
 		y = gamePanel.TILE_SIZE;
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/player/down2.png"));
+			if(gamePanel.player.getSpriteInteract().getClass() == Student.class) {
+				if(gamePanel.player.getSex())
+					image = ImageIO.read(getClass().getResourceAsStream("/student_girl/down2.png"));
+				else
+					image = ImageIO.read(getClass().getResourceAsStream("/student_boy/down2.png"));
+			}
+			else
+				image = ImageIO.read(getClass().getResourceAsStream("/prof/down2.png"));
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -411,7 +469,10 @@ public class HUD {
 		x = 3 * gamePanel.TILE_SIZE;
 		y = 5 * gamePanel.TILE_SIZE;
 		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/player/up2.png"));
+			if(gamePanel.player.getSex())
+				image = ImageIO.read(getClass().getResourceAsStream("/player_girl/up2.png"));
+			else
+				image = ImageIO.read(getClass().getResourceAsStream("/player_boy/up2.png"));
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -461,41 +522,38 @@ public class HUD {
 				g2.drawString(text, x, y);
 			} else if(submenu == 1) {
 				//1st OPTION
-				g2.setFont(g2.getFont().deriveFont(Font.BOLD, 24F));
+				g2.setFont(g2.getFont().deriveFont(Font.BOLD, 16F));
 				if(menuIndex == 0)
 					g2.setColor(Color.red);
 				else
 					g2.setColor(Color.black);
-				x = gamePanel.TILE_SIZE;
+				x = gamePanel.TILE_SIZE /2;
 				y = 8 * gamePanel.TILE_SIZE;
-				g2.drawString(gamePanel.player.moveSet.get(0).getName() + "   " + gamePanel.player.moveSet.get(0).getLimit() + "/" + gamePanel.player.moveSet.get(0).getLimitMax(), x, y);
+				g2.drawString(gamePanel.player.moveSet.get(0).getName() + "   " + gamePanel.player.moveSet.get(0).getPower() + "   " + gamePanel.player.moveSet.get(0).getLimit() + "/" + gamePanel.player.moveSet.get(0).getLimitMax(), x, y);
 				
 				//2nd OPTION
 				if(menuIndex == 1)
 					g2.setColor(Color.red);
 				else
 					g2.setColor(Color.black);
-				x = gamePanel.TILE_SIZE;
 				y += gamePanel.TILE_SIZE - gamePanel.TILE_SIZE / 4;
-				g2.drawString(gamePanel.player.moveSet.get(1).getName() + "   " + gamePanel.player.moveSet.get(1).getLimit() + "/" + gamePanel.player.moveSet.get(1).getLimitMax(), x, y);
+				g2.drawString(gamePanel.player.moveSet.get(1).getName() + "   " + gamePanel.player.moveSet.get(1).getPower() + "   " + gamePanel.player.moveSet.get(1).getLimit() + "/" + gamePanel.player.moveSet.get(1).getLimitMax(), x, y);
 				
 				//3rd OPTION
 				if(menuIndex == 2)
 					g2.setColor(Color.red);
 				else
 					g2.setColor(Color.black);
-				x = gamePanel.TILE_SIZE;
 				y += gamePanel.TILE_SIZE - gamePanel.TILE_SIZE / 4;
-				g2.drawString(gamePanel.player.moveSet.get(2).getName() + "   " + gamePanel.player.moveSet.get(2).getLimit() + "/" + gamePanel.player.moveSet.get(2).getLimitMax(), x, y);
+				g2.drawString(gamePanel.player.moveSet.get(2).getName() + "   " + gamePanel.player.moveSet.get(2).getPower() + "   " + gamePanel.player.moveSet.get(2).getLimit() + "/" + gamePanel.player.moveSet.get(2).getLimitMax(), x, y);
 				
 				//4th OPTION
 				if(menuIndex == 3)
 					g2.setColor(Color.red);
 				else
 					g2.setColor(Color.black);
-				x = gamePanel.TILE_SIZE;
 				y += gamePanel.TILE_SIZE - gamePanel.TILE_SIZE / 4;
-				g2.drawString(gamePanel.player.moveSet.get(3).getName() + "   " + gamePanel.player.moveSet.get(3).getLimit() + "/" + gamePanel.player.moveSet.get(3).getLimitMax(), x, y);
+				g2.drawString(gamePanel.player.moveSet.get(3).getName() + "   " + gamePanel.player.moveSet.get(3).getPower() + "   " + gamePanel.player.moveSet.get(3).getLimit() + "/" + gamePanel.player.moveSet.get(3).getLimitMax(), x, y);
 			} else if (submenu == 2) {
 				dialogue = "";
 				final int startX = gamePanel.TILE_SIZE / 2;
@@ -607,6 +665,10 @@ public class HUD {
 	
 	public boolean getPlayerTurn() {
 		return this.playerTurn;
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 	
 	//Return x to center a text on the screen

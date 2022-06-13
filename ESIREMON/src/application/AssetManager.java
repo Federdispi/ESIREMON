@@ -15,17 +15,17 @@ public class AssetManager {
 	}
 	
 	public void setNPC() {
-		gamePanel.npc[0] = new Student(gamePanel, "Lucas", true, "down_stop", 5);
+		gamePanel.npc[0] = new Student(gamePanel, "Lucas", false, "down_stop", 5);
 		gamePanel.npc[0].setX(17 * gamePanel.TILE_SIZE);
 		gamePanel.npc[0].setY(10 * gamePanel.TILE_SIZE);
 		gamePanel.npc[0].setMoves(true);
 		gamePanel.npc[0].setBattle(true);
 		
-		gamePanel.npc[2] = new Student(gamePanel, "Mael", true, "up_stop", 5);
+		gamePanel.npc[2] = new Student(gamePanel, "Mael", false, "up_stop", 5);
 		gamePanel.npc[2].setX(23 * gamePanel.TILE_SIZE);
 		gamePanel.npc[2].setY(5 * gamePanel.TILE_SIZE - gamePanel.TILE_SIZE / 2);
 		
-		gamePanel.npc[3] = new Student(gamePanel, "Benjamin", true, "down_stop", 5);
+		gamePanel.npc[3] = new Student(gamePanel, "Benjamin", false, "down_stop", 5);
 		gamePanel.npc[3].setX(23 * gamePanel.TILE_SIZE - 10);
 		gamePanel.npc[3].setY(9 * gamePanel.TILE_SIZE - 20);
 		

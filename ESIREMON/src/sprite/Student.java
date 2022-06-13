@@ -17,10 +17,10 @@ public class Student extends Sprite {
 		this.direction = direction;
 		previous_direction = "down";
 		
-		Attack att1 = new Attack("Att1", 5, 20);
-		Attack att2 = new Attack("Att2", 5, 30);
-		Attack att3 = new Attack("Att3", 20, 10);
-		Attack att4 = new Attack("Att4", 10, 20);
+		Attack att1 = new Attack("Souvenir du Lycée", 5, 20);
+		Attack att2 = new Attack("Révisions de la veille", 2, 30);
+		Attack att3 = new Attack("Annale de 2016", 20, 10);
+		Attack att4 = new Attack("Discord avec les Bros", 10, 20);
 		moveSet.add(att1);
 		moveSet.add(att2);
 		moveSet.add(att3);
@@ -30,23 +30,38 @@ public class Student extends Sprite {
 		
 		if(sexe) {
 			try {
-				up1 = ImageIO.read(getClass().getResourceAsStream("/player/up1.png"));
-				up2 = ImageIO.read(getClass().getResourceAsStream("/player/up3.png"));
-				up3 = ImageIO.read(getClass().getResourceAsStream("/player/up2.png"));
-				down1 = ImageIO.read(getClass().getResourceAsStream("/player/down1.png"));
-				down2 = ImageIO.read(getClass().getResourceAsStream("/player/down3.png"));
-				down3 = ImageIO.read(getClass().getResourceAsStream("/player/down2.png"));
-				left1 = ImageIO.read(getClass().getResourceAsStream("/player/left1.png"));
-				left2 = ImageIO.read(getClass().getResourceAsStream("/player/left3.png"));
-				left3 = ImageIO.read(getClass().getResourceAsStream("/player/left2.png"));
-				right1 = ImageIO.read(getClass().getResourceAsStream("/player/right1.png"));
-				right2 = ImageIO.read(getClass().getResourceAsStream("/player/right3.png"));
-				right3 = ImageIO.read(getClass().getResourceAsStream("/player/right2.png"));
+				up1 = ImageIO.read(getClass().getResourceAsStream("/student_girl/up1.png"));
+				up2 = ImageIO.read(getClass().getResourceAsStream("/student_girl/up3.png"));
+				up3 = ImageIO.read(getClass().getResourceAsStream("/student_girl/up2.png"));
+				down1 = ImageIO.read(getClass().getResourceAsStream("/student_girl/down1.png"));
+				down2 = ImageIO.read(getClass().getResourceAsStream("/student_girl/down3.png"));
+				down3 = ImageIO.read(getClass().getResourceAsStream("/student_girl/down2.png"));
+				left1 = ImageIO.read(getClass().getResourceAsStream("/student_girl/left1.png"));
+				left2 = ImageIO.read(getClass().getResourceAsStream("/student_girl/left3.png"));
+				left3 = ImageIO.read(getClass().getResourceAsStream("/student_girl/left2.png"));
+				right1 = ImageIO.read(getClass().getResourceAsStream("/student_girl/right1.png"));
+				right2 = ImageIO.read(getClass().getResourceAsStream("/student_girl/right3.png"));
+				right3 = ImageIO.read(getClass().getResourceAsStream("/student_girl/right2.png"));
 			} catch(IOException e) {
 				e.printStackTrace();
 			}		
 		} else {
-			//TODO
+			try {
+				up1 = ImageIO.read(getClass().getResourceAsStream("/student_boy/up1.png"));
+				up2 = ImageIO.read(getClass().getResourceAsStream("/student_boy/up3.png"));
+				up3 = ImageIO.read(getClass().getResourceAsStream("/student_boy/up2.png"));
+				down1 = ImageIO.read(getClass().getResourceAsStream("/student_boy/down1.png"));
+				down2 = ImageIO.read(getClass().getResourceAsStream("/student_boy/down3.png"));
+				down3 = ImageIO.read(getClass().getResourceAsStream("/student_boy/down2.png"));
+				left1 = ImageIO.read(getClass().getResourceAsStream("/student_boy/left1.png"));
+				left2 = ImageIO.read(getClass().getResourceAsStream("/student_boy/left3.png"));
+				left3 = ImageIO.read(getClass().getResourceAsStream("/student_boy/left2.png"));
+				right1 = ImageIO.read(getClass().getResourceAsStream("/student_boy/right1.png"));
+				right2 = ImageIO.read(getClass().getResourceAsStream("/student_boy/right3.png"));
+				right3 = ImageIO.read(getClass().getResourceAsStream("/student_boy/right2.png"));
+			} catch(IOException e) {
+				e.printStackTrace();
+			}	
 		}
 	}
 	

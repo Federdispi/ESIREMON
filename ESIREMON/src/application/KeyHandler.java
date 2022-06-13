@@ -64,6 +64,7 @@ public class KeyHandler implements KeyListener {
 					break;
 				case 2:
 					gamePanel.save.saveGame();
+					gamePanel.setGameState(gamePanel.PLAY);
 					break;
 				case 3:
 					gamePanel.setGameState(gamePanel.MAIN_MENU);
@@ -97,7 +98,8 @@ public class KeyHandler implements KeyListener {
 			else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				switch(gamePanel.hud.getMenuIndex()) {
 				case 0:
-					gamePanel.setGameState(gamePanel.PLAY);
+					gamePanel.setGameState(gamePanel.NEW_GAME);
+					gamePanel.hud.setName("");
 					break;
 				case 1:
 					gamePanel.save.loadGame();
@@ -242,6 +244,39 @@ public class KeyHandler implements KeyListener {
 			else if(e.getKeyCode() == KeyEvent.VK_ESCAPE && gamePanel.hud.getSubMenu() >= 1) {
 				gamePanel.hud.setSubMenu(0);
 				gamePanel.hud.setMenuIndex(0);
+			}
+		}
+		
+		//NEW GAME
+		else if(gamePanel.getGameState() == gamePanel.NEW_GAME) {
+			if(gamePanel.hud.getSubMenu() == 0) {
+				final String POSSIBLE_CHAR = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
+				if(POSSIBLE_CHAR.contains(e.getKeyChar() + "") && gamePanel.hud.getName().length() < 10) 
+					gamePanel.hud.setName(gamePanel.hud.getName() + e.getKeyChar());
+				else if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE && gamePanel.hud.getName().length() > 0)
+					gamePanel.hud.setName(gamePanel.hud.getName().substring(0, gamePanel.hud.getName().length() - 1));
+				else if(e.getKeyCode() == KeyEvent.VK_ENTER && !gamePanel.hud.getName().isEmpty()) {
+					gamePanel.player.setName(gamePanel.hud.getName());
+					gamePanel.hud.setSubMenu(1);
+				}
+				else if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+					gamePanel.setGameState(gamePanel.MAIN_MENU);
+			} else if(gamePanel.hud.getSubMenu() == 1) {
+				if(e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_Z)
+					gamePanel.hud.setMenuIndex(0);
+				else if(e.getKeyCode() == KeyEvent.VK_S)
+					gamePanel.hud.setMenuIndex(1);
+				else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if(gamePanel.hud.getMenuIndex() == 0)
+						gamePanel.player.setSex(false);
+					else
+						gamePanel.player.setSex(true);
+					gamePanel.hud.setMenuIndex(0);
+					gamePanel.hud.setSubMenu(0);
+					gamePanel.setGameState(gamePanel.PLAY);
+				}
+				else if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+					gamePanel.hud.setSubMenu(0);
 			}
 		}
 	}
