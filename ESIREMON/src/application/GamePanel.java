@@ -82,8 +82,14 @@ public class GamePanel extends JPanel implements Runnable {
 		player = new Player(this, keyHandler, "?", true);
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < npc.length; j++) {
-				if(npc[j][i] != null)
+				if(npc[j][i] != null) {
 					npc[j][i].setLifePoints(100);
+					npc[j][i].setDialogIndex(0);
+					for(int k = 0; k < 4; k++) {
+						if(npc[j][i].moveSet.size() > 0)
+							npc[j][i].moveSet.get(k).setLimit(npc[j][i].moveSet.get(k).getLimitMax());
+					}
+				}
 			}
 		}
 		hud.setWin(false);
