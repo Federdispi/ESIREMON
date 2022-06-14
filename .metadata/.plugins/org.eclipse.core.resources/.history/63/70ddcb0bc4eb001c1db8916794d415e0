@@ -1,64 +1,89 @@
 package application;
 
+import object.Bed;
+import object.Bookshelf;
 import object.Couch;
 import object.Desk;
 import object.Entrance;
 import object.HorizontalDesk;
 import object.Kfet;
 import object.Table;
+import object.Tree;
 import sprite.Prof;
 import sprite.Student;
 
 public class AssetManager {
 	GamePanel gamePanel;
+	
+	/*
+	 * Constructor
+	 */
 	public AssetManager(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
 	}
 	
+	/*
+	 * Creates the non playable characters and places them in the maps
+	 */
 	public void setNPC() {
 		/*
 		 * Map 1 : Route
 		 */
-		gamePanel.npc[0][1] = new Student(gamePanel, "Pierre", false, "right_stop", 5);
-		gamePanel.npc[0][1].setX(10 * gamePanel.TILE_SIZE);
-		gamePanel.npc[0][1].setY(5 * gamePanel.TILE_SIZE);
+		gamePanel.npc[0][1] = new Student(gamePanel, "Justin", false, "left_stop", 3);
+		gamePanel.npc[0][1].setX(26 * gamePanel.TILE_SIZE);
+		gamePanel.npc[0][1].setY(10 * gamePanel.TILE_SIZE);
 		gamePanel.npc[0][1].setMoves(true);
 		
-		gamePanel.npc[0][2] = new Student(gamePanel, "Laurine", true, "down_stop", 5);
-		gamePanel.npc[0][2].setX(8 * gamePanel.TILE_SIZE);
-		gamePanel.npc[0][2].setY(4 * gamePanel.TILE_SIZE);
+		gamePanel.npc[1][1] = new Student(gamePanel, "Pierre", false, "right_stop", 3);
+		gamePanel.npc[1][1].setX(20 * gamePanel.TILE_SIZE);
+		gamePanel.npc[1][1].setY(5 * gamePanel.TILE_SIZE);
+		gamePanel.npc[1][1].setMoves(true);
 		
-		gamePanel.npc[0][3] = new Student(gamePanel, "Pierre", false, "right_stop", 5);
-		gamePanel.npc[0][3].setX(10 * gamePanel.TILE_SIZE);
-		gamePanel.npc[0][3].setY(5 * gamePanel.TILE_SIZE);
+		gamePanel.npc[2][1] = new Student(gamePanel, "Laurine", true, "up_stop", 5);
+		gamePanel.npc[2][1].setX(8 * gamePanel.TILE_SIZE);
+		gamePanel.npc[2][1].setY(4 * gamePanel.TILE_SIZE);
+		
+		gamePanel.npc[3][1] = new Student(gamePanel, "Tom", false, "up_stop", 5);
+		gamePanel.npc[3][1].setX(9 * gamePanel.TILE_SIZE);
+		gamePanel.npc[3][1].setY(4 * gamePanel.TILE_SIZE);
+		gamePanel.npc[3][1].setBattle(false);
+		
+		gamePanel.npc[4][1] = new Student(gamePanel, "Aya", false, "up_stop", 5);
+		gamePanel.npc[4][1].setX(2 * gamePanel.TILE_SIZE);
+		gamePanel.npc[4][1].setY(10 * gamePanel.TILE_SIZE);
+		gamePanel.npc[4][1].setMoves(true);
+		gamePanel.npc[4][1].setBattle(false);
 		/*
 		 * Map 2 : ESIREM
 		 */
-		gamePanel.npc[0][2] = new Student(gamePanel, "Lucas", false, "down_stop", 5);
+		gamePanel.npc[0][2] = new Student(gamePanel, "Lucas", false, "down_stop", 10);
 		gamePanel.npc[0][2].setX(17 * gamePanel.TILE_SIZE);
 		gamePanel.npc[0][2].setY(10 * gamePanel.TILE_SIZE);
 		gamePanel.npc[0][2].setMoves(true);
 		
-		gamePanel.npc[2][2] = new Student(gamePanel, "Mael", false, "up_stop", 5);
+		gamePanel.npc[2][2] = new Student(gamePanel, "Mael", false, "up_stop", 20);
 		gamePanel.npc[2][2].setX(23 * gamePanel.TILE_SIZE);
 		gamePanel.npc[2][2].setY(5 * gamePanel.TILE_SIZE - gamePanel.TILE_SIZE / 2);
 		
-		gamePanel.npc[3][2] = new Student(gamePanel, "Benjamin", false, "down_stop", 5);
+		gamePanel.npc[3][2] = new Student(gamePanel, "Benjamin", false, "down_stop", 14);
 		gamePanel.npc[3][2].setX(23 * gamePanel.TILE_SIZE - 10);
 		gamePanel.npc[3][2].setY(9 * gamePanel.TILE_SIZE - 20);
 		
-		gamePanel.npc[4][2] = new Student(gamePanel, "Insigam", true, "down_stop", 5);
+		gamePanel.npc[4][2] = new Student(gamePanel, "Insigam", true, "down_stop", 12);
 		gamePanel.npc[4][2].setX(2 * gamePanel.TILE_SIZE);
 		gamePanel.npc[4][2].setY(15 * gamePanel.TILE_SIZE);
 		gamePanel.npc[4][2].setMoves(true);
 		/*
 		 * Map 3 : Steinbrunn
 		 */		
-		gamePanel.npc[0][3] = new Prof(gamePanel, "Nade Herr", "up_stop", 90);
+		gamePanel.npc[0][3] = new Prof(gamePanel, "Nader", "up_stop", 30);
 		gamePanel.npc[0][3].setX(9 * gamePanel.TILE_SIZE + gamePanel.TILE_SIZE / 2);
 		gamePanel.npc[0][3].setY(17 * gamePanel.TILE_SIZE);
 	}
 	
+	/*
+	 * Creates the objects and places them in the maps
+	 */
 	public void setObject() {	
 		/*
 		 * Map 0 : Appart
@@ -66,6 +91,18 @@ public class AssetManager {
 		gamePanel.object[0][0] = new Entrance(gamePanel, "Route");
 		gamePanel.object[0][0].setX(3 * gamePanel.TILE_SIZE);
 		gamePanel.object[0][0].setY(4 * gamePanel.TILE_SIZE - 20);
+		
+		gamePanel.object[1][0] = new Bed(gamePanel);
+		gamePanel.object[1][0].setX(0);
+		gamePanel.object[1][0].setY(2 * gamePanel.TILE_SIZE);
+		
+		gamePanel.object[2][0] = new Bookshelf(gamePanel);
+		gamePanel.object[2][0].setX(0);
+		gamePanel.object[2][0].setY(0);
+		
+		gamePanel.object[3][0] = new Table(gamePanel);
+		gamePanel.object[3][0].setX(5 * gamePanel.TILE_SIZE);
+		gamePanel.object[3][0].setY(gamePanel.TILE_SIZE);
 		/*
 		 * Map 1 : Route
 		 */
@@ -76,6 +113,30 @@ public class AssetManager {
 		gamePanel.object[1][1] = new Entrance(gamePanel, "ESIREM");
 		gamePanel.object[1][1].setX(2 * gamePanel.TILE_SIZE);
 		gamePanel.object[1][1].setY(gamePanel.TILE_SIZE - 20);
+		
+		gamePanel.object[2][1] = new Tree(gamePanel);
+		gamePanel.object[2][1].setX(28 * gamePanel.TILE_SIZE);
+		gamePanel.object[2][1].setY(5 * gamePanel.TILE_SIZE);
+		
+		gamePanel.object[3][1] = new Tree(gamePanel);
+		gamePanel.object[3][1].setX(24 * gamePanel.TILE_SIZE);
+		gamePanel.object[3][1].setY(4 * gamePanel.TILE_SIZE);
+		
+		gamePanel.object[4][1] = new Tree(gamePanel);
+		gamePanel.object[4][1].setX(20 * gamePanel.TILE_SIZE);
+		gamePanel.object[4][1].setY(10 * gamePanel.TILE_SIZE);
+		
+		gamePanel.object[5][1] = new Tree(gamePanel);
+		gamePanel.object[5][1].setX(16 * gamePanel.TILE_SIZE);
+		gamePanel.object[5][1].setY(2 * gamePanel.TILE_SIZE);
+
+		gamePanel.object[6][1] = new Tree(gamePanel);
+		gamePanel.object[6][1].setX(8 * gamePanel.TILE_SIZE);
+		gamePanel.object[6][1].setY(8 * gamePanel.TILE_SIZE);
+		
+		gamePanel.object[7][1] = new Tree(gamePanel);
+		gamePanel.object[7][1].setX(12 * gamePanel.TILE_SIZE);
+		gamePanel.object[7][1].setY(3 * gamePanel.TILE_SIZE);
 		/*
 		 * Map 2 : ESIREM
 		 */

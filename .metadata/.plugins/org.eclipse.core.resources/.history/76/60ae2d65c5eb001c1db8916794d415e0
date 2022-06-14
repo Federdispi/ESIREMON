@@ -169,9 +169,6 @@ public class Save {
 							//Sprite life points
 							line = bufferedReader.readLine();
 							gamePanel.npc[i][map].setLifePoints(Integer.parseInt(line));
-							//Sprite dialogIndex
-							line = bufferedReader.readLine();
-							gamePanel.npc[i][map].setDialogIndex(Integer.parseInt(line));
 						}
 					}
 				}

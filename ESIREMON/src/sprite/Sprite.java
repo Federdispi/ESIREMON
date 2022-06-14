@@ -38,7 +38,7 @@ public class Sprite {
 	protected boolean battle = true;
 	
 	String dialogues[] = new String[20];
-	int dialogueIndex = 0;
+	protected int dialogueIndex = 0;
 	
 	public ArrayList<Attack> moveSet = new ArrayList<>(); //List of the attacks
 	
@@ -255,6 +255,10 @@ public class Sprite {
 		this.direction = direction;
 	}
 	
+	public void setDialogIndex(int dialogIndex) {
+		this.dialogueIndex = dialogIndex;
+	}
+	
 	/*
 	 * GETTERS	
 	 */
@@ -312,5 +316,9 @@ public class Sprite {
 	
 	public boolean getSex() {
 		return this.sex;
+	}
+	
+	public int getDialogIndex() {
+		return this.dialogueIndex;
 	}
 }

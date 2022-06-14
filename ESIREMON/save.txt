@@ -1,4 +1,4 @@
-Alex
+Federico
 false
 100
 5
@@ -45,22 +45,32 @@ down_stop
 480
 left_stop
 true
+100
+0
 960
 240
 right_stop
 true
+100
+0
 384
 192
 up_stop
 true
+100
+0
 432
 192
 up_stop
 false
+100
+0
 96
 480
 up_stop
 false
+100
+0
 
 
 
@@ -70,22 +80,32 @@ false
 480
 down_stop
 true
+100
+0
 552
 432
 right_stop
 false
+100
+0
 1104
 216
 up_stop
 true
+100
+0
 1094
 412
 down_stop
 true
+100
+0
 96
 720
 down_stop
 true
+100
+0
 
 
 
@@ -95,6 +115,8 @@ true
 816
 up_stop
 true
+100
+0
 
 
 

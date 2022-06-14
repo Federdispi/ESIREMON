@@ -76,7 +76,7 @@ public class AssetManager {
 		/*
 		 * Map 3 : Steinbrunn
 		 */		
-		gamePanel.npc[0][3] = new Prof(gamePanel, "Nader", "up_stop", 30);
+		gamePanel.npc[0][3] = new Prof(gamePanel, "Nader", "up_stop", 25);
 		gamePanel.npc[0][3].setX(9 * gamePanel.TILE_SIZE + gamePanel.TILE_SIZE / 2);
 		gamePanel.npc[0][3].setY(17 * gamePanel.TILE_SIZE);
 	}

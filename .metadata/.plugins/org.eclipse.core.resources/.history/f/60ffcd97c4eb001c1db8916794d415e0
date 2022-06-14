@@ -79,12 +79,8 @@ public class Save {
 						bufferedWriter.newLine();
 						//Sprite battle
 						bufferedWriter.write(String.valueOf(gamePanel.npc[i][map].getBattle()));
-						bufferedWriter.newLine();
 						//Sprite life points
 						bufferedWriter.write(String.valueOf(gamePanel.npc[i][map].getLifePoints()));
-						bufferedWriter.newLine();
-						//Sprite dialogIndex
-						bufferedWriter.write(String.valueOf(gamePanel.npc[i][map].getDialogIndex()));
 					}
 					bufferedWriter.newLine();
 				}
@@ -166,12 +162,6 @@ public class Save {
 							//Sprite battle
 							line = bufferedReader.readLine();
 							gamePanel.npc[i][map].setBattle(Boolean.parseBoolean(line));
-							//Sprite life points
-							line = bufferedReader.readLine();
-							gamePanel.npc[i][map].setLifePoints(Integer.parseInt(line));
-							//Sprite dialogIndex
-							line = bufferedReader.readLine();
-							gamePanel.npc[i][map].setDialogIndex(Integer.parseInt(line));
 						}
 					}
 				}
